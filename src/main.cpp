@@ -9,7 +9,8 @@
 #include <Encoder.h>
 #include <Audio.h>
 #include <Wire.h>
-#include <SPI.h>
+#include "SPI.h"
+#include "ILI9488_t3.h"
 #include <SD.h>
 #include <SerialFlash.h>
 
@@ -45,6 +46,15 @@ AudioControlSGTL5000     sgtl5000_1;     //xy=345.1999816894531,435
 // GUItool: end automatically generated code
 
 
+#define TFT_RST 34
+#define TFT_DC 9
+#define TFT_CS 10
+#define MOSI 11
+#define MISO 12
+#define SCLK 13
+#define T_CS 33
+
+ILI9488_t3 tft = ILI9488_t3(&SPI, TFT_CS, TFT_DC, TFT_RST, MOSI, SCLK, MISO);
 
 
 //TODO: feedback delay?
@@ -92,6 +102,9 @@ void setup()
   biquad1.setNotch(2, 1830, 400);
   notefreq1.begin(0.3);
   notefreq2.begin(0.1);
+  tft.begin();
+  tft.fillScreen(ILI9488_BLACK);
+  tft.setRotation(3);
 }
 
 elapsedMillis volmsec = 0;
@@ -127,9 +140,13 @@ void loop()
       prev_reverb_ms = reverb_ms;
     }
 
-    if(notefreq1.available() && notefreq2.available()){
-      notefreq2.read();
-      Serial.println("Freq: " + String(notefreq1.read()) + " Probability: " + String(String(notefreq1.probability())) + " After filtering: " + String(notefreq2.probability()));
+    if(notefreq1.available()){
+		tft.fillRect(100, 150, 140, 60, ILI9488_BLACK);
+		tft.setTextColor(ILI9488_GREEN);
+		tft.setTextSize(1);
+		tft.setCursor(100, 150);
+		tft.print("f = " + String(notefreq1.read()));
+      	Serial.println("Freq: " + String(notefreq1.read()) + " Probability: " + String(String(notefreq1.probability())) );
     }
 
     // Serial.print("all=");
@@ -143,5 +160,7 @@ void loop()
     // Serial.print(AudioMemoryUsageMax());
     // Serial.print("    ");
     // Serial.println();
+
+
   }
 }
