@@ -5,6 +5,10 @@
 
 // TODO: maybe inherit from AudioStream?
 class Effect {
+protected:
+    Param* params;
+	int num_params;
+    int selected_param = 0;
 public:
 	AudioStream* chain_start;
 	AudioStream* chain_end;
@@ -18,8 +22,5 @@ public:
 	void decrement();
 	void change_param(int steps);
 
-protected:
-    Param* params;
-	int num_params;
-    int selected_param = 0;
+
 };
