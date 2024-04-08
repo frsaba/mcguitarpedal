@@ -13,6 +13,7 @@
 #include "ILI9488_t3.h"
 #include <SD.h>
 #include <SerialFlash.h>
+#include "OneButton.h"
 
 #include <delay.cpp>
 #include <display.h>
@@ -45,6 +46,12 @@ int value_selector_prev = 0;
 
 extern ILI9488_t3 tft;
 
+OneButton button1(37, true);
+OneButton button2(38, true);
+OneButton button3(39, true);
+
+elapsedMillis volmsec = 0;
+
 void setup()
 {
     // Audio connections require memory to work.  For more
@@ -65,6 +72,12 @@ void setup()
     sgtl5000_1.lineInLevel(12);
 
     pinMode(A10, INPUT);
+    button1.attachClick([]()
+                        { displayText("Button 1 pressed"); });
+    button2.attachClick([]()
+                        { displayText("Button 2 pressed"); });
+    button3.attachClick([]()
+                        { displayText("Button 3 pressed"); });
 
     tuner.begin(0.3);
     tft.begin();
@@ -74,11 +87,8 @@ void setup()
     displayText("Hello");
 }
 
-elapsedMillis volmsec = 0;
-
 void loop()
 {
-
     if (volmsec > 150)
     {
         float vol = analogRead(A10);
@@ -126,4 +136,8 @@ void loop()
         // Serial.print("    ");
         // Serial.println();
     }
+    button1.tick();
+    button2.tick();
+    button3.tick();
+    delay(10);
 }

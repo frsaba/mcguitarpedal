@@ -7,7 +7,7 @@ Effect::Effect(Param params[], int num_params, AudioStream* chain_start, AudioSt
 }
 
 void Effect::next_param(int change = 1){
-	selected_param = (selected_param + change + num_params) % num_params; //TODO: modulo with negative numbers?
+	selected_param = (selected_param + change + num_params) % num_params;
 	displayText("Selected parameter: " + String(params[selected_param].name));
 }
 
