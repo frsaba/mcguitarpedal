@@ -16,10 +16,15 @@
 #include "OneButton.h"
 
 #include <delay.cpp>
+#include <reverb.cpp>
 #include <display.h>
 
-Delay delay_effect = Delay();
+#define CHAIN_LENGTH 2
+Effect *effects_chain[] = {new Delay(), new Reverb()};
+Effect *delay_effect = effects_chain[0];
+Effect *reverb_effect = effects_chain[1];
 
+int selected_effect_index = 0;
 // GUItool: begin automatically generated code
 AudioInputI2S audio_input;       // xy=334.1037826538086,172.99997901916504
 AudioMixer4 dry_wet_mixer;       // xy=681.1037902832031,179
@@ -29,8 +34,10 @@ AudioConnection patchCord1(audio_input, 0, dry_wet_mixer, 0);
 AudioConnection patchCord2(dry_wet_mixer, 0, audio_output, 0);
 AudioConnection patchCord3(dry_wet_mixer, 0, audio_output, 1);
 AudioConnection patchCord4(dry_wet_mixer, tuner);
-AudioConnection patchCord5(audio_input, 0, *delay_effect.chain_start, 0);
-AudioConnection patchCord6(*delay_effect.chain_end, 0, dry_wet_mixer, 1);
+AudioConnection patchCord5(audio_input, 0, *delay_effect->chain_start, 0);
+AudioConnection patchCord6(*delay_effect->chain_end, 0, *reverb_effect->chain_start, 0);
+AudioConnection patchCord7(*reverb_effect->chain_end, 0, dry_wet_mixer, 1);
+
 AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 // GUItool: end automatically generated code
 
@@ -52,28 +59,44 @@ OneButton button3(39, true);
 
 elapsedMillis volmsec = 0;
 
+std::vector<AudioConnection> patchCords;
+
 void setup()
 {
     // Audio connections require memory to work.  For more
     // detailed information, see the MemoryAndCpuUsage example
-    AudioMemory(500);
+    AudioMemory(800);
 
-    dry_wet_mixer.gain(0, 0.5);
-    dry_wet_mixer.gain(1, 0.5);
+    dry_wet_mixer.gain(0, 0.6);
+    dry_wet_mixer.gain(1, 0.6);
 
-    // AudioConnection          patchCord5(audio_input, 0, *delay_effect.chain_start, 0);
-    // AudioConnection          patchCord6(*delay_effect.chain_end, 0, dry_wet_mixer, 1);
+    // //connect input to the start of the effects chain
+    // AudioConnection *connection1 = new AudioConnection(audio_input, *effects_chain[0]->chain_start);
+    // patchCords.push_back(*connection1);
 
-    // Enable the audio shield, select input, and enable output
+    // // connect effects together
+    // for (size_t i = 0; i < CHAIN_LENGTH - 1; i++)
+    // {
+    //     AudioConnection *connection = new AudioConnection(*effects_chain[i]->chain_end, *effects_chain[i + 1]->chain_start);
+    //     patchCords.push_back(*connection);
+    // }
+
+    // // Connect last effect to output
+    // AudioConnection *connectionLast = new AudioConnection(*effects_chain[CHAIN_LENGTH - 1]->chain_end, 0, dry_wet_mixer, 1);
+    // patchCords.push_back(*connectionLast);
+
+
     sgtl5000_1.enable();
     sgtl5000_1.inputSelect(myInput);
     sgtl5000_1.adcHighPassFilterDisable();
     sgtl5000_1.volume(0.5);
-    sgtl5000_1.lineInLevel(12);
+    sgtl5000_1.lineInLevel(10);
 
     pinMode(A10, INPUT);
     button1.attachClick([]()
-                        { displayText("Button 1 pressed"); });
+                        {
+                            selected_effect_index = (selected_effect_index + 1) % CHAIN_LENGTH;
+                            displayText("Selected effect: " + String(effects_chain[selected_effect_index]->name)); });
     button2.attachClick([]()
                         { displayText("Button 2 pressed"); });
     button3.attachClick([]()
@@ -99,25 +122,16 @@ void loop()
         int param_selector_new = param_selector.read() / 4;
         if (param_selector_new != param_selector_prev)
         {
-            delay_effect.next_param(param_selector_new - param_selector_prev);
+            effects_chain[selected_effect_index]->next_param(param_selector_new - param_selector_prev);
             param_selector_prev = param_selector_new;
         }
 
         int value_selector_new = value_selector.read() / 4;
         if (value_selector_new != value_selector_prev)
         {
-            delay_effect.change_param(value_selector_new - value_selector_prev);
+            effects_chain[selected_effect_index]->change_param(value_selector_new - value_selector_prev);
             value_selector_prev = value_selector_new;
         }
-
-        // reverb_ms = 100 + encoder_value_selector.read() / 4 * 20;
-
-        // if (reverb_ms != prev_reverb_ms)
-        // {
-        //   Serial.println("Reverb: " + String(reverb_ms));
-        //   reverb1.reverbTime(reverb_ms / 1000.0);
-        //   prev_reverb_ms = reverb_ms;
-        // }
 
         // if (tuner.available())
         // {
