@@ -7,7 +7,8 @@
 class Delay : public Effect
 {
 private:
-    Param parameters[2]{
+    Param parameters[3]{
+        dry_wet_param,
         Param("Delay (ms)", 100, 5, 400, 10, std::bind(&Delay::update_delay_time, this, std::placeholders::_1)),
         Param("Feedback", 0.2, 0, 0.9, 0.1, std::bind(&Delay::update_feedback, this, std::placeholders::_1))};
 
@@ -36,11 +37,13 @@ public:
     Delay() : Effect(
                   "Delay",
                   parameters,
-                  2,
+                  3,
                   &delay,
                   &mixer),
               patchCord4(delay, 0, mixer, 0), patchCord5(delay, 1, mixer, 1), patchCord6(delay, 2, mixer, 2), patchCord7(delay, 3, mixer, 3)
     {
+        init_connections();
+
         mixer.gain(0, 1);
         mixer.gain(1, 0.75);
         mixer.gain(2, 0.5);

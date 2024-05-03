@@ -34,8 +34,14 @@ AudioConnection patchCord1(audio_input, 0, dry_wet_mixer, 0);
 AudioConnection patchCord2(dry_wet_mixer, 0, audio_output, 0);
 AudioConnection patchCord3(dry_wet_mixer, 0, audio_output, 1);
 AudioConnection patchCord4(dry_wet_mixer, tuner);
-AudioConnection patchCord5(audio_input, 0, *delay_effect->chain_start, 0);
-AudioConnection patchCord6(*delay_effect->chain_end, 0, *reverb_effect->chain_start, 0);
+// AudioConnection patchCord5(audio_input, 0, delay_effect->input_amp, 0);
+AudioConnection patchCord8(audio_input, 0, *delay_effect->chain_start,  0);
+AudioConnection patchCord9(*delay_effect->chain_end, *reverb_effect->chain_start);
+// AudioConnection patchCord8(delay_effect->input_amp, 0, *delay_effect->chain_start,  0);
+// AudioConnection patchCord9(*delay_effect->chain_end, 0, delay_effect->dry_wet_mixer,  1);
+// AudioConnection patchCord10(delay_effect->input_amp, 0, delay_effect->dry_wet_mixer,  0);
+
+// AudioConnection patchCord6(delay_effect->dry_wet_mixer, 0, *reverb_effect->chain_start, 0);
 AudioConnection patchCord7(*reverb_effect->chain_end, 0, dry_wet_mixer, 1);
 
 AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
@@ -65,10 +71,10 @@ void setup()
 {
     // Audio connections require memory to work.  For more
     // detailed information, see the MemoryAndCpuUsage example
-    AudioMemory(800);
+    AudioMemory(1200);
 
-    dry_wet_mixer.gain(0, 0.6);
-    dry_wet_mixer.gain(1, 0.6);
+    dry_wet_mixer.gain(0, 0);
+    dry_wet_mixer.gain(1, 0.8);
 
     // //connect input to the start of the effects chain
     // AudioConnection *connection1 = new AudioConnection(audio_input, *effects_chain[0]->chain_start);
@@ -85,7 +91,6 @@ void setup()
     // AudioConnection *connectionLast = new AudioConnection(*effects_chain[CHAIN_LENGTH - 1]->chain_end, 0, dry_wet_mixer, 1);
     // patchCords.push_back(*connectionLast);
 
-
     sgtl5000_1.enable();
     sgtl5000_1.inputSelect(myInput);
     sgtl5000_1.adcHighPassFilterDisable();
@@ -98,7 +103,9 @@ void setup()
                             selected_effect_index = (selected_effect_index + 1) % CHAIN_LENGTH;
                             displayText("Selected effect: " + String(effects_chain[selected_effect_index]->name)); });
     button2.attachClick([]()
-                        { displayText("Button 2 pressed"); });
+                        { 
+                            effects_chain[selected_effect_index]->toggle_bypass(); 
+                            });
     button3.attachClick([]()
                         { displayText("Button 3 pressed"); });
 

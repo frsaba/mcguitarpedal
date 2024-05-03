@@ -14,19 +14,31 @@ public:
 
 protected:
 	Param *params;
-	int num_params;
-	int selected_param = 0;
+	size_t num_params;
+	size_t selected_param = 0;
+	Param dry_wet_param;
+	bool bypass = false;   
+
+	AudioConnection dry_patchcord;
+	AudioConnection wet_patchcord_in;
+	AudioConnection wet_patchcord_out;
+
+	void init_connections();
 
 public:
+	AudioMixer4 dry_wet_mixer;
+	AudioAmplifier input_amp;
 	AudioStream *chain_start;
 	AudioStream *chain_end;
 
-	Effect(int num_params);
-	Effect(String name, Param params[], int num_params, AudioStream *chain_start, AudioStream *chain_end);
+	Effect(size_t num_params);
+	Effect(String name, Param params[], size_t num_params, AudioStream *chain_start, AudioStream *chain_end);
 
 	void next_param(int change);
 
 	void increment();
 	void decrement();
 	void change_param(int steps);
+	void update_dry_wet(float);
+	void toggle_bypass();
 };

@@ -10,7 +10,8 @@
 class Reverb : public Effect
 {
 private:
-    Param params[2]{
+    Param reverb_params[3]{
+        dry_wet_param,
         Param("Reverb time", DEFAULT_REVERB_TIME_MS, 100, 2000, 100, std::bind(&Reverb::update_reverb_time, this, std::placeholders::_1)),
         Param("Gain", 0.2, 0, 0.7, 0.1, std::bind(&Reverb::update_gain, this, std::placeholders::_1))};
 
@@ -33,12 +34,13 @@ public:
 
     Reverb() : Effect(
                    "Reverb",
-                   params,
-                   2,
+                   reverb_params,
+                   3,
                    &amp,
                    &reverb),
                    patchCord(amp, 0, reverb, 0)
     {
+        init_connections();
         amp.gain(DEFAULT_REVERB_GAIN);
         update_reverb_time(20);
     }
