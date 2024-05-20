@@ -1,5 +1,7 @@
 #include "param.h"
 
+//TODO: unit string (ms, %, etc)
+//TODO: param descriptions
 Param::Param(String name, float default_value, float min_value, float max_value, float step_size, std::function<void(float)> update_function)
     : default_value(default_value), 
       min_value(min_value),         

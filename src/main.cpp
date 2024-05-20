@@ -78,6 +78,7 @@ void setup()
     // detailed information, see the MemoryAndCpuUsage example
     AudioMemory(1200);
 
+	//TODO: toggle dry/wet for entire chain
     dry_wet_mixer.gain(0, 0.3);
     dry_wet_mixer.gain(1, 1);
 
@@ -112,7 +113,8 @@ void setup()
                         { 
                             effects_chain[selected_effect_index]->toggle_bypass(); 
                             });
-    button3.attachClick([]()
+    //TODO: long press to reset
+	button3.attachClick([]()
                         { displayText("Button 3 pressed"); });
 
     tuner.begin(0.3);

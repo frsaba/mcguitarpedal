@@ -4,6 +4,7 @@
 #include <Audio.h>
 #include <Effect.h>
 
+//TODO: feedback chain
 class Delay : public Effect
 {
 private:
