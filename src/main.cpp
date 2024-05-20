@@ -17,12 +17,14 @@
 
 #include <delay.cpp>
 #include <reverb.cpp>
+#include <tremolo.cpp>
 #include <display.h>
 
-#define CHAIN_LENGTH 2
-Effect *effects_chain[] = {new Delay(), new Reverb()};
-Effect *delay_effect = effects_chain[0];
-Effect *reverb_effect = effects_chain[1];
+#define CHAIN_LENGTH 3
+Effect *effects_chain[] = {new Tremolo(), new Delay(), new Reverb()};
+Effect *tremolo_effect = effects_chain[0];
+Effect *delay_effect = effects_chain[1];
+Effect *reverb_effect = effects_chain[2];
 
 int selected_effect_index = 0;
 // GUItool: begin automatically generated code
@@ -32,7 +34,14 @@ AudioAnalyzeNoteFrequency tuner; // xy=1014.1037216186523,270.00000953674316
 AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
 
 // Create connections manually
-AudioConnection patchCord1(audio_input, 0, delay_effect->input_amp, 0);
+AudioConnection patchCord1(audio_input, 0, tremolo_effect->input_amp, 0);
+
+AudioConnection patchCord16(tremolo_effect->input_amp, 0, tremolo_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
+AudioConnection patchCord13(tremolo_effect->input_amp, 0, *tremolo_effect->chain_start, 0);  // Wet in
+AudioConnection patchCord14(*tremolo_effect->chain_end, 0, tremolo_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
+
+AudioConnection patchCord15(tremolo_effect->dry_wet_mixer, 0, delay_effect->input_amp, 0);
+
 AudioConnection patchCord2(delay_effect->input_amp, 0, delay_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
 AudioConnection patchCord3(delay_effect->input_amp, 0, *delay_effect->chain_start, 0);  // Wet in
 AudioConnection patchCord4(*delay_effect->chain_end, 0, delay_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
