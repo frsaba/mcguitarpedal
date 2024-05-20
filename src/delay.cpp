@@ -26,7 +26,7 @@ public:
         delay.delay(0, new_ms);
         delay.delay(1, new_ms * 2);
         delay.delay(2, new_ms * 3);
-        delay.delay(2, new_ms * 4);
+        delay.delay(3, new_ms * 4);
     }
 
     void update_feedback(float new_feedback)
@@ -42,7 +42,7 @@ public:
                   &mixer),
               patchCord4(delay, 0, mixer, 0), patchCord5(delay, 1, mixer, 1), patchCord6(delay, 2, mixer, 2), patchCord7(delay, 3, mixer, 3)
     {
-        init_connections();
+        // init_connections();
 
         mixer.gain(0, 1);
         mixer.gain(1, 0.75);

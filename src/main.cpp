@@ -30,19 +30,24 @@ AudioInputI2S audio_input;       // xy=334.1037826538086,172.99997901916504
 AudioMixer4 dry_wet_mixer;       // xy=681.1037902832031,179
 AudioAnalyzeNoteFrequency tuner; // xy=1014.1037216186523,270.00000953674316
 AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
-AudioConnection patchCord1(audio_input, 0, dry_wet_mixer, 0);
-AudioConnection patchCord2(dry_wet_mixer, 0, audio_output, 0);
-AudioConnection patchCord3(dry_wet_mixer, 0, audio_output, 1);
-AudioConnection patchCord4(dry_wet_mixer, tuner);
-// AudioConnection patchCord5(audio_input, 0, delay_effect->input_amp, 0);
-AudioConnection patchCord8(audio_input, 0, *delay_effect->chain_start,  0);
-AudioConnection patchCord9(*delay_effect->chain_end, *reverb_effect->chain_start);
-// AudioConnection patchCord8(delay_effect->input_amp, 0, *delay_effect->chain_start,  0);
-// AudioConnection patchCord9(*delay_effect->chain_end, 0, delay_effect->dry_wet_mixer,  1);
-// AudioConnection patchCord10(delay_effect->input_amp, 0, delay_effect->dry_wet_mixer,  0);
 
-// AudioConnection patchCord6(delay_effect->dry_wet_mixer, 0, *reverb_effect->chain_start, 0);
-AudioConnection patchCord7(*reverb_effect->chain_end, 0, dry_wet_mixer, 1);
+// Create connections manually
+AudioConnection patchCord1(audio_input, 0, delay_effect->input_amp, 0);
+AudioConnection patchCord2(delay_effect->input_amp, 0, delay_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
+AudioConnection patchCord3(delay_effect->input_amp, 0, *delay_effect->chain_start, 0);  // Wet in
+AudioConnection patchCord4(*delay_effect->chain_end, 0, delay_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
+
+AudioConnection patchCord5(delay_effect->dry_wet_mixer, 0, reverb_effect->input_amp, 0);
+AudioConnection patchCord6(reverb_effect->input_amp, 0, reverb_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
+AudioConnection patchCord7(reverb_effect->input_amp, 0, *reverb_effect->chain_start, 0);  // Wet in
+AudioConnection patchCord8(*reverb_effect->chain_end, 0, reverb_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
+
+AudioConnection patchCord9(reverb_effect->dry_wet_mixer, 0, dry_wet_mixer, 1); // Final mix to main dry/wet mixer
+
+// Final output connections
+AudioConnection patchCord10(dry_wet_mixer, 0, audio_output, 0);
+AudioConnection patchCord11(dry_wet_mixer, 0, audio_output, 1);
+AudioConnection patchCord12(dry_wet_mixer, tuner);
 
 AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 // GUItool: end automatically generated code
@@ -73,8 +78,8 @@ void setup()
     // detailed information, see the MemoryAndCpuUsage example
     AudioMemory(1200);
 
-    dry_wet_mixer.gain(0, 0);
-    dry_wet_mixer.gain(1, 0.8);
+    dry_wet_mixer.gain(0, 0.3);
+    dry_wet_mixer.gain(1, 1);
 
     // //connect input to the start of the effects chain
     // AudioConnection *connection1 = new AudioConnection(audio_input, *effects_chain[0]->chain_start);
@@ -99,7 +104,8 @@ void setup()
 
     pinMode(A10, INPUT);
     button1.attachClick([]()
-                        {
+                        {	
+							//TODO: Create macro for selected effect
                             selected_effect_index = (selected_effect_index + 1) % CHAIN_LENGTH;
                             displayText("Selected effect: " + String(effects_chain[selected_effect_index]->name)); });
     button2.attachClick([]()

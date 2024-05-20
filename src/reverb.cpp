@@ -40,7 +40,7 @@ public:
                    &reverb),
                    patchCord(amp, 0, reverb, 0)
     {
-        init_connections();
+        // init_connections();
         amp.gain(DEFAULT_REVERB_GAIN);
         update_reverb_time(20);
     }
