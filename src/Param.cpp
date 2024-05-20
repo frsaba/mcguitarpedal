@@ -14,6 +14,10 @@ Param::Param(String name, float default_value, float min_value, float max_value,
 Param::~Param() {
 }
 
+Param::Param() {
+	name = "Undefined param";
+}
+
 float Param::increment() {
     return change(1);
 }
