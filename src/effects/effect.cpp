@@ -1,4 +1,4 @@
-#include <effect.h>
+#include "effect.h"
 
 Effect::Effect(String name, Param params[], size_t num_params, AudioStream *chain_start, AudioStream *chain_end) : name(name), params(params), num_params(num_params), chain_start(chain_start), chain_end(chain_end)
 {

@@ -15,9 +15,9 @@
 #include <SerialFlash.h>
 #include "OneButton.h"
 
-#include <delay.cpp>
-#include <reverb.cpp>
-#include <tremolo.cpp>
+#include <effects/delay.cpp>
+#include <effects/reverb.cpp>
+#include <effects/tremolo.cpp>
 #include <display.h>
 
 #define CHAIN_LENGTH 3

@@ -2,7 +2,7 @@
 #include "param.h"
 #include <Arduino.h>
 #include <Audio.h>
-#include <Effect.h>
+#include "effect.h"
 
 //TODO: feedback chain
 class Delay : public Effect

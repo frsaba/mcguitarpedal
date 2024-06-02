@@ -2,7 +2,7 @@
 #include "param.h"
 #include <Arduino.h>
 #include <Audio.h>
-#include <Effect.h>
+#include "effect.h"
 
 #define DEFAULT_REVERB_TIME_MS 200
 #define DEFAULT_REVERB_GAIN 0.3

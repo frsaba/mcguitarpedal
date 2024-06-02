@@ -2,7 +2,7 @@
 #include "param.h"
 #include <Arduino.h>
 #include <Audio.h>
-#include <Effect.h>
+#include "Effect.h"
 
 #define DEFAULT_FREQUENCY 4
 
