@@ -10,7 +10,7 @@
 #include <Audio.h>
 #include <Wire.h>
 #include "SPI.h"
-#include "ILI9488_t3.h"
+#include <TFT_eSPI.h> 
 #include <SD.h>
 #include <SerialFlash.h>
 #include "OneButton.h"
@@ -79,7 +79,7 @@ int param_selector_prev = 0;
 Encoder value_selector(29, 30);
 int value_selector_prev = 0;
 
-extern ILI9488_t3 tft;
+extern TFT_eSPI tft;
 
 OneButton button1(37, true);
 OneButton button2(38, true);
@@ -136,7 +136,7 @@ void setup()
 
     tuner.begin(0.3);
     tft.begin();
-    tft.fillScreen(ILI9488_BLACK);
+    tft.fillScreen(TFT_BLACK);
     tft.setRotation(3);
 
     displayText("Hello");

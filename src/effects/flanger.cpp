@@ -29,19 +29,19 @@ private:
 public:
     void update_offset(float offset)
     {
-        Serial.println("Voices: " + String(offset));
+        // Serial.println("Voices: " + String(offset));
         flange.voices(offset, params[2].current_value, params[3].current_value);
     }
 
     void update_length(float new_length)
     {
-        Serial.println("Length: " + String(new_length));
+        // Serial.println("Length: " + String(new_length));
         flange.begin(delayline, new_length, params[1].current_value, params[2].current_value, params[3].current_value);
     }
 
 	void update_rate(float new_rate)
     {
-        Serial.println("Rate: " + String(new_rate));
+        // Serial.println("Rate: " + String(new_rate));
         flange.voices(params[1].current_value, params[2].current_value, new_rate);
     }
 
