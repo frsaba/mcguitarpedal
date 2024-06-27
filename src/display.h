@@ -12,3 +12,4 @@
 extern TFT_eSPI  tft;
 
 void displayText(const String &s);
+void init_display();

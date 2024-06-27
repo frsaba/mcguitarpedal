@@ -20,6 +20,7 @@
 #include <effects/tremolo.cpp>
 #include <effects/chorus.cpp>
 #include <display.h>
+#include <lvgl.h>
 
 #define CHAIN_LENGTH 4
 Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
@@ -91,6 +92,8 @@ std::vector<AudioConnection> patchCords;
 
 void setup()
 {
+	
+    Serial.begin( 115200 );
     // Audio connections require memory to work.  For more
     // detailed information, see the MemoryAndCpuUsage example
     AudioMemory(1200);
@@ -98,6 +101,7 @@ void setup()
 	//TODO: toggle dry/wet for entire chain
     dry_wet_mixer.gain(0, 0.3);
     dry_wet_mixer.gain(1, 1);
+
 
     // //connect input to the start of the effects chain
     // AudioConnection *connection1 = new AudioConnection(audio_input, *effects_chain[0]->chain_start);
@@ -135,11 +139,13 @@ void setup()
                         { displayText("Button 3 pressed"); });
 
     tuner.begin(0.3);
-    tft.begin();
-    tft.fillScreen(TFT_BLACK);
-    tft.setRotation(3);
+    // tft.begin();
+    // tft.fillScreen(TFT_BLACK);
+    // tft.setRotation(3);
 
-    displayText("Hello");
+    // displayText("Hello");
+
+	init_display();
 }
 
 void loop()
@@ -185,5 +191,6 @@ void loop()
     button1.tick();
     button2.tick();
     button3.tick();
+	lv_timer_handler();
     delay(10);
 }
