@@ -1,5 +1,6 @@
 #include "display.h"
 #include <lvgl.h>
+#include "encoder_input.h"
 
 #if LV_USE_TFT_ESPI
 #include <TFT_eSPI.h>
@@ -10,27 +11,9 @@ lv_obj_t *label;
 
 void displayText(const String &s)
 {
-    // tft.fillRect(50, 150, 400, 60, TFT_BLACK);
-    // tft.setTextColor(TFT_GREENYELLOW);
-    // tft.setTextSize(2);
-    // tft.setCursor(50, 150);
-    // tft.print(s);
 	lv_label_set_text( label, s.begin() );
     Serial.println(s);
 }
-
-/*Using LVGL with Arduino requires some extra steps:
- *Be sure to read the docs here: https://docs.lvgl.io/master/integration/framework/arduino.html  */
-
-
-
-/*To use the built-in examples and demos of LVGL uncomment the includes below respectively.
- *You also need to copy `lvgl/examples` to `lvgl/src/examples`. Similarly for the demos `lvgl/demos` to `lvgl/src/demos`.
- *Note that the `lv_examples` library is for LVGL v7 and you shouldn't install it for this version (since LVGL v8)
- *as the examples and demos are now part of the main LVGL library. */
-
-//#include <examples/lv_examples.h>
-//#include <demos/lv_demos.h>
 
 /*Set to your screen resolution and rotation*/
 #define TFT_HOR_RES   320
@@ -85,6 +68,81 @@ static uint32_t my_tick(void)
     return millis();
 }
 
+static lv_group_t * group1;
+static lv_group_t * group2;
+
+static lv_obj_t * list1;
+static lv_obj_t * list2;
+
+void create_side_by_side_lists(void) {
+    /* Create a parent container */
+    lv_obj_t * container = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(container, 440, 240);  // Set size of the container
+    lv_obj_center(container);  // Center the container on the screen
+    lv_obj_set_layout(container, LV_LAYOUT_FLEX);  // Set the container layout to flex
+    lv_obj_set_flex_flow(container, LV_FLEX_FLOW_ROW);  // Set the flex flow to row
+    lv_obj_set_flex_align(container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START); // Align items to start
+
+    /* Create the first list */
+    list1 = lv_list_create(container);
+    lv_obj_set_size(list1, 150, 200);  // Set size of the first list
+
+    /* Add items to the first list */
+    lv_list_add_text(list1, "List 1");
+    lv_obj_t* btn1_1 = lv_list_add_btn(list1, LV_SYMBOL_FILE, "Effect 1");
+    lv_obj_t* btn1_2 = lv_list_add_btn(list1, LV_SYMBOL_FILE, "Effect 2");
+    lv_obj_t* btn1_3 = lv_list_add_btn(list1, LV_SYMBOL_FILE, "Effect 3");
+    lv_obj_t* btn_arc = lv_btn_create(list1);
+    lv_obj_align(btn_arc, LV_ALIGN_CENTER, 0, 0); // Align the button to the center
+
+    // Create an arc
+    lv_obj_t * arc = lv_arc_create(btn_arc);
+    lv_obj_set_size(arc, 40, 40); // Set the size of the arc
+    lv_obj_set_align(arc, LV_ALIGN_LEFT_MID); // Center the arc within the button
+
+	// Create a style for the arc
+    static lv_style_t style_arc;
+    lv_style_init(&style_arc);
+	lv_style_set_arc_width(&style_arc, 5);
+    lv_style_set_line_color(&style_arc, lv_palette_main(LV_PALETTE_BLUE)); // Optional: Set line color
+
+    // Apply the style to the arc
+    lv_obj_add_style(arc, &style_arc, LV_PART_MAIN);
+
+    // Customize the arc (optional)
+    lv_arc_set_bg_angles(arc, 0, 360); // Set the background angles of the arc
+    lv_arc_set_angles(arc, 0, 270); // Set the arc's angles
+
+    // Create a label
+    lv_obj_t * label = lv_label_create(btn_arc);
+    lv_label_set_text(label, "Test"); // Set the label text
+    lv_obj_center(label); // Center the label within the button
+
+    /* Create the second list */
+    list2 = lv_list_create(container);
+    lv_obj_set_size(list2, 200, 200);  // Set size of the second list to fill the container
+    lv_obj_set_flex_grow(list2, 1);  // Set the second list to grow and take up remaining space
+
+    /* Add items to the second list */
+    lv_list_add_text(list2, "List 2");
+    lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param A");
+    lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param B");
+    lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param C");
+
+    /* Create groups for each list */
+    group1 = lv_group_create();
+    group2 = lv_group_create();
+
+	lv_group_focus_obj(btn1_2);
+
+    // lv_group_add_obj(group1, list1);
+	lv_group_add_obj(group1, btn1_1);
+    lv_group_add_obj(group1, btn1_2);
+    lv_group_add_obj(group1, btn1_3);
+	lv_group_add_obj(group1, btn_arc);
+    // lv_group_add_obj(group2, list2);
+}
+
 void init_display()
 {
     String LVGL_Arduino = "Hello Arduino! ";
@@ -116,9 +174,9 @@ void init_display()
 #endif
 
     /*Initialize the (dummy) input device driver*/
-    lv_indev_t * indev = lv_indev_create();
-    lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER); /*Touchpad should have POINTER type*/
-    lv_indev_set_read_cb(indev, my_touchpad_read);
+    // lv_indev_t * indev = lv_indev_create();
+    // lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER); /*Touchpad should have POINTER type*/
+    // lv_indev_set_read_cb(indev, my_touchpad_read);
 
     /* Create a simple label
      * ---------------------
@@ -140,17 +198,25 @@ void init_display()
      */
 
     label = lv_label_create( lv_screen_active() );
-    lv_label_set_text( label, String("Hello Arduino, I'm LVGL!" + String(LV_SYMBOL_AUDIO )).begin());
-    lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
-	static lv_style_t label_style;
-	lv_style_init(&label_style);
-	lv_style_set_bg_color(&label_style, lv_color_hex(0x1F1F1F));
-	lv_style_set_bg_opa(&label_style, LV_OPA_50);
-	lv_style_set_border_width(&label_style, 2);
-	lv_style_set_border_color(&label_style, lv_color_black());
-	lv_style_set_text_color(&label_style, lv_color_white());
-	lv_style_set_text_font(&label_style, &lv_font_montserrat_24);
-	lv_obj_add_style(label, &label_style, 0);
+    // lv_label_set_text( label, String("Hello Arduino, I'm LVGL!" + String(LV_SYMBOL_AUDIO )).begin());
+    // lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
+	// static lv_style_t label_style;
+	// lv_style_init(&label_style);
+	// lv_style_set_bg_color(&label_style, lv_color_hex(0x1F1F1F));
+	// lv_style_set_bg_opa(&label_style, LV_OPA_50);
+	// lv_style_set_border_width(&label_style, 2);
+	// lv_style_set_border_color(&label_style, lv_color_black());
+	// lv_style_set_text_color(&label_style, lv_color_white());
+	// lv_style_set_text_font(&label_style, &lv_font_montserrat_24);
+	// lv_obj_add_style(label, &label_style, 0);
+
+    /* Create the UI */
+	create_side_by_side_lists();
+
+	setup_input_devices();
+
+    lv_indev_set_group(encoder1, group1);
+    // lv_indev_set_group(encoder2, group2);
 
     Serial.println( "Setup done" );
 }
