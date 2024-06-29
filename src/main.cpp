@@ -130,10 +130,10 @@ void setup()
 							//TODO: Create macro for selected effect
                             selected_effect_index = (selected_effect_index + 1) % CHAIN_LENGTH;
                             displayText("Selected effect: " + String(effects_chain[selected_effect_index]->name)); });
-    button2.attachClick([]()
-                        { 
-                            effects_chain[selected_effect_index]->toggle_bypass(); 
-                            });
+    // button2.attachClick([]()
+    //                     { 
+    //                         effects_chain[selected_effect_index]->toggle_bypass(); 
+    //                         });
     //TODO: long press to reset
 	button3.attachClick([]()
                         { displayText("Button 3 pressed"); });
@@ -146,6 +146,7 @@ void setup()
     // displayText("Hello");
 
 	init_display();
+	create_effect_lists(effects_chain, CHAIN_LENGTH);
 }
 
 void loop()
