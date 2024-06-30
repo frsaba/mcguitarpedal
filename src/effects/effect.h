@@ -6,6 +6,8 @@
 #include <iterator>
 #include <display.h>
 
+#define DEFAULT_WET 40
+
 // TODO: maybe inherit from AudioStream?
 class Effect
 {
@@ -40,5 +42,7 @@ public:
 	void decrement();
 	void change_param(int steps);
 	void update_dry_wet(float);
-	void toggle_bypass();
+	float toggle_bypass();
+
+	friend void create_effect_lists(Effect *effects_chain[], size_t chain_length);
 };

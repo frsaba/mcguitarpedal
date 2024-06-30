@@ -73,7 +73,11 @@ static lv_group_t * group1;
 static lv_group_t * group2;
 
 static lv_obj_t * list1;
-static lv_obj_t * list2;
+// static lv_obj_t * list2;
+
+// typedef struct {
+//     TFT_eSPI * tft;
+// } lv_tft_espi_t;
 
 void init_display()
 {
@@ -96,6 +100,10 @@ void init_display()
     /*TFT_eSPI can be enabled lv_conf.h to initialize the display in a simple way*/
     disp = lv_tft_espi_create(TFT_HOR_RES, TFT_VER_RES, draw_buf, sizeof(draw_buf));
     lv_display_set_rotation(disp, TFT_ROTATION);
+	// lv_tft_espi_t* dsc = (lv_tft_espi_t*)lv_display_get_driver_data(disp);
+	// dsc->tft->
+	// lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565);
+	// lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565A8);
 
 
     /*Initialize the (dummy) input device driver*/
@@ -142,26 +150,60 @@ void init_display()
     group2 = lv_group_create();
 	setup_input_devices();
 
-    lv_indev_set_group(encoder1, group1);
-    // lv_indev_set_group(encoder2, group2);
+    lv_indev_set_group(effect_selector, group1);
+    lv_indev_set_group(param_selector, group2);
 
     Serial.println( "Setup done" );
 }
 
-static void event_handler(lv_event_t * e)
+//Called when effect encoder button is pressed. Toggles the effect bypass
+static void bypass_event(lv_event_t * e)
 {
-    lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
 	Effect* effect = (Effect *)target->user_data;
-    if(code == LV_EVENT_CLICKED) {
-        // LV_UNUSED(obj);
-        LV_LOG_USER("Clicked: %s", effect->name.begin());
-		effect->toggle_bypass();
 
-    }
+	// LV_UNUSED(obj);
+	float new_value = effect->toggle_bypass();
+	LV_LOG_USER("Clicked: %s", effect->name.begin());
+	lv_obj_t* arc = lv_obj_get_child(target, 1); // First child is the label, second should be the arc
+
+	if (lv_obj_check_type(arc, &lv_arc_class)) {
+		
+		lv_arc_set_value(arc, new_value);
+		// lv_obj_invalidate(arc); // Force redraw
+	}
+	else{
+		LV_LOG_USER("Arc object not found");
+	}
+
+
+}
+static size_t chain_length;
+lv_obj_t** params_lists;
+// Called when the effect is navigated to; Hides the old params list and shows the new one instead.
+static void effect_focused_event(lv_event_t * e)
+{
+    lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	Effect* effect = (Effect *)target->user_data;
+	int effect_index = lv_obj_get_index(target) - 1;
+
+	if(effect_index < 0){
+		LV_LOG_ERROR("Could not find focused effect index");
+		return;	
+	}
+
+	LV_LOG_USER("Clicked: %s %d", effect->name.begin(), effect_index);
+
+	for (size_t i = 0; i < chain_length; i++)
+	{
+		if(i == static_cast<size_t>(effect_index)) lv_obj_remove_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
+		else lv_obj_add_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
+	}
 }
 
-void create_effect_lists(Effect *effects_chain[], size_t chain_length){
+
+void create_effect_lists(Effect *effects_chain[], size_t length){
+	chain_length = length;
 	    /* Create a parent container */
     lv_obj_t * container = lv_obj_create(lv_scr_act());
     lv_obj_set_size(container, 470, 240);  // Set size of the container
@@ -176,10 +218,13 @@ void create_effect_lists(Effect *effects_chain[], size_t chain_length){
 
     /* Add items to the first list */
     lv_list_add_text(list1, "Effects");
+
+	params_lists = new lv_obj_t*[chain_length];
 	for (size_t i = 0; i < chain_length; i++)
 	{
 		lv_obj_t* list_button = lv_list_add_btn(list1, NULL, effects_chain[i]->name.begin());
-		list_button->user_data = effects_chain[i];
+		Effect* effect = effects_chain[i];
+		list_button->user_data = effect;
 		// lv_obj_set_size(list_button, 100, 40);
 		// lv_obj_align(list_button, LV_ALIGN_CENTER, 0, 0); // Align the button to the center
 
@@ -187,30 +232,47 @@ void create_effect_lists(Effect *effects_chain[], size_t chain_length){
 		lv_obj_t *arc = lv_arc_create(list_button);
 
 		// lv_obj_set_pos(arc, 60, 60);
-		lv_obj_set_size(arc, 20, 20);
-		lv_arc_set_rotation(arc, 135);
-		lv_arc_set_bg_angles(arc, 0, 270);
-		lv_arc_set_value(arc, 50);
-		lv_obj_set_style_arc_width(arc, 2, LV_PART_MAIN );
-		lv_obj_set_style_arc_width(arc, 2, LV_PART_INDICATOR);
-		lv_obj_set_style_arc_color(arc, lv_palette_main(LV_PALETTE_CYAN), LV_PART_MAIN);
-		lv_obj_set_style_arc_color(arc, lv_palette_darken(LV_PALETTE_CYAN, 3), LV_PART_INDICATOR);
-		lv_obj_set_style_bg_color(arc, lv_palette_darken(LV_PALETTE_CYAN, 10), LV_PART_KNOB);
+		lv_obj_set_size(arc, 25, 25);
+		// lv_arc_set_rotation(arc, 135);
+		// lv_arc_set_bg_angles(arc, 0, 270);
+		lv_arc_set_value(arc, DEFAULT_WET);
+		lv_obj_set_style_arc_width(arc, 6, LV_PART_MAIN );
+		lv_obj_set_style_arc_width(arc, 6, LV_PART_INDICATOR);
+		lv_obj_set_style_arc_color(arc, lv_palette_main(LV_PALETTE_RED), LV_PART_MAIN);
+		lv_obj_set_style_arc_color(arc, lv_palette_darken(LV_PALETTE_BLUE, 3), LV_PART_INDICATOR);
+		lv_obj_set_style_bg_color(arc, lv_palette_darken(LV_PALETTE_BLUE, 10), LV_PART_KNOB);
 		lv_obj_set_style_pad_all(arc, 2, LV_PART_KNOB );
 
-		lv_obj_add_event_cb(list_button, event_handler, LV_EVENT_CLICKED, NULL);
-
-
 		lv_group_add_obj(group1, list_button);
+
+		params_lists[i] = lv_list_create(container);
+		lv_list_add_text(params_lists[i], "Params");
+		lv_obj_set_size(params_lists[i], 200, 200);  // Set size of the second list to fill the container
+		lv_obj_set_flex_grow(params_lists[i], 1);
+		for (size_t param_index = 0; param_index < effect->num_params; param_index++)
+		{
+			Param* param = &effect->params[param_index];
+			auto param_button = lv_list_add_btn(params_lists[i], LV_SYMBOL_FILE, param->name.begin());
+
+			lv_group_add_obj(group2, param_button);
+		}
+
+		if(i > 0) lv_obj_add_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
+
+		//Add navigation with encoders
+		lv_obj_add_event_cb(list_button, bypass_event, LV_EVENT_CLICKED, NULL);
+		lv_obj_add_event_cb(list_button, effect_focused_event, LV_EVENT_FOCUSED, NULL);
 	}
+
+
     /* Create the second list */
-    list2 = lv_list_create(container);
-    lv_obj_set_size(list2, 200, 200);  // Set size of the second list to fill the container
-    lv_obj_set_flex_grow(list2, 1);  // Set the second list to grow and take up remaining space
+    // list2 = lv_list_create(container);
+    // lv_obj_set_size(list2, 200, 200);  // Set size of the second list to fill the container
+    // lv_obj_set_flex_grow(list2, 1);  // Set the second list to grow and take up remaining space
 
     /* Add items to the second list */
-    lv_list_add_text(list2, "List 2");
-    lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param A");
-    lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param B");
-    lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param C");
+    // lv_list_add_text(list2, "List 2");
+    // lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param A");
+    // lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param B");
+    // lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param C");
 }

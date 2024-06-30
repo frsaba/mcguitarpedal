@@ -21,6 +21,7 @@
 #include <effects/chorus.cpp>
 #include <display.h>
 #include <lvgl.h>
+#define TFT_RGB_ORDER TFT_BGR
 
 #define CHAIN_LENGTH 4
 Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
@@ -74,17 +75,22 @@ AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 
 const int myInput = AUDIO_INPUT_LINEIN;
 // const int myInput = AUDIO_INPUT_MIC;
-Encoder param_selector(31, 32);
-int param_selector_prev = 0;
 
-Encoder value_selector(29, 30);
-int value_selector_prev = 0;
+Encoder encoder_1(27, 28);
+int encoder_1_prev = 0;
+
+Encoder encoder_2(31, 32);
+int encoder_2_prev = 0;
+
+Encoder encoder_3(29, 30);
+int encoder_3_prev = 0;
+
 
 extern TFT_eSPI tft;
 
-OneButton button1(37, true);
-OneButton button2(38, true);
-OneButton button3(39, true);
+OneButton button_1(37, true);
+OneButton button_2(38, true);
+OneButton button_3(39, true);
 
 elapsedMillis volmsec = 0;
 
@@ -125,17 +131,17 @@ void setup()
     sgtl5000_1.lineInLevel(10);
 
     pinMode(A10, INPUT);
-    button1.attachClick([]()
-                        {	
-							//TODO: Create macro for selected effect
-                            selected_effect_index = (selected_effect_index + 1) % CHAIN_LENGTH;
-                            displayText("Selected effect: " + String(effects_chain[selected_effect_index]->name)); });
+    // button_1.attachClick([]()
+    //                     {	
+	// 						//TODO: Create macro for selected effect
+    //                         selected_effect_index = (selected_effect_index + 1) % CHAIN_LENGTH;
+    //                         displayText("Selected effect: " + String(effects_chain[selected_effect_index]->name)); });
     // button2.attachClick([]()
     //                     { 
     //                         effects_chain[selected_effect_index]->toggle_bypass(); 
     //                         });
     //TODO: long press to reset
-	button3.attachClick([]()
+	button_3.attachClick([]()
                         { displayText("Button 3 pressed"); });
 
     tuner.begin(0.3);
@@ -158,18 +164,18 @@ void loop()
         sgtl5000_1.volume(vol); // <-- uncomment if you have the optional
         volmsec = 0;            //     volume pot on your audio shield
 
-        int param_selector_new = param_selector.read() / 4;
-        if (param_selector_new != param_selector_prev)
+        int param_selector_new = encoder_2.read() / 4;
+        if (param_selector_new != encoder_2_prev)
         {
-            effects_chain[selected_effect_index]->next_param(param_selector_new - param_selector_prev);
-            param_selector_prev = param_selector_new;
+            effects_chain[selected_effect_index]->next_param(param_selector_new - encoder_2_prev);
+            encoder_2_prev = param_selector_new;
         }
 
-        int value_selector_new = value_selector.read() / 4;
-        if (value_selector_new != value_selector_prev)
+        int value_selector_new = encoder_3.read() / 4;
+        if (value_selector_new != encoder_3_prev)
         {
-            effects_chain[selected_effect_index]->change_param(value_selector_new - value_selector_prev);
-            value_selector_prev = value_selector_new;
+            effects_chain[selected_effect_index]->change_param(value_selector_new - encoder_3_prev);
+            encoder_3_prev = value_selector_new;
         }
 
         // if (tuner.available())
@@ -189,9 +195,9 @@ void loop()
         // Serial.print("    ");
         // Serial.println();
     }
-    button1.tick();
-    button2.tick();
-    button3.tick();
+    button_1.tick();
+    button_2.tick();
+    button_3.tick();
 	lv_timer_handler();
     delay(10);
 }

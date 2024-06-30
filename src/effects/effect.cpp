@@ -2,7 +2,7 @@
 
 Effect::Effect(String name, Param params[], size_t num_params, AudioStream *chain_start, AudioStream *chain_end) : name(name), params(params), num_params(num_params), chain_start(chain_start), chain_end(chain_end)
 {
-	dry_wet_param = Param("Dry/Wet", 0, 5, 100, 5, std::bind(&Effect::update_dry_wet, this, std::placeholders::_1));
+	dry_wet_param = Param("Dry/Wet", DEFAULT_WET, 5, 100, 5, std::bind(&Effect::update_dry_wet, this, std::placeholders::_1));
 	// // this->params[0] = dry_wet_param;
 	// // this->params = new Param[num_params];
 	// // for (size_t i = 0; i < num_params; i++)
@@ -31,11 +31,13 @@ void Effect::update_dry_wet(float new_value)
 	dry_wet_mixer.gain(1, new_value / 100.0);
 }
 
-void Effect::toggle_bypass()
+float Effect::toggle_bypass()
 {
 	bypass = !bypass;
-	update_dry_wet(bypass ? 0 : params[0].current_value);
-	displayText("Set wet to " + String(bypass ? 0 : params[0].current_value) + "%");
+	float value = bypass ? 0 : params[0].current_value;
+	update_dry_wet(value);
+	displayText("Set wet to " + String(bypass ? 0 : value) + "%");
+	return value;
 }
 
 void Effect::next_param(int change = 1)
