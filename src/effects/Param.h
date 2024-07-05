@@ -20,4 +20,5 @@ public:
 	float increment();
 	float decrement();
 	float change(int steps);
+	float get_as_percentage();
 };

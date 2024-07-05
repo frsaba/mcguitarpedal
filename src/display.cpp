@@ -192,7 +192,7 @@ static void effect_focused_event(lv_event_t * e)
 		return;	
 	}
 
-	LV_LOG_USER("Clicked: %s %d", effect->name.begin(), effect_index);
+	// LV_LOG_USER("Focused: %s %d", effect->name.begin(), effect_index);
 
 	for (size_t i = 0; i < chain_length; i++)
 	{
@@ -200,6 +200,42 @@ static void effect_focused_event(lv_event_t * e)
 		else lv_obj_add_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
 	}
 }
+
+// Create an arc object with styling
+lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
+	// Arc styling
+	static lv_style_t style_arc_main;
+	static lv_style_t style_arc_indicator;
+	static lv_style_t style_arc_knob;
+	lv_style_init(&style_arc_main);
+	lv_style_init(&style_arc_indicator);
+	lv_style_init(&style_arc_knob);
+
+	lv_style_set_arc_width(&style_arc_main, 6);
+	lv_style_set_arc_width(&style_arc_indicator, 6);
+	lv_style_set_arc_color(&style_arc_main, lv_palette_main(LV_PALETTE_RED));
+	lv_style_set_arc_color(&style_arc_indicator, lv_palette_darken(LV_PALETTE_BLUE, 3));
+	lv_style_set_bg_color(&style_arc_knob, lv_palette_darken(LV_PALETTE_BLUE, 10));
+	lv_style_set_pad_all(&style_arc_knob, 2);
+
+
+	lv_obj_t *arc = lv_arc_create(parent);
+	lv_obj_add_style(arc, &style_arc_main, LV_PART_MAIN);
+	lv_obj_add_style(arc, &style_arc_indicator, LV_PART_INDICATOR);
+	lv_obj_add_style(arc, &style_arc_knob, LV_PART_KNOB);
+
+	lv_obj_set_size(arc, size, size);
+	// lv_arc_set_rotation(arc, 135);
+	// lv_arc_set_bg_angles(arc, 0, 270);
+	lv_arc_set_value(arc, value);
+
+	//TODO: if touchscreen is used, should these be able to be adjusted?
+	//These 2 lines make the arc non-adjustable according to the docs. Is the second one enough?
+	// lv_obj_remove_style(arc, NULL, LV_PART_KNOB);
+	lv_obj_remove_flag(arc, LV_OBJ_FLAG_CLICKABLE);	
+
+	return arc;
+} 
 
 
 void create_effect_lists(Effect *effects_chain[], size_t length){
@@ -212,11 +248,10 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
     lv_obj_set_flex_flow(container, LV_FLEX_FLOW_ROW);  // Set the flex flow to row
     lv_obj_set_flex_align(container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START); // Align items to start
 
-    /* Create the first list */
+    // Create the first lists we'll add the effects to
     list1 = lv_list_create(container);
-    lv_obj_set_size(list1, 150, 200);  // Set size of the first list
+    lv_obj_set_size(list1, 150, 200);
 
-    /* Add items to the first list */
     lv_list_add_text(list1, "Effects");
 
 	params_lists = new lv_obj_t*[chain_length];
@@ -225,43 +260,35 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 		lv_obj_t* list_button = lv_list_add_btn(list1, NULL, effects_chain[i]->name.begin());
 		Effect* effect = effects_chain[i];
 		list_button->user_data = effect;
-		// lv_obj_set_size(list_button, 100, 40);
-		// lv_obj_align(list_button, LV_ALIGN_CENTER, 0, 0); // Align the button to the center
 
-		// Create an arc
-		lv_obj_t *arc = lv_arc_create(list_button);
+		// Create the arc for the effect wet level
+		create_arc(list_button, DEFAULT_WET);
 
-		// lv_obj_set_pos(arc, 60, 60);
-		lv_obj_set_size(arc, 25, 25);
-		// lv_arc_set_rotation(arc, 135);
-		// lv_arc_set_bg_angles(arc, 0, 270);
-		lv_arc_set_value(arc, DEFAULT_WET);
-		lv_obj_set_style_arc_width(arc, 6, LV_PART_MAIN );
-		lv_obj_set_style_arc_width(arc, 6, LV_PART_INDICATOR);
-		lv_obj_set_style_arc_color(arc, lv_palette_main(LV_PALETTE_RED), LV_PART_MAIN);
-		lv_obj_set_style_arc_color(arc, lv_palette_darken(LV_PALETTE_BLUE, 3), LV_PART_INDICATOR);
-		lv_obj_set_style_bg_color(arc, lv_palette_darken(LV_PALETTE_BLUE, 10), LV_PART_KNOB);
-		lv_obj_set_style_pad_all(arc, 2, LV_PART_KNOB );
-
+		//Add to group 1 so that it can be scrolled with the encoder
 		lv_group_add_obj(group1, list_button);
 
+		//Set up params list
 		params_lists[i] = lv_list_create(container);
 		lv_list_add_text(params_lists[i], "Params");
 		lv_obj_set_size(params_lists[i], 200, 200);  // Set size of the second list to fill the container
 		lv_obj_set_flex_grow(params_lists[i], 1);
+
 		for (size_t param_index = 0; param_index < effect->num_params; param_index++)
 		{
 			Param* param = &effect->params[param_index];
 			auto param_button = lv_list_add_btn(params_lists[i], LV_SYMBOL_FILE, param->name.begin());
 
+			create_arc(param_button, param->get_as_percentage());
+
+			//Add to group 2 so that it can be scrolled with the encoder
 			lv_group_add_obj(group2, param_button);
 		}
 
+		// Only the selected effect's parameter list is shown
 		if(i > 0) lv_obj_add_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
 
-		//Add navigation with encoders
-		lv_obj_add_event_cb(list_button, bypass_event, LV_EVENT_CLICKED, NULL);
-		lv_obj_add_event_cb(list_button, effect_focused_event, LV_EVENT_FOCUSED, NULL);
+		lv_obj_add_event_cb(list_button, bypass_event, LV_EVENT_CLICKED, NULL); 			// Encoder click: toggle bypass
+		lv_obj_add_event_cb(list_button, effect_focused_event, LV_EVENT_FOCUSED, NULL); 	//Add navigation with encoders
 	}
 
 
