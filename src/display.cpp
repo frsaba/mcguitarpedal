@@ -1,11 +1,6 @@
-#include "display.h"
-#include <lvgl.h>
-#include "encoder_input.h"
 
-#if LV_USE_TFT_ESPI
 #include <TFT_eSPI.h>
-#endif
-
+#include "display.h"
 
 lv_obj_t *label;
 
@@ -69,8 +64,9 @@ static uint32_t my_tick(void)
     return millis();
 }
 
-static lv_group_t * group1;
-static lv_group_t * group2;
+static lv_group_t * effects_group;
+static lv_group_t * params_group;
+static lv_group_t * values_group;
 
 static lv_obj_t * list1;
 // static lv_obj_t * list2;
@@ -79,6 +75,22 @@ static lv_obj_t * list1;
 //     TFT_eSPI * tft;
 // } lv_tft_espi_t;
 
+
+static void value_changed_event(lv_event_t * e)
+{
+    // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	// Param* param = (Param *)lv_event_get_user_data(e);
+	// int effect_index = lv_obj_get_index(target) - 1;
+
+	// if(effect_index < 0){
+	// 	LV_LOG_ERROR("Could not find focused effect index");
+	// 	return;	
+	// }
+
+	LV_LOG_USER("Event fired %d", lv_event_get_code(e)); //%s", lv_event_get_user_data(e));
+
+
+}
 void init_display()
 {
     String LVGL_Arduino = "Hello Arduino! ";
@@ -146,12 +158,18 @@ void init_display()
     /* Create the UI */
 	// create_side_by_side_lists();
 
-	group1 = lv_group_create();
-    group2 = lv_group_create();
+	effects_group = lv_group_create();
+    params_group = lv_group_create();
+    values_group = lv_group_create();
+
 	setup_input_devices();
 
-    lv_indev_set_group(effect_selector, group1);
-    lv_indev_set_group(param_selector, group2);
+    lv_indev_set_group(effect_selector, effects_group);
+    lv_indev_set_group(param_selector, params_group);
+	lv_indev_set_group(value_selector, values_group);
+	
+	
+	//  lv_indev_add_event_cb(value_selector, value_changed_event, LV_EVENT_ALL, params_group->obj_focus);
 
     Serial.println( "Setup done" );
 }
@@ -192,7 +210,7 @@ static void effect_focused_event(lv_event_t * e)
 		return;	
 	}
 
-	// LV_LOG_USER("Focused: %s %d", effect->name.begin(), effect_index);
+	LV_LOG_USER("Focused: %s %d", effect->name.begin(), effect_index);
 
 	for (size_t i = 0; i < chain_length; i++)
 	{
@@ -200,6 +218,22 @@ static void effect_focused_event(lv_event_t * e)
 		else lv_obj_add_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
 	}
 }
+
+// static void value_changed_event(lv_event_t * e)
+// {
+//     // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+// 	// Param* param = (Param *)lv_event_get_user_data(e);
+// 	// int effect_index = lv_obj_get_index(target) - 1;
+
+// 	// if(effect_index < 0){
+// 	// 	LV_LOG_ERROR("Could not find focused effect index");
+// 	// 	return;	
+// 	// }
+
+// 	LV_LOG_USER("Focused: %s", lv_event_get_user_data(e));
+
+
+// }
 
 // Create an arc object with styling
 lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
@@ -237,6 +271,7 @@ lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
 	return arc;
 } 
 
+	
 
 void create_effect_lists(Effect *effects_chain[], size_t length){
 	chain_length = length;
@@ -265,7 +300,7 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 		create_arc(list_button, DEFAULT_WET);
 
 		//Add to group 1 so that it can be scrolled with the encoder
-		lv_group_add_obj(group1, list_button);
+		lv_group_add_obj(effects_group, list_button);
 
 		//Set up params list
 		params_lists[i] = lv_list_create(container);
@@ -277,11 +312,22 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 		{
 			Param* param = &effect->params[param_index];
 			auto param_button = lv_list_add_btn(params_lists[i], LV_SYMBOL_FILE, param->name.begin());
+			lv_obj_set_user_data(param_button, &effect->params[param_index]);
+			//Add to group 2 so that it can be scrolled with the encoder
+			lv_group_add_obj(params_group, param_button);
 
 			create_arc(param_button, param->get_as_percentage());
 
-			//Add to group 2 so that it can be scrolled with the encoder
-			lv_group_add_obj(group2, param_button);
+			lv_obj_t* spinbox = lv_spinbox_create(param_button);
+			lv_spinbox_set_range(spinbox, 1, 4);
+			lv_spinbox_set_digit_format(spinbox, 1, 0);
+			// lv_spinbox_set_rollover(spinbox, true);
+			lv_group_add_obj(values_group, spinbox);
+			// lv_group_focus_next(values_group);
+			lv_group_set_editing(values_group, true);
+			// lv_group_focus_freeze(lv_group_get_default(), true);
+			lv_obj_add_event_cb(spinbox, value_changed_event, LV_EVENT_ALL, &effect->params[param_index]);
+
 		}
 
 		// Only the selected effect's parameter list is shown

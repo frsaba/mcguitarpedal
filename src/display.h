@@ -1,6 +1,9 @@
 #pragma once
 #include <TFT_eSPI.h> 
 #include <effects/effect.h>
+#include <lvgl.h>
+#include "encoder_input.h"
+
 // #define TFT_RST 34
 // #define TFT_DC 9
 // #define TFT_CS 36
