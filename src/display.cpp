@@ -20,26 +20,6 @@ void displayText(const String &s)
 #define DRAW_BUF_SIZE (TFT_HOR_RES * TFT_VER_RES / 10 * (LV_COLOR_DEPTH / 8))
 uint32_t draw_buf[DRAW_BUF_SIZE / 4];
 
-#if LV_USE_LOG != 0
-void my_print( lv_log_level_t level, const char * buf )
-{
-    // LV_UNUSED(level);
-    Serial.println(buf);
-    Serial.flush();
-}
-#endif
-
-/* LVGL calls it when a rendered image needs to copied to the display*/
-// void my_disp_flush( lv_display_t *disp, const lv_area_t *area, uint8_t * px_map)
-// {
-//     uint32_t w = (area->x2 - area->x1 + 1);
-//     uint32_t h = (area->y2 - area->y1 + 1);
-
-//     tft.setAddrWindow(area->x1, area->y1, w, h);
-//     tft.pushColors((uint16_t *)&px_map, w * h);
-//     lv_disp_flush_ready(disp);
-// }
-
 /*Read the touchpad*/
 void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
 {
@@ -76,7 +56,12 @@ static lv_obj_t * list1;
 // } lv_tft_espi_t;
 
 
-static void value_changed_event(lv_event_t * e)
+// static void value_changed_event(lv_event_t * e)
+// {
+// 	LV_LOG_USER("Event fired %d", lv_event_get_code(e)); //%s", lv_event_get_user_data(e));
+
+// }
+static void value_changed_event(int enc_diff)
 {
     // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
 	// Param* param = (Param *)lv_event_get_user_data(e);
@@ -87,8 +72,58 @@ static void value_changed_event(lv_event_t * e)
 	// 	return;	
 	// }
 
-	LV_LOG_USER("Event fired %d", lv_event_get_code(e)); //%s", lv_event_get_user_data(e));
+	LV_LOG_USER("Encoder turned %d", enc_diff); //%s", lv_event_get_user_data(e));
 
+	lv_obj_t* selected_param_obj = lv_group_get_focused(params_group);
+	lv_obj_t* selected_effect_obj = lv_group_get_focused(effects_group);
+	if(selected_param_obj == NULL)	LV_LOG_USER("Focused param object is null");
+	if(selected_effect_obj == NULL)	LV_LOG_USER("Focused effect object is null");
+
+	//make sure the param is not hidden (in another tab)
+	//the parent has the hidden flag
+	if( lv_obj_has_flag(lv_obj_get_parent(selected_param_obj), LV_OBJ_FLAG_HIDDEN)){
+		LV_LOG_USER("Trying to set hidden param");
+		return;
+	}
+
+	Param* param = (Param *)lv_obj_get_user_data(selected_param_obj);
+	Effect* effect = (Effect *)lv_obj_get_user_data(selected_effect_obj);
+
+	float new_value = param->change(enc_diff);
+	LV_LOG_USER("Changing param %s - %s : %.1f", effect->name.begin(), param->name.begin(), new_value);
+
+	lv_obj_t* arc = lv_obj_get_child_by_type(selected_param_obj, 0, &lv_arc_class);
+
+	//Update arc
+	if (arc) {
+		lv_arc_set_value(arc, param->get_as_percentage());
+	}
+	else{
+		LV_LOG_USER("Arc object not found");
+	}
+
+	//Update value label
+	lv_obj_t* label = lv_obj_get_child_by_type(selected_param_obj, -1, &lv_label_class); // oldest label is the param name, youngest should be the value
+	if (label) {
+		 lv_label_set_text_fmt(label, "%.1f", new_value);
+	}
+	else{
+		LV_LOG_USER("Value label object not found");
+	}
+
+	//if the param is dry/wet, update the arc next to the effect name as well
+	if(&effect->params[0] == param){
+		LV_LOG_USER("Changing dry/wet");
+		lv_obj_t* arc = lv_obj_get_child_by_type(selected_effect_obj, 0, &lv_arc_class);
+
+		//Update arc
+		if (arc) {
+			lv_arc_set_value(arc, param->get_as_percentage());
+		}
+		else{
+			LV_LOG_USER("Dry/wet arc object not found");
+		}
+	}
 
 }
 void init_display()
@@ -104,9 +139,9 @@ void init_display()
     lv_tick_set_cb(my_tick);
 
     /* register print function for debugging */
-#if LV_USE_LOG != 0
-    lv_log_register_print_cb( my_print );
-#endif
+// #if LV_USE_LOG != 0
+//     lv_log_register_print_cb( my_print );
+// #endif
 
     lv_display_t * disp;
     /*TFT_eSPI can be enabled lv_conf.h to initialize the display in a simple way*/
@@ -117,43 +152,7 @@ void init_display()
 	// lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565);
 	// lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565A8);
 
-
-    /*Initialize the (dummy) input device driver*/
-    // lv_indev_t * indev = lv_indev_create();
-    // lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER); /*Touchpad should have POINTER type*/
-    // lv_indev_set_read_cb(indev, my_touchpad_read);
-
-    /* Create a simple label
-     * ---------------------
-     lv_obj_t *label = lv_label_create( lv_screen_active() );
-     lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
-     lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
-
-     * Try an example. See all the examples
-     *  - Online: https://docs.lvgl.io/master/examples.html
-     *  - Source codes: https://github.com/lvgl/lvgl/tree/master/examples
-     * ----------------------------------------------------------------
-
-     lv_example_btn_1();
-
-     * Or try out a demo. Don't forget to enable the demos in lv_conf.h. E.g. LV_USE_DEMOS_WIDGETS
-     * -------------------------------------------------------------------------------------------
-
-     lv_demo_widgets();
-     */
-
     label = lv_label_create( lv_screen_active() );
-    // lv_label_set_text( label, String("Hello Arduino, I'm LVGL!" + String(LV_SYMBOL_AUDIO )).begin());
-    // lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
-	// static lv_style_t label_style;
-	// lv_style_init(&label_style);
-	// lv_style_set_bg_color(&label_style, lv_color_hex(0x1F1F1F));
-	// lv_style_set_bg_opa(&label_style, LV_OPA_50);
-	// lv_style_set_border_width(&label_style, 2);
-	// lv_style_set_border_color(&label_style, lv_color_black());
-	// lv_style_set_text_color(&label_style, lv_color_white());
-	// lv_style_set_text_font(&label_style, &lv_font_montserrat_24);
-	// lv_obj_add_style(label, &label_style, 0);
 
     /* Create the UI */
 	// create_side_by_side_lists();
@@ -167,6 +166,8 @@ void init_display()
     lv_indev_set_group(effect_selector, effects_group);
     lv_indev_set_group(param_selector, params_group);
 	lv_indev_set_group(value_selector, values_group);
+
+	set_scroll_callback(value_selector, value_changed_event);
 	
 	
 	//  lv_indev_add_event_cb(value_selector, value_changed_event, LV_EVENT_ALL, params_group->obj_focus);
@@ -183,7 +184,7 @@ static void bypass_event(lv_event_t * e)
 	// LV_UNUSED(obj);
 	float new_value = effect->toggle_bypass();
 	LV_LOG_USER("Clicked: %s", effect->name.begin());
-	lv_obj_t* arc = lv_obj_get_child(target, 1); // First child is the label, second should be the arc
+	lv_obj_t* arc = lv_obj_get_child_by_type(target, 0, &lv_arc_class);// lv_obj_get_child(target, 1); // First child is the label, second should be the arc
 
 	if (lv_obj_check_type(arc, &lv_arc_class)) {
 		
@@ -316,17 +317,19 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 			//Add to group 2 so that it can be scrolled with the encoder
 			lv_group_add_obj(params_group, param_button);
 
-			create_arc(param_button, param->get_as_percentage());
 
-			lv_obj_t* spinbox = lv_spinbox_create(param_button);
-			lv_spinbox_set_range(spinbox, 1, 4);
-			lv_spinbox_set_digit_format(spinbox, 1, 0);
-			// lv_spinbox_set_rollover(spinbox, true);
-			lv_group_add_obj(values_group, spinbox);
+			lv_obj_t* value_label = lv_label_create(param_button);
+			lv_label_set_text_fmt(value_label, "%.1f", param->current_value);
+
+			create_arc(param_button, param->get_as_percentage());
+			// lv_label_bind_text(label, lv_subject &param->current_value, "%f")
+			// lv_textarea_set_accepted_chars(textbox, "0123456789.");
+			// lv_textarea_set_max_length(textbox, 5);
+			// lv_group_add_obj(values_group, textbox);
 			// lv_group_focus_next(values_group);
-			lv_group_set_editing(values_group, true);
+			// lv_group_set_editing(values_group, true);
 			// lv_group_focus_freeze(lv_group_get_default(), true);
-			lv_obj_add_event_cb(spinbox, value_changed_event, LV_EVENT_ALL, &effect->params[param_index]);
+			// lv_obj_add_event_cb(textbox, value_changed_event, LV_EVENT_ALL, &effect->params[param_index]);
 
 		}
 

@@ -13,8 +13,8 @@ extern OneButton button_2;
 extern Encoder encoder_2;
 extern OneButton button_3;
 extern Encoder encoder_3;
-extern int selector_prev;
 
+void set_scroll_callback(lv_indev_t* indev, void(*encoder_scroll_cb)(int));
 void encoder_read(lv_indev_t * indev, lv_indev_data_t*data);
 void setup_input_devices();
 

@@ -164,19 +164,21 @@ void loop()
         sgtl5000_1.volume(vol); // <-- uncomment if you have the optional
         volmsec = 0;            //     volume pot on your audio shield
 
-        int param_selector_new = encoder_2.read() / 4;
-        if (param_selector_new != encoder_2_prev)
-        {
-            effects_chain[selected_effect_index]->next_param(param_selector_new - encoder_2_prev);
-            encoder_2_prev = param_selector_new;
-        }
+		//TODO: base inputs entirely on encoder_input.h and remove all references to it in main
+		
+        // int param_selector_new = encoder_2.read() / 4;
+        // if (param_selector_new != encoder_2_prev)
+        // {
+        //     effects_chain[selected_effect_index]->next_param(param_selector_new - encoder_2_prev);
+        //     encoder_2_prev = param_selector_new;
+        // }
 
-        int value_selector_new = encoder_3.read() / 4;
-        if (value_selector_new != encoder_3_prev)
-        {
-            effects_chain[selected_effect_index]->change_param(value_selector_new - encoder_3_prev);
-            encoder_3_prev = value_selector_new;
-        }
+        // int value_selector_new = encoder_3.read() / 4;
+        // if (value_selector_new != encoder_3_prev)
+        // {
+        //     effects_chain[selected_effect_index]->change_param(value_selector_new - encoder_3_prev);
+        //     encoder_3_prev = value_selector_new;
+        // }
 
         // if (tuner.available())
         // {
