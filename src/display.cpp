@@ -61,7 +61,7 @@ static lv_obj_t * list1;
 // 	LV_LOG_USER("Event fired %d", lv_event_get_code(e)); //%s", lv_event_get_user_data(e));
 
 // }
-static void value_changed_event(int enc_diff)
+void value_changed_event(int enc_diff)
 {
     // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
 	// Param* param = (Param *)lv_event_get_user_data(e);
@@ -105,7 +105,8 @@ static void value_changed_event(int enc_diff)
 	//Update value label
 	lv_obj_t* label = lv_obj_get_child_by_type(selected_param_obj, -1, &lv_label_class); // oldest label is the param name, youngest should be the value
 	if (label) {
-		 lv_label_set_text_fmt(label, "%.1f", new_value);
+		// TODO: don't put a space before '%' in the unit string
+		 lv_label_set_text_fmt(label, "%.1f %s", new_value, param->unit.begin());
 	}
 	else{
 		LV_LOG_USER("Value label object not found");
@@ -319,7 +320,7 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 
 
 			lv_obj_t* value_label = lv_label_create(param_button);
-			lv_label_set_text_fmt(value_label, "%.1f", param->current_value);
+			lv_label_set_text_fmt(value_label, "%.1f %s", param->current_value, param->unit.begin());
 
 			create_arc(param_button, param->get_as_percentage());
 			// lv_label_bind_text(label, lv_subject &param->current_value, "%f")

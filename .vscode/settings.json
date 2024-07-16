@@ -47,6 +47,14 @@
 		"lvgl.h": "c",
 		"lv_global.h": "c",
 		"chrono": "cpp",
-		"ratio": "cpp"
+		"ratio": "cpp",
+		"cstring": "cpp",
+		"ctime": "cpp",
+		"list": "cpp",
+		"fstream": "cpp",
+		"istream": "cpp",
+		"semaphore": "cpp",
+		"stop_token": "cpp",
+		"thread": "cpp"
 	}
 }

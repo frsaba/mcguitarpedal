@@ -2,14 +2,15 @@
 
 //TODO: unit string (ms, %, etc)
 //TODO: param descriptions
-Param::Param(String name, float default_value, float min_value, float max_value, float step_size, std::function<void(float)> update_function)
+Param::Param(String name, float default_value, float min_value, float max_value, float step_size, std::function<void(float)> update_function, String unit)
     : default_value(default_value), 
       min_value(min_value),         
       max_value(max_value),         
       step_size(step_size),         
       update_function(update_function),
       name(name),                   
-      current_value(default_value)  
+      current_value(default_value),
+	  unit(unit)
 {
 }
 

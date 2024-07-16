@@ -10,7 +10,7 @@ class Delay : public Effect
 private:
     Param parameters[3]{
         dry_wet_param,
-        Param("Delay (ms)", 100, 5, 400, 10, std::bind(&Delay::update_delay_time, this, std::placeholders::_1)),
+        Param("Delay", 100, 5, 400, 10, std::bind(&Delay::update_delay_time, this, std::placeholders::_1), "ms"),
         Param("Feedback", 0.2, 0, 0.9, 0.1, std::bind(&Delay::update_feedback, this, std::placeholders::_1))};
 
     AudioEffectDelay delay; // Declare delay object here

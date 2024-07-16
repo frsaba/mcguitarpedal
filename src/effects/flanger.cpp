@@ -20,7 +20,7 @@ private:
         dry_wet_param,
         Param("Offset", DEFAULT_OFFSET, 1, MAX_FLANGE_DELAY_LENGTH, 10, std::bind(&Flanger::update_offset, this, std::placeholders::_1)),
         Param("Depth", DEFAULT_DEPTH, 10, MAX_FLANGE_DELAY_LENGTH, 10, std::bind(&Flanger::update_length, this, std::placeholders::_1)),
-		Param("Rate", DEFAULT_RATE, 0.5, 10, 0.5, std::bind(&Flanger::update_rate, this, std::placeholders::_1))};
+		Param("Rate", DEFAULT_RATE, 0.5, 10, 0.5, std::bind(&Flanger::update_rate, this, std::placeholders::_1), "Hz")};
 
     AudioEffectFlange flange; // xy=660.6000213623047,258.1999683380127
     AudioConnection patchCord;
