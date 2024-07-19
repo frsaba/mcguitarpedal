@@ -61,16 +61,14 @@ static lv_obj_t * list1;
 // 	LV_LOG_USER("Event fired %d", lv_event_get_code(e)); //%s", lv_event_get_user_data(e));
 
 // }
-void value_changed_event(int enc_diff)
+// This event gets called when the params encoder gets turned. We should react and change the actively edited parameter
+void param_encoder_turned(int enc_diff)
 {
-    // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
-	// Param* param = (Param *)lv_event_get_user_data(e);
-	// int effect_index = lv_obj_get_index(target) - 1;
-
-	// if(effect_index < 0){
-	// 	LV_LOG_ERROR("Could not find focused effect index");
-	// 	return;	
-	// }
+	//If we are not in edit mode, ignore.
+	if(lv_group_get_editing(params_group) == false){
+		// LV_LOG_USER("Not in edit mode");
+		return;
+	} 
 
 	LV_LOG_USER("Encoder turned %d", enc_diff); //%s", lv_event_get_user_data(e));
 
@@ -106,7 +104,7 @@ void value_changed_event(int enc_diff)
 	lv_obj_t* label = lv_obj_get_child_by_type(selected_param_obj, -1, &lv_label_class); // oldest label is the param name, youngest should be the value
 	if (label) {
 		// TODO: don't put a space before '%' in the unit string
-		 lv_label_set_text_fmt(label, "%.1f %s", new_value, param->unit.begin());
+		 lv_label_set_text_fmt(label, "%.1f%s", new_value, param->unit.begin());
 	}
 	else{
 		LV_LOG_USER("Value label object not found");
@@ -127,6 +125,7 @@ void value_changed_event(int enc_diff)
 	}
 
 }
+
 void init_display()
 {
     String LVGL_Arduino = "Hello Arduino! ";
@@ -168,7 +167,9 @@ void init_display()
     lv_indev_set_group(param_selector, params_group);
 	lv_indev_set_group(value_selector, values_group);
 
-	set_scroll_callback(value_selector, value_changed_event);
+	set_scroll_callback(param_selector, param_encoder_turned);
+
+	// lv_indev_add_event_cb(param_selector, param_edited_event, LV_EVENT_ALL, NULL);
 	
 	
 	//  lv_indev_add_event_cb(value_selector, value_changed_event, LV_EVENT_ALL, params_group->obj_focus);
@@ -198,6 +199,41 @@ static void bypass_event(lv_event_t * e)
 
 
 }
+
+//Called when the param selection button is pressed. Toggles value set mode
+static void param_selected_event(lv_event_t * e)
+{
+    lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	Param* param = (Param *)target->user_data;
+
+	LV_LOG_USER("Clicked: %s", param->name.begin());
+
+	// lv_obj_add_state(target, LV_STATE_PRESSED);
+	lv_group_set_editing(params_group, !lv_group_get_editing(params_group));
+
+	if(lv_group_get_editing(params_group)){
+		lv_obj_add_state(target, LV_STATE_PRESSED);
+	}else{
+		lv_obj_remove_state(target, LV_STATE_PRESSED);
+	}
+	// lv_obj_t* arc = lv_obj_get_child_by_type(target, 0, &lv_arc_class);// lv_obj_get_child(target, 1); // First child is the label, second should be the arc
+
+	// if (lv_obj_check_type(arc, &lv_arc_class)) {
+		
+	// 	lv_arc_set_value(arc, new_value);
+	// 	// lv_obj_invalidate(arc); // Force redraw
+	// }
+	// else{
+	// 	LV_LOG_USER("Arc object not found");
+	// }
+
+
+}
+
+
+
+
+
 static size_t chain_length;
 lv_obj_t** params_lists;
 // Called when the effect is navigated to; Hides the old params list and shows the new one instead.
@@ -219,6 +255,10 @@ static void effect_focused_event(lv_event_t * e)
 		if(i == static_cast<size_t>(effect_index)) lv_obj_remove_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
 		else lv_obj_add_flag(params_lists[i], LV_OBJ_FLAG_HIDDEN);
 	}
+
+	//If we are in the middle of editing a parameter, exit edit mode.
+	lv_group_set_editing(params_group, false);
+	lv_obj_remove_state(*params_group->obj_focus, LV_STATE_PRESSED);
 }
 
 // static void value_changed_event(lv_event_t * e)
@@ -320,7 +360,7 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 
 
 			lv_obj_t* value_label = lv_label_create(param_button);
-			lv_label_set_text_fmt(value_label, "%.1f %s", param->current_value, param->unit.begin());
+			lv_label_set_text_fmt(value_label, "%.1f%s", param->current_value, param->unit.begin());
 
 			create_arc(param_button, param->get_as_percentage());
 			// lv_label_bind_text(label, lv_subject &param->current_value, "%f")
@@ -331,6 +371,9 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 			// lv_group_set_editing(values_group, true);
 			// lv_group_focus_freeze(lv_group_get_default(), true);
 			// lv_obj_add_event_cb(textbox, value_changed_event, LV_EVENT_ALL, &effect->params[param_index]);
+
+			lv_obj_add_event_cb(param_button, param_selected_event, LV_EVENT_CLICKED, NULL); 
+				
 
 		}
 

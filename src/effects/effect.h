@@ -45,5 +45,5 @@ public:
 	float toggle_bypass();
 
 	friend void create_effect_lists(Effect *effects_chain[], size_t chain_length);
-	friend void value_changed_event(int enc_diff);
+	friend void param_encoder_turned(int enc_diff);
 };

@@ -9,9 +9,12 @@ Param::Param(String name, float default_value, float min_value, float max_value,
       step_size(step_size),         
       update_function(update_function),
       name(name),                   
-      current_value(default_value),
-	  unit(unit)
+      current_value(default_value)
 {
+	//Put an extra space in front of the unit, but only if it's not there already
+	//Except for the '%', which doesn't require a space
+	//TODO: remove extra space where the unit is used
+	this->unit = (unit == "%" || unit[0] == ' ') ? unit : " " + unit;
 }
 
 Param::~Param() {
