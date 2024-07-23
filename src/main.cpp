@@ -22,6 +22,7 @@
 #include <display.h>
 #include <lvgl.h>
 #define TFT_RGB_ORDER TFT_BGR
+#include <presets/presets.h>
 
 #define CHAIN_LENGTH 4
 Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
@@ -142,8 +143,17 @@ void setup()
     //                         });
     //TODO: long press to reset
 	button_3.attachClick([]()
-                        { displayText("Button 3 pressed"); });
-
+                        { 
+							load_preset(effects_chain, CHAIN_LENGTH);
+							displayText("Button 3 pressed"); 
+							
+						});
+	button_3.attachLongPressStart([]()
+                        { 
+							save_preset(effects_chain, CHAIN_LENGTH);
+							displayText("Button 3 long-pressed"); 
+							
+						});
     tuner.begin(0.3);
     // tft.begin();
     // tft.fillScreen(TFT_BLACK);
