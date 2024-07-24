@@ -125,6 +125,25 @@ void param_encoder_turned(int enc_diff)
 	}
 
 }
+typedef struct {
+    TFT_eSPI * tft;
+} lv_tft_espi_t;
+
+static void swapped_flush_cb(lv_display_t * disp, const lv_area_t * area, uint8_t * px_map)
+{
+    lv_tft_espi_t * dsc = (lv_tft_espi_t *)lv_display_get_driver_data(disp);
+
+    uint32_t w = (area->x2 - area->x1 + 1);
+    uint32_t h = (area->y2 - area->y1 + 1);
+
+    dsc->tft->startWrite();
+    dsc->tft->setAddrWindow(area->x1, area->y1, w, h);
+    dsc->tft->pushColors((uint16_t *)px_map, w * h, false);
+    dsc->tft->endWrite();
+
+    lv_display_flush_ready(disp);
+
+}
 
 void init_display()
 {
@@ -146,6 +165,7 @@ void init_display()
     lv_display_t * disp;
     /*TFT_eSPI can be enabled lv_conf.h to initialize the display in a simple way*/
     disp = lv_tft_espi_create(TFT_HOR_RES, TFT_VER_RES, draw_buf, sizeof(draw_buf));
+	lv_display_set_flush_cb(disp, swapped_flush_cb);
     lv_display_set_rotation(disp, TFT_ROTATION);
 	// lv_tft_espi_t* dsc = (lv_tft_espi_t*)lv_display_get_driver_data(disp);
 	// dsc->tft->
@@ -212,9 +232,9 @@ static void param_selected_event(lv_event_t * e)
 	lv_group_set_editing(params_group, !lv_group_get_editing(params_group));
 
 	if(lv_group_get_editing(params_group)){
-		lv_obj_add_state(target, LV_STATE_PRESSED);
+		lv_obj_add_state(target, LV_STATE_FOCUSED);
 	}else{
-		lv_obj_remove_state(target, LV_STATE_PRESSED);
+		lv_obj_remove_state(target, LV_STATE_FOCUSED);
 	}
 	// lv_obj_t* arc = lv_obj_get_child_by_type(target, 0, &lv_arc_class);// lv_obj_get_child(target, 1); // First child is the label, second should be the arc
 
@@ -289,9 +309,9 @@ lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
 
 	lv_style_set_arc_width(&style_arc_main, 6);
 	lv_style_set_arc_width(&style_arc_indicator, 6);
-	lv_style_set_arc_color(&style_arc_main, lv_palette_main(LV_PALETTE_RED));
-	lv_style_set_arc_color(&style_arc_indicator, lv_palette_darken(LV_PALETTE_BLUE, 3));
-	lv_style_set_bg_color(&style_arc_knob, lv_palette_darken(LV_PALETTE_BLUE, 10));
+	lv_style_set_arc_color(&style_arc_main, lv_palette_lighten(LV_PALETTE_LIME, 4));
+	lv_style_set_arc_color(&style_arc_indicator, lv_palette_darken(LV_PALETTE_BLUE,4));
+	lv_style_set_bg_color(&style_arc_knob, lv_palette_darken(LV_PALETTE_BLUE, 6));
 	lv_style_set_pad_all(&style_arc_knob, 2);
 
 
@@ -335,6 +355,7 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 	for (size_t i = 0; i < chain_length; i++)
 	{
 		lv_obj_t* list_button = lv_list_add_btn(list1, NULL, effects_chain[i]->name.begin());
+		// lv_obj_set_style_bg_color(list_button, lv_color_hex(0xFF0000), 0);
 		Effect* effect = effects_chain[i];
 		list_button->user_data = effect;
 
