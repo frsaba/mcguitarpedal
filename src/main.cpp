@@ -163,6 +163,7 @@ void setup()
 
 	init_display();
 	create_effect_lists(effects_chain, CHAIN_LENGTH);
+	displayText("");
 }
 
 void loop()

@@ -226,15 +226,20 @@ static void param_selected_event(lv_event_t * e)
     lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
 	Param* param = (Param *)target->user_data;
 
+	if(lv_obj_has_flag(lv_obj_get_parent(target), LV_OBJ_FLAG_HIDDEN)){
+		LV_LOG_USER("Trying to set hidden object");
+		return;
+	}
+
 	LV_LOG_USER("Clicked: %s", param->name.begin());
 
 	// lv_obj_add_state(target, LV_STATE_PRESSED);
 	lv_group_set_editing(params_group, !lv_group_get_editing(params_group));
 
 	if(lv_group_get_editing(params_group)){
-		lv_obj_add_state(target, LV_STATE_FOCUSED);
+		lv_obj_add_state(target, LV_STATE_EDITED);
 	}else{
-		lv_obj_remove_state(target, LV_STATE_FOCUSED);
+		lv_obj_remove_state(target, LV_STATE_EDITED);
 	}
 	// lv_obj_t* arc = lv_obj_get_child_by_type(target, 0, &lv_arc_class);// lv_obj_get_child(target, 1); // First child is the label, second should be the arc
 
@@ -371,10 +376,18 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 		lv_obj_set_size(params_lists[i], 200, 200);  // Set size of the second list to fill the container
 		lv_obj_set_flex_grow(params_lists[i], 1);
 
+		//TODO: maybe blink actively edited parameter?
+		static lv_style_t param_button_editing_style;
+		lv_style_init(&param_button_editing_style);
+		// lv_style_set_outline_width(&param_button_editing_style, 2);
+		lv_style_set_text_decor(&param_button_editing_style, LV_TEXT_DECOR_UNDERLINE);
+
 		for (size_t param_index = 0; param_index < effect->num_params; param_index++)
 		{
 			Param* param = &effect->params[param_index];
 			auto param_button = lv_list_add_btn(params_lists[i], LV_SYMBOL_FILE, param->name.begin());
+			lv_obj_add_style(param_button, &param_button_editing_style, LV_STATE_EDITED);
+
 			lv_obj_set_user_data(param_button, &effect->params[param_index]);
 			//Add to group 2 so that it can be scrolled with the encoder
 			lv_group_add_obj(params_group, param_button);
