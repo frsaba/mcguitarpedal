@@ -142,18 +142,18 @@ void setup()
     //                         effects_chain[selected_effect_index]->toggle_bypass(); 
     //                         });
     //TODO: long press to reset
-	button_3.attachClick([]()
-                        { 
-							load_preset(effects_chain, CHAIN_LENGTH);
-							displayText("Button 3 pressed"); 
+	// button_1.attachClick([]()
+    //                     { 
+	// 						load_preset(effects_chain, CHAIN_LENGTH);
+	// 						displayText("Loading preset"); 
 							
-						});
-	button_3.attachLongPressStart([]()
-                        { 
-							save_preset(effects_chain, CHAIN_LENGTH);
-							displayText("Button 3 long-pressed"); 
+	// 					});
+	// button_1.attachLongPressStart([]()
+    //                     { 
+	// 						save_preset(effects_chain, CHAIN_LENGTH);
+	// 						displayText("Button 3 long-pressed"); 
 							
-						});
+	// 					});
     tuner.begin(0.3);
     // tft.begin();
     // tft.fillScreen(TFT_BLACK);

@@ -3,7 +3,7 @@
 #include <OneButton.h>
 #include <Encoder.h>
 
-extern lv_indev_t* effect_selector;
+extern lv_indev_t* preset_selector;
 extern lv_indev_t* param_selector;
 extern lv_indev_t* value_selector;
 

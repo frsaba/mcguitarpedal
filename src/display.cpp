@@ -46,10 +46,10 @@ static uint32_t my_tick(void)
 
 static lv_group_t * effects_group;
 static lv_group_t * params_group;
-static lv_group_t * values_group;
+static lv_group_t * presets_group;
 
 static lv_obj_t * list1;
-// static lv_obj_t * list2;
+static lv_obj_t * presets_list;
 
 // typedef struct {
 //     TFT_eSPI * tft;
@@ -179,15 +179,15 @@ void init_display()
 
 	effects_group = lv_group_create();
     params_group = lv_group_create();
-    values_group = lv_group_create();
+    presets_group = lv_group_create();
 
 	setup_input_devices();
 
-    lv_indev_set_group(effect_selector, effects_group);
-    lv_indev_set_group(param_selector, params_group);
-	lv_indev_set_group(value_selector, values_group);
+    lv_indev_set_group(param_selector, effects_group);
+    lv_indev_set_group(value_selector, params_group);
+	lv_indev_set_group(preset_selector, presets_group);
 
-	set_scroll_callback(param_selector, param_encoder_turned);
+	set_scroll_callback(value_selector, param_encoder_turned);
 
 	// lv_indev_add_event_cb(param_selector, param_edited_event, LV_EVENT_ALL, NULL);
 	
@@ -286,6 +286,24 @@ static void effect_focused_event(lv_event_t * e)
 	lv_obj_remove_state(*params_group->obj_focus, LV_STATE_PRESSED);
 }
 
+static void preset_pressed(lv_event_t * e)
+{
+    lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	// Effect* effect = (Effect *)target->user_data;
+	// int effect_index = lv_obj_get_index(target) - 1;
+
+	LV_LOG_USER("Preset button pressed");
+}
+
+static void preset_long_press(lv_event_t * e)
+{
+    lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	// Effect* effect = (Effect *)target->user_data;
+	// int effect_index = lv_obj_get_index(target) - 1;
+
+	LV_LOG_USER("Preset button long pressed");
+}
+
 // static void value_changed_event(lv_event_t * e)
 // {
 //     // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
@@ -343,15 +361,15 @@ lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
 void create_effect_lists(Effect *effects_chain[], size_t length){
 	chain_length = length;
 	    /* Create a parent container */
-    lv_obj_t * container = lv_obj_create(lv_scr_act());
-    lv_obj_set_size(container, 470, 240);  // Set size of the container
-    lv_obj_center(container);  // Center the container on the screen
-    lv_obj_set_layout(container, LV_LAYOUT_FLEX);  // Set the container layout to flex
-    lv_obj_set_flex_flow(container, LV_FLEX_FLOW_ROW);  // Set the flex flow to row
-    lv_obj_set_flex_align(container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START); // Align items to start
+    lv_obj_t * main_container = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(main_container, 470, 230);  // Set size of the container
+    lv_obj_align(main_container, LV_ALIGN_TOP_MID, 0, 25);  // Center the container on the screen
+    lv_obj_set_layout(main_container, LV_LAYOUT_FLEX);  // Set the container layout to flex
+    lv_obj_set_flex_flow(main_container, LV_FLEX_FLOW_ROW);  // Set the flex flow to row
+    lv_obj_set_flex_align(main_container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START); // Align items to start
 
     // Create the first lists we'll add the effects to
-    list1 = lv_list_create(container);
+    list1 = lv_list_create(main_container);
     lv_obj_set_size(list1, 150, 200);
 
     lv_list_add_text(list1, "Effects");
@@ -371,7 +389,7 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 		lv_group_add_obj(effects_group, list_button);
 
 		//Set up params list
-		params_lists[i] = lv_list_create(container);
+		params_lists[i] = lv_list_create(main_container);
 		lv_list_add_text(params_lists[i], "Params");
 		lv_obj_set_size(params_lists[i], 200, 200);  // Set size of the second list to fill the container
 		lv_obj_set_flex_grow(params_lists[i], 1);
@@ -397,14 +415,6 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 			lv_label_set_text_fmt(value_label, "%.1f%s", param->current_value, param->unit.begin());
 
 			create_arc(param_button, param->get_as_percentage());
-			// lv_label_bind_text(label, lv_subject &param->current_value, "%f")
-			// lv_textarea_set_accepted_chars(textbox, "0123456789.");
-			// lv_textarea_set_max_length(textbox, 5);
-			// lv_group_add_obj(values_group, textbox);
-			// lv_group_focus_next(values_group);
-			// lv_group_set_editing(values_group, true);
-			// lv_group_focus_freeze(lv_group_get_default(), true);
-			// lv_obj_add_event_cb(textbox, value_changed_event, LV_EVENT_ALL, &effect->params[param_index]);
 
 			lv_obj_add_event_cb(param_button, param_selected_event, LV_EVENT_CLICKED, NULL); 
 				
@@ -419,14 +429,25 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 	}
 
 
-    /* Create the second list */
-    // list2 = lv_list_create(container);
-    // lv_obj_set_size(list2, 200, 200);  // Set size of the second list to fill the container
-    // lv_obj_set_flex_grow(list2, 1);  // Set the second list to grow and take up remaining space
+    /* Create the presets list */
+    presets_list = lv_list_create(lv_scr_act());
+    lv_obj_set_size(presets_list, 470, 50);
+	lv_obj_align(presets_list, LV_ALIGN_BOTTOM_MID, 0, -10);
+
+
+	// static lv_style_t presets_list_style;
+	// lv_style_init(&presets_list_style);
+	lv_obj_set_flex_flow(presets_list, LV_FLEX_FLOW_ROW);
 
     /* Add items to the second list */
-    // lv_list_add_text(list2, "List 2");
-    // lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param A");
-    // lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param B");
-    // lv_list_add_btn(list2, LV_SYMBOL_FILE, "Param C");
+    // lv_list_add_text(presets_list, "Presets");
+	for (size_t i = 0; i < 4; i++)
+	{
+		lv_obj_t* preset_btn =  lv_list_add_btn(presets_list, LV_SYMBOL_FILE, ("Preset " + String(i)).begin());
+		lv_group_add_obj(presets_group, preset_btn);
+		lv_obj_set_width(preset_btn, lv_pct(25));
+
+		lv_obj_add_event_cb(preset_btn, preset_pressed, LV_EVENT_SHORT_CLICKED, NULL);
+		lv_obj_add_event_cb(preset_btn, preset_long_press, LV_EVENT_LONG_PRESSED, NULL); 
+	}
 }
