@@ -5,6 +5,7 @@
 #include <Audio.h>
 #include <iterator>
 #include <display.h>
+#include <presets/presets.h>
 
 #define DEFAULT_WET 40
 
@@ -48,4 +49,6 @@ public:
 	friend void param_encoder_turned(int enc_diff);
 	friend void save_preset(Effect** effect_chain, size_t num_effects);
 	friend void load_preset(Effect** effect_chain,  size_t num_effects);
+	friend preset_data_t effects_to_preset_data(String preset_name, const Effect *effects_chain[]);
+	
 };
