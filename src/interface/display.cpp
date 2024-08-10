@@ -1,4 +1,4 @@
-#include "display.h"
+#include <interface/display.h>
 
 lv_obj_t *label;
 preset_bank_t preset_bank;

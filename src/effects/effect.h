@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Audio.h>
 #include <iterator>
-#include <display.h>
+#include <interface/display.h>
 #include <presets/presets.h>
 
 #define DEFAULT_WET 40

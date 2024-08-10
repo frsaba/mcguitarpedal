@@ -19,7 +19,7 @@
 #include <effects/reverb.cpp>
 #include <effects/tremolo.cpp>
 #include <effects/chorus.cpp>
-#include <display.h>
+#include <interface/display.h>
 #include <lvgl.h>
 #define TFT_RGB_ORDER TFT_BGR
 #include <presets/presets.h>
