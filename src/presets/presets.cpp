@@ -65,7 +65,7 @@ preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]
 }
 
 
-size_t save_presets(const preset_bank_t& bank){
+size_t save_presets(const preset_bank_t& bank, bool just_print){
 	EepromStream eepromStream(0, 4096); // Teensy 4.1 should supply 4284 bytes
 
 	JsonDocument preset_bank_json;
@@ -76,25 +76,25 @@ size_t save_presets(const preset_bank_t& bank){
 
 	for (size_t preset_index = 0; preset_index < bank.num_presets; preset_index++)
 	{
-		preset_data_t data = bank.presets[preset_index];
+		preset_data_t preset_data = bank.presets[preset_index];
 		JsonDocument preset_json;
 		JsonDocument effect_array_json;
 		JsonArray effect_array = effect_array_json.to<JsonArray>();
 
-		preset_json["name"] = data.name;
+		preset_json["name"] = preset_data.name;
 
 		for (size_t effect_index = 0; effect_index < bank.num_effects; effect_index++)
 		{
-			effect_data_t* effect = &data.effect_values[effect_index];
+			effect_data_t* effect_data = &preset_data.effect_values[effect_index];
 			JsonDocument effect_json_doc;
-			effect_json_doc["name"] = effect->name;
-			effect_json_doc["on"] = 1 - effect->bypass;
+			effect_json_doc["name"] = effect_data->name;
+			effect_json_doc["on"] = 1 - effect_data->bypass;
 			JsonDocument params_json_doc;
 			effect_json_doc["vals"] = params_json_doc.to<JsonArray>();
 
-			for (size_t param_index = 0; param_index < effect->num_params; param_index++)
+			for (size_t param_index = 0; param_index < effect_data->num_params; param_index++)
 			{
-				param_data_t param = effect->params[param_index];
+				param_data_t param = effect_data->params[param_index];
 				effect_json_doc["vals"].add(param.name + ":" + String(param.current_value));
 			}
 
@@ -111,13 +111,85 @@ size_t save_presets(const preset_bank_t& bank){
 
 	// serialize the array and send the result to Serial
 	Serial.println("Saving preset '" + bank.presets[0].name + "' ...");
-	serializeJson(preset_bank_json, Serial);
-	size_t len = serializeJson(preset_bank_json, eepromStream);
+	size_t len = serializeJson(preset_bank_json, Serial);
+	if(!just_print){
+		serializeJson(preset_bank_json, eepromStream);
+	}
 	Serial.println();
 	Serial.println("Written preset in "+ String(len) + " bytes");
 
 	return len;
 }
+
+void load_presets(preset_bank_t* bank){
+	EepromStream eepromStream(0, 4096);
+	JsonDocument doc;
+
+	DeserializationError error = deserializeJson(doc, eepromStream);
+
+	if (error) {
+		displayText("deserializeJson() failed: ");
+		Serial.println(error.c_str());
+		//TODO: what should we do if deserialization fails?
+	}
+
+	bank->active_preset = doc["active"];
+
+	JsonArray presets_array = doc["presets"];
+
+	size_t preset_index = 0;
+	for(JsonObject preset_json : presets_array){
+
+		preset_data_t* preset_data =  &bank->presets[preset_index];
+		preset_data->name = String(preset_json["name"]);
+
+		size_t effect_index = 0;
+		for (JsonObject effect_json_doc : preset_json["chain"].as<JsonArray>()) {
+			effect_data_t* effect_data = &preset_data->effect_values[effect_index];
+
+			effect_data->name = String(effect_json_doc["name"]);
+			effect_data->bypass = 1 - int(effect_json_doc["on"]);
+
+			JsonArray params_json_array = effect_json_doc["vals"];
+			effect_data->num_params = params_json_array.size();
+
+			for (size_t param_index = 0; param_index < effect_data->num_params; param_index++)
+			{
+				param_data_t* param = &effect_data->params[param_index];
+				String value_string = effect_json_doc["vals"][param_index];
+
+				size_t colon_index = value_string.lastIndexOf(';');
+
+				param->name = value_string.substring(0, colon_index);
+				param->current_value = value_string.substring(colon_index + 1).toFloat();
+
+				// Serial.printf("%s %f\n", param->name, param->current_value);
+				char buffer[64];
+				snprintf(buffer, sizeof(buffer), "%s %f\n", param->name.begin(), param->current_value);
+				Serial.print(buffer);
+				
+				// effect_json_doc["vals"].add(param.name + ":" + String(param.current_value));
+			}
+
+			effect_index++;
+		}
+
+		preset_index++;
+	}
+
+	// for (JsonObject presets_0_chain_item : presets_array[0]["chain"].as<JsonArray>()) {
+
+	// const char* presets_0_chain_item_name = presets_0_chain_item["name"]; // "Chorus", "Tremolo", "Delay", ...
+	// int presets_0_chain_item_on = presets_0_chain_item["on"]; // 1, 1, 1, 1
+
+	// JsonArray presets_0_chain_item_vals = presets_0_chain_item["vals"];
+	// const char* presets_0_chain_item_vals_0 = presets_0_chain_item_vals[0]; // "Dry/Wet:40.00", ...
+	// const char* presets_0_chain_item_vals_1 = presets_0_chain_item_vals[1]; // "Voices:3.00", "Rate:4.00", ...
+	// const char* presets_0_chain_item_vals_2 = presets_0_chain_item_vals[2]; // "Length:16.00", "Depth:1.00", ...
+
+	// }
+}
+
 
 void load_preset(Effect** effect_chain,  size_t num_effects){
 	EepromStream eepromStream(0, 2048);

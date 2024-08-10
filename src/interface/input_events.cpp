@@ -142,6 +142,11 @@ void preset_pressed(lv_event_t * e)
 	// int effect_index = lv_obj_get_index(target) - 1;
 
 	LV_LOG_USER("Preset button pressed");
+	// preset_bank_t loaded_bank;
+	load_presets(&preset_bank);
+	LV_LOG_USER("Loaded preset bank");
+	save_presets(preset_bank, true);
+
 }
 
 void preset_long_press(lv_event_t * e)

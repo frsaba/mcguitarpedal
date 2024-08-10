@@ -38,9 +38,9 @@ typedef struct{
 
 void save_preset(Effect** effect_chain, size_t num_effects);
 
-size_t save_presets(const preset_bank_t& presets);
+size_t save_presets(const preset_bank_t& presets, bool just_print = false);
 
-preset_bank_t load_presets();
+void load_presets(preset_bank_t* bank);
 
 preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]);
 void load_preset(Effect** effect_chain,  size_t num_effects);
