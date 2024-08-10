@@ -1,9 +1,7 @@
-
-#include <TFT_eSPI.h>
 #include "display.h"
 
 lv_obj_t *label;
-
+preset_bank_t preset_bank;
 
 void displayText(const String &s)
 {
@@ -288,7 +286,7 @@ static void effect_focused_event(lv_event_t * e)
 
 static void preset_pressed(lv_event_t * e)
 {
-    lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+    // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
 	// Effect* effect = (Effect *)target->user_data;
 	// int effect_index = lv_obj_get_index(target) - 1;
 
@@ -297,9 +295,11 @@ static void preset_pressed(lv_event_t * e)
 
 static void preset_long_press(lv_event_t * e)
 {
-    lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
-	// Effect* effect = (Effect *)target->user_data;
+    // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	// Effect* effect = (Effect *)target->user_data;	
 	// int effect_index = lv_obj_get_index(target) - 1;
+
+	save_presets(preset_bank);
 
 	LV_LOG_USER("Preset button long pressed");
 }
@@ -431,6 +431,8 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 
     /* Create the presets list */
     presets_list = lv_list_create(lv_scr_act());
+	preset_data_t presets[NUM_PRESETS];
+	preset_bank = {0,4,4,{effects_to_preset_data("Preset 0", effects_chain)}};
     lv_obj_set_size(presets_list, 470, 50);
 	lv_obj_align(presets_list, LV_ALIGN_BOTTOM_MID, 0, -10);
 

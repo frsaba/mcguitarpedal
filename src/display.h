@@ -3,6 +3,7 @@
 #include <effects/effect.h>
 #include <lvgl.h>
 #include "encoder_input.h"
+#include <presets/presets.h>
 
 // #define TFT_RST 34
 // #define TFT_DC 9

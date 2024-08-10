@@ -42,5 +42,5 @@ size_t save_presets(const preset_bank_t& presets);
 
 preset_bank_t load_presets();
 
-preset_data_t effects_to_preset_data(String preset_name, const Effect *effects_chain[]);
+preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]);
 void load_preset(Effect** effect_chain,  size_t num_effects);
