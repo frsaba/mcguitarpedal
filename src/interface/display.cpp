@@ -47,7 +47,7 @@ lv_group_t * effects_group;
 lv_group_t * params_group;
 lv_group_t * presets_group;
 
-lv_obj_t * list1;
+lv_obj_t * effects_list;
 lv_obj_t * presets_list;
 
 size_t chain_length;
@@ -174,15 +174,15 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
     lv_obj_set_flex_align(main_container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START); // Align items to start
 
     // Create the first lists we'll add the effects to
-    list1 = lv_list_create(main_container);
-    lv_obj_set_size(list1, 150, 200);
+    effects_list = lv_list_create(main_container);
+    lv_obj_set_size(effects_list, 150, 200);
 
-    lv_list_add_text(list1, "Effects");
+    lv_list_add_text(effects_list, "Effects");
 
 	params_lists = new lv_obj_t*[chain_length];
 	for (size_t i = 0; i < chain_length; i++)
 	{
-		lv_obj_t* list_button = lv_list_add_btn(list1, NULL, effects_chain[i]->name.begin());
+		lv_obj_t* list_button = lv_list_add_btn(effects_list, NULL, effects_chain[i]->name.begin());
 		// lv_obj_set_style_bg_color(list_button, lv_color_hex(0xFF0000), 0);
 		Effect* effect = effects_chain[i];
 		list_button->user_data = effect;
@@ -257,4 +257,37 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 		lv_obj_add_event_cb(preset_btn, preset_pressed, LV_EVENT_SHORT_CLICKED, NULL);
 		lv_obj_add_event_cb(preset_btn, preset_long_press, LV_EVENT_LONG_PRESSED, NULL); 
 	}
+}
+
+
+// Helper function for updating the value label of a parameter
+void update_value_label(lv_obj_t* obj, float new_value, char* unit_str){
+	lv_obj_t* label = lv_obj_get_child_by_type(obj, -1, &lv_label_class); // oldest label is the param name, youngest should be the value
+	if (label) {
+		// TODO: don't put a space before '%' in the unit string
+		 lv_label_set_text_fmt(label, "%.1f%s", new_value, unit_str);
+	}
+	else{
+		LV_LOG_USER("Value label object not found");
+	}
+
+}
+
+//Finds the arc type child on the given object and updates its knob value
+void update_arc(lv_obj_t* obj, float value){
+	lv_obj_t* arc = lv_obj_get_child_by_type(obj, 0, &lv_arc_class);
+
+	//Update arc
+	if (arc) {
+		lv_arc_set_value(arc, value);
+	}
+	else{
+		LV_LOG_USER("Arc object not found");
+	}
+	
+}
+
+// Set all the knob and text values that show the current param values for the effects chain
+void apply_param_values_to_knobs(){
+	
 }

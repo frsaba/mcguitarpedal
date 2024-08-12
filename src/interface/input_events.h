@@ -8,7 +8,7 @@ extern lv_group_t * effects_group;
 extern lv_group_t * params_group;
 extern lv_group_t * presets_group;
 
-extern lv_obj_t * list1;
+extern lv_obj_t * effects_list;
 extern lv_obj_t * presets_list;
 
 extern lv_obj_t *label;

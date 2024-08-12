@@ -19,3 +19,6 @@ class Effect;
 void displayText(const String &s);
 void init_display();
 void create_effect_lists(Effect *effects_chain[], size_t chain_length);
+void update_value_label(lv_obj_t* obj, float new_value, char* unit_str);
+void update_arc(lv_obj_t* obj, float value);
+void apply_param_values_to_knobs();

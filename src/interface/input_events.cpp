@@ -51,38 +51,14 @@ void param_encoder_turned(int enc_diff)
 	float new_value = param->change(enc_diff);
 	LV_LOG_USER("Changing param %s - %s : %.1f", effect->name.begin(), param->name.begin(), new_value);
 
-	lv_obj_t* arc = lv_obj_get_child_by_type(selected_param_obj, 0, &lv_arc_class);
 
-	//Update arc
-	if (arc) {
-		lv_arc_set_value(arc, param->get_as_percentage());
-	}
-	else{
-		LV_LOG_USER("Arc object not found");
-	}
-
-	//Update value label
-	lv_obj_t* label = lv_obj_get_child_by_type(selected_param_obj, -1, &lv_label_class); // oldest label is the param name, youngest should be the value
-	if (label) {
-		// TODO: don't put a space before '%' in the unit string
-		 lv_label_set_text_fmt(label, "%.1f%s", new_value, param->unit.begin());
-	}
-	else{
-		LV_LOG_USER("Value label object not found");
-	}
+	update_arc(selected_param_obj, param->get_as_percentage());
+	update_value_label(selected_param_obj, new_value, param->unit.begin());
 
 	//if the param is dry/wet, update the arc next to the effect name as well
 	if(&effect->params[0] == param){
 		LV_LOG_USER("Changing dry/wet");
-		lv_obj_t* arc = lv_obj_get_child_by_type(selected_effect_obj, 0, &lv_arc_class);
-
-		//Update arc
-		if (arc) {
-			lv_arc_set_value(arc, param->get_as_percentage());
-		}
-		else{
-			LV_LOG_USER("Dry/wet arc object not found");
-		}
+		update_arc(selected_effect_obj, param->get_as_percentage());
 	}
 
 }
@@ -96,18 +72,8 @@ void bypass_event(lv_event_t * e)
 	// LV_UNUSED(obj);
 	float new_value = effect->toggle_bypass();
 	LV_LOG_USER("Clicked: %s", effect->name.begin());
-	lv_obj_t* arc = lv_obj_get_child_by_type(target, 0, &lv_arc_class);// lv_obj_get_child(target, 1); // First child is the label, second should be the arc
 
-	if (lv_obj_check_type(arc, &lv_arc_class)) {
-		
-		lv_arc_set_value(arc, new_value);
-		// lv_obj_invalidate(arc); // Force redraw
-	}
-	else{
-		LV_LOG_USER("Arc object not found");
-	}
-
-
+	update_arc(target, new_value);
 }
 
 // Called when the effect is navigated to; Hides the old params list and shows the new one instead.
@@ -148,6 +114,7 @@ void preset_pressed(lv_event_t * e)
 	serialize_presets(preset_bank, false);
 	LV_LOG_USER("Applying preset...");
 	apply_preset_values(preset_bank.presets[preset_bank.active_preset].effect_values, effects_chain, preset_bank.num_effects);
+	apply_param_values_to_knobs();
 
 }
 
