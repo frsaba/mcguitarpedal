@@ -140,8 +140,8 @@ lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
 	lv_style_set_arc_width(&style_arc_main, 6);
 	lv_style_set_arc_width(&style_arc_indicator, 6);
 	lv_style_set_arc_color(&style_arc_main, lv_palette_lighten(LV_PALETTE_LIME, 4));
-	lv_style_set_arc_color(&style_arc_indicator, lv_palette_darken(LV_PALETTE_BLUE,4));
-	lv_style_set_bg_color(&style_arc_knob, lv_palette_darken(LV_PALETTE_BLUE, 6));
+	lv_style_set_arc_color(&style_arc_indicator, lv_palette_darken(LV_PALETTE_BLUE,2));
+	lv_style_set_bg_color(&style_arc_knob, lv_palette_darken(LV_PALETTE_BLUE, 4));
 	lv_style_set_pad_all(&style_arc_knob, 2);
 
 

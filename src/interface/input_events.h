@@ -2,6 +2,8 @@
 #include <lvgl.h>
 #include <effects/effect.h>
 
+extern Effect *effects_chain[];
+
 extern lv_group_t * effects_group;
 extern lv_group_t * params_group;
 extern lv_group_t * presets_group;

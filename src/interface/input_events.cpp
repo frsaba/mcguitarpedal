@@ -145,7 +145,9 @@ void preset_pressed(lv_event_t * e)
 	// preset_bank_t loaded_bank;
 	load_presets(&preset_bank);
 	LV_LOG_USER("Loaded preset bank");
-	save_presets(preset_bank, true);
+	serialize_presets(preset_bank, false);
+	LV_LOG_USER("Applying preset...");
+	apply_preset_values(preset_bank.presets[preset_bank.active_preset].effect_values, effects_chain, preset_bank.num_effects);
 
 }
 
@@ -155,7 +157,8 @@ void preset_long_press(lv_event_t * e)
 	// Effect* effect = (Effect *)target->user_data;	
 	// int effect_index = lv_obj_get_index(target) - 1;
 
-	save_presets(preset_bank);
+	preset_bank.presets[preset_bank.active_preset] = effects_to_preset_data("Preset " + preset_bank.active_preset, effects_chain);
+	serialize_presets(preset_bank, true);
 
 	LV_LOG_USER("Preset button long pressed");
 }

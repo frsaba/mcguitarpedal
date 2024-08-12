@@ -65,9 +65,7 @@ preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]
 }
 
 
-size_t save_presets(const preset_bank_t& bank, bool just_print){
-	EepromStream eepromStream(0, 4096); // Teensy 4.1 should supply 4284 bytes
-
+size_t serialize_presets(const preset_bank_t& bank, bool write_to_eeprom){
 	JsonDocument preset_bank_json;
 	JsonDocument presets_array_json;
 	JsonArray presets_array = presets_array_json.to<JsonArray>();
@@ -108,15 +106,19 @@ size_t save_presets(const preset_bank_t& bank, bool just_print){
 
 	preset_bank_json["presets"] = presets_array;
 	
-
 	// serialize the array and send the result to Serial
-	Serial.println("Saving preset '" + bank.presets[0].name + "' ...");
+	Serial.println("Serialized preset bank:\n");
 	size_t len = serializeJson(preset_bank_json, Serial);
-	if(!just_print){
+	Serial.println();
+	//Write to EEPROM
+	if(write_to_eeprom){
+		Serial.println(String("Saving preset '") + bank.presets[0].name + String("' to EEPROM..."));
+		EepromStream eepromStream(0, 4096); // Teensy 4.1 should supply 4284 bytes
 		serializeJson(preset_bank_json, eepromStream);
+		Serial.println("Preset saved");
 	}
 	Serial.println();
-	Serial.println("Written preset in "+ String(len) + " bytes");
+	Serial.println("Preset size "+ String(len) + " bytes");
 
 	return len;
 }
@@ -197,14 +199,14 @@ void apply_preset_values(effect_data_t effect_values[], Effect** effect_chain,  
 
 	for (size_t i = 0; i < num_effects; i++)
 	{
-		Effect* effect = findEffectByName(effect_values->name, effect_chain, num_effects);
+		Effect* effect = findEffectByName(effect_values[i].name, effect_chain, num_effects);
 
 		if(effect == nullptr){
 			Serial.print(F("Could not find effect: "));
 			Serial.println(effect_values[i].name);
 		}
 		
-		for (param_data_t param_data : effect_values->params)
+		for (param_data_t param_data : effect_values[i].params)
 		{
 			Param* param = findParamByName(param_data.name, effect);
 
@@ -220,7 +222,7 @@ void apply_preset_values(effect_data_t effect_values[], Effect** effect_chain,  
 			Serial.print(buffer);
 		}
 
-		effect->set_bypass(effect_values->bypass);
+		effect->set_bypass(effect_values[i].bypass);
 
 	}
 }
