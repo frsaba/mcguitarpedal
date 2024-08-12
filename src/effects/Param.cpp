@@ -33,7 +33,11 @@ float Param::decrement() {
 }
 
 float Param::change(int steps){
-	current_value += steps * step_size;
+	return set_value( current_value + steps * step_size);
+}
+
+float Param::set_value(float value){
+	current_value = value;
     if(current_value < min_value) current_value = min_value;
 	if(current_value > max_value) current_value = max_value;
 	update_function(current_value);

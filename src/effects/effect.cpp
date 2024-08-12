@@ -33,7 +33,12 @@ void Effect::update_dry_wet(float new_value)
 
 float Effect::toggle_bypass()
 {
-	bypass = !bypass;
+	return set_bypass(!bypass);
+}
+
+float Effect::set_bypass(bool bypass)
+{
+	this->bypass = bypass;
 	float value = bypass ? 0 : params[0].current_value;
 	update_dry_wet(value);
 	displayText("Set wet to " + String(bypass ? 0 : value) + "%");

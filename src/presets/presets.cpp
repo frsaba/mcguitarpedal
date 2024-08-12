@@ -53,9 +53,9 @@ preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]
 		effect_data->bypass = effect->bypass;
 		effect_data->num_params = effect->num_params;
 
-		for (size_t i = 0; i < effect->num_params; i++)
+		for (size_t j = 0; j < effect->num_params; j++)
 		{
-			Param* param = &effect->params[i];
+			Param* param = &effect->params[j];
 			effect_data->params.push_back(param_data_t {param->name, param->current_value});
 		}
 
@@ -158,7 +158,7 @@ void load_presets(preset_bank_t* bank){
 				param_data_t* param = &effect_data->params[param_index];
 				String value_string = effect_json_doc["vals"][param_index];
 
-				size_t colon_index = value_string.lastIndexOf(';');
+				size_t colon_index = value_string.lastIndexOf(':');
 
 				param->name = value_string.substring(0, colon_index);
 				param->current_value = value_string.substring(colon_index + 1).toFloat();
@@ -167,6 +167,8 @@ void load_presets(preset_bank_t* bank){
 				char buffer[64];
 				snprintf(buffer, sizeof(buffer), "%s %f\n", param->name.begin(), param->current_value);
 				Serial.print(buffer);
+
+				effect_data->params.push_back(*param);
 				
 				// effect_json_doc["vals"].add(param.name + ":" + String(param.current_value));
 			}
@@ -191,17 +193,50 @@ void load_presets(preset_bank_t* bank){
 }
 
 
-void load_preset(Effect** effect_chain,  size_t num_effects){
-	EepromStream eepromStream(0, 2048);
+void apply_preset_values(effect_data_t effect_values[], Effect** effect_chain,  size_t num_effects){
 
-	JsonDocument doc;
-	// doc["value"] = 42;
-	// doc["lat"] = 48.748010;
-	// doc["lon"] = 2.293491;
+	for (size_t i = 0; i < num_effects; i++)
+	{
+		Effect* effect = findEffectByName(effect_values->name, effect_chain, num_effects);
 
-	ReadLoggingStream loggingStream(eepromStream, Serial);
-	deserializeJson(doc, loggingStream);
+		if(effect == nullptr){
+			Serial.print(F("Could not find effect: "));
+			Serial.println(effect_values[i].name);
+		}
+		
+		for (param_data_t param_data : effect_values->params)
+		{
+			Param* param = findParamByName(param_data.name, effect);
 
+			if(effect == nullptr){
+				Serial.print(F("Could not find param: "));
+				Serial.println(effect->name + ' '+ param_data.name);
+			}
 
-	// serializeJson(doc, Serial);
+			param->set_value(param_data.current_value);
+
+			char buffer[64];
+			snprintf(buffer, sizeof(buffer), "Set %s:%s to %f\n", effect->name.begin(), param->name.begin(), param->current_value);
+			Serial.print(buffer);
+		}
+
+		effect->set_bypass(effect_values->bypass);
+
+	}
+}
+
+Effect* findEffectByName(String name, Effect** effect_chain, size_t num_effects){
+	for (size_t i = 0; i < num_effects; i++)
+	{
+		if(effect_chain[i]->name == name) return effect_chain[i];
+	}
+	return nullptr;
+}
+
+Param* findParamByName(String name, Effect* effect){
+	for (size_t i = 0; i < effect->num_params; i++)
+	{
+		if(effect->params[i].name == name) return &effect->params[i];
+	}
+	return nullptr;
 }
