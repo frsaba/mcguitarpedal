@@ -223,6 +223,9 @@ void apply_preset_values(effect_data_t effect_values[], Effect** effect_chain,  
 		}
 
 		effect->set_bypass(effect_values[i].bypass);
+		char buffer[64];
+		snprintf(buffer, sizeof(buffer), "Set %s:bypass to %d\n", effect->name.begin(), effect->bypass);
+		Serial.print(buffer);
 
 	}
 }

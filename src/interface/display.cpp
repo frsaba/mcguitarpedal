@@ -287,7 +287,32 @@ void update_arc(lv_obj_t* obj, float value){
 	
 }
 
-// Set all the knob and text values that show the current param values for the effects chain
+// Set all the knob and text values to show the current param values for the effects chain
 void apply_param_values_to_knobs(){
+	LV_LOG_USER("Applying parameter values...");
+
+	for (size_t effect_index = 0; effect_index < lv_obj_get_child_count_by_type(effects_list, &lv_list_button_class); effect_index++) {
+		lv_obj_t *effect_btn = lv_obj_get_child_by_type(effects_list, effect_index, &lv_list_button_class);
+		if (effect_btn == NULL) {
+			LV_LOG_USER("Effect button at index %d is NULL", (int)effect_index);
+			continue;
+		}
+
+		Effect* effect = (Effect *)effect_btn->user_data;
+		float dry_wet_value = effect->bypass ? 0 : effect->params[0].current_value;
+		update_arc(effect_btn, dry_wet_value);
+
+		// LV_LOG_USER("Dry/Wet Value: %f", dry_wet_value);
+
+		for (size_t param_index = 0; param_index < lv_obj_get_child_count_by_type(params_lists[effect_index], &lv_list_button_class); param_index++)
+		{
+			lv_obj_t * param_btn = lv_obj_get_child_by_type(params_lists[effect_index], param_index, &lv_list_button_class);
+			Param* param = (Param*)param_btn->user_data;
+			update_value_label(param_btn, param->current_value, param->unit.begin());
+			update_arc(param_btn, param->current_value);
+		}
+	}
+
+
 	
 }
