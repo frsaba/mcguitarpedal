@@ -80,7 +80,7 @@ const int myInput = AUDIO_INPUT_LINEIN;
 Encoder encoder_1(27, 28);
 int encoder_1_prev = 0;
 
-Encoder encoder_2(31, 32);
+Encoder encoder_2(25, 26);
 int encoder_2_prev = 0;
 
 Encoder encoder_3(29, 30);
