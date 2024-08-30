@@ -103,27 +103,34 @@ void effect_focused_event(lv_event_t * e)
 
 void preset_pressed(lv_event_t * e)
 {
-    // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
-	// Effect* effect = (Effect *)target->user_data;
-	// int effect_index = lv_obj_get_index(target) - 1;
-
+	lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	int preset_index = lv_obj_get_index_by_type(target, &lv_list_button_class);
+	if(preset_index < 0){
+		LV_LOG_ERROR("Could not find preset index");
+		return;
+	}
 	LV_LOG_USER("Preset button pressed");
+
 	// preset_bank_t loaded_bank;
-	load_presets(&preset_bank);
+	// load_presets(&preset_bank);
 	LV_LOG_USER("Loaded preset bank");
 	serialize_presets(preset_bank, false);
 	LV_LOG_USER("Applying preset...");
-	apply_preset_values(preset_bank.presets[preset_bank.active_preset].effect_values, effects_chain, preset_bank.num_effects);
+	preset_bank.active_preset = preset_index;
+	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
 	apply_param_values_to_knobs();
 
 }
 
 void preset_long_press(lv_event_t * e)
 {
-    // lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
-	// Effect* effect = (Effect *)target->user_data;	
-	// int effect_index = lv_obj_get_index(target) - 1;
-
+	lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+    int preset_index = lv_obj_get_index_by_type(target, &lv_list_button_class);
+	preset_bank.active_preset = preset_index;
+	if(preset_index < 0){
+		LV_LOG_ERROR("Could not find preset index");
+		return;
+	}
 	preset_bank.presets[preset_bank.active_preset] = effects_to_preset_data("Preset " + preset_bank.active_preset, effects_chain);
 	serialize_presets(preset_bank, true);
 

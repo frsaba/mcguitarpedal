@@ -79,6 +79,7 @@ size_t serialize_presets(const preset_bank_t& bank, bool write_to_eeprom){
 		JsonDocument effect_array_json;
 		JsonArray effect_array = effect_array_json.to<JsonArray>();
 
+		//TODO: fix preset name (missing number)
 		preset_json["name"] = preset_data.name;
 
 		for (size_t effect_index = 0; effect_index < bank.num_effects; effect_index++)

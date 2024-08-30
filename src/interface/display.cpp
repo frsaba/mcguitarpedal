@@ -119,6 +119,11 @@ void init_display()
 
 	set_scroll_callback(value_selector, param_encoder_turned);
 
+	//TODO: move this to main or somewhere else
+	preset_bank = {0,4,4,{effects_to_preset_data("Preset 0", effects_chain)}};
+
+	load_presets(&preset_bank);
+
 	// lv_indev_add_event_cb(param_selector, param_edited_event, LV_EVENT_ALL, NULL);
 	
 	
@@ -163,6 +168,7 @@ lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
 	return arc;
 } 
 
+//TODO: rename and break up this function
 void create_effect_lists(Effect *effects_chain[], size_t length){
 	chain_length = length;
 	    /* Create a parent container */
@@ -236,18 +242,13 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 
     /* Create the presets list */
     presets_list = lv_list_create(lv_scr_act());
-	preset_data_t presets[NUM_PRESETS];
-	preset_bank = {0,4,4,{effects_to_preset_data("Preset 0", effects_chain)}};
+	
     lv_obj_set_size(presets_list, 470, 50);
 	lv_obj_align(presets_list, LV_ALIGN_BOTTOM_MID, 0, -10);
 
-
-	// static lv_style_t presets_list_style;
-	// lv_style_init(&presets_list_style);
 	lv_obj_set_flex_flow(presets_list, LV_FLEX_FLOW_ROW);
 
-    /* Add items to the second list */
-    // lv_list_add_text(presets_list, "Presets");
+	//TODO: grey out empty presets
 	for (size_t i = 0; i < 4; i++)
 	{
 		lv_obj_t* preset_btn =  lv_list_add_btn(presets_list, LV_SYMBOL_FILE, ("Preset " + String(i)).begin());
@@ -256,6 +257,8 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 
 		lv_obj_add_event_cb(preset_btn, preset_pressed, LV_EVENT_SHORT_CLICKED, NULL);
 		lv_obj_add_event_cb(preset_btn, preset_long_press, LV_EVENT_LONG_PRESSED, NULL); 
+
+		lv_obj_set_user_data(preset_btn, &preset_bank.presets[i]);
 	}
 }
 
