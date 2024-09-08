@@ -1,6 +1,6 @@
 LTspice 24.0.12 for Windows
-Circuit: * G:\repos\mcguitarpedal\preamp\SPICE Files\LTspice\ACAnalysis.asc
-Start Time: Sat Sep  7 16:18:40 2024
+Circuit: * G:\repos\mcguitarpedal\preamp\SPICE Files\LTspice\NoiseAnalysis.asc
+Start Time: Sat Sep  7 16:18:23 2024
 solver = Normal
 Maximum thread count: 12
 tnom = 27
@@ -26,5 +26,5 @@ Gmin = 2.70769e-13
 Gmin = 0
 Gmin stepping succeeded in finding the operating point.
 
-Total elapsed time: 0.141 seconds.
+Total elapsed time: 0.123 seconds.
 
