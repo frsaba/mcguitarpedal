@@ -1,0 +1,63 @@
+{
+  "Name": "preamp_LN",
+  "Description": "Low noise RF filter for preamp
+",
+  "Tool": "FW",
+  "Version": "1.2",
+  "Design": {
+    "visitedTabs": [
+      "filter-type",
+      "specifications",
+      "components",
+      "tolerances",
+      "next-steps"
+    ],
+    "filterType": "lowPass",
+    "specifications": {
+      "gain": 0,
+      "gainUnit": "dB",
+      "passbandAttenuation": -3,
+      "passbandFrequency": 30000,
+      "stopbandAttenuation": -20,
+      "stopbandFrequency": 100000,
+      "filterResponseValue": 0,
+      "filterResponseSlider": 53
+    },
+    "components": {
+      "vsPlus": 9,
+      "vsMinus": 0,
+      "optimization": "Noise",
+      "optimizationPreference": "nonSpecific",
+      "compensateForGbw": false,
+      "preferredAlgorithms": {
+        "sallenKey|lowPass": "lowpassV2"
+      },
+      "stages": [
+        {
+          "stageLetter": "A",
+          "componentSizing": 65,
+          "gain": -1,
+          "gainEnabled": false,
+          "implementation": "sallenKey",
+          "opAmps": "LT6236"
+        }
+      ],
+      "recommendedAmps": [],
+      "sortOrder": [
+        0
+      ]
+    },
+    "tolerances": {
+      "resistorTolerance": "5%",
+      "capacitorTolerance": "10%",
+      "inductorTolerance": "5%",
+      "opAmpGbwTolerance": "20%",
+      "resistorPreferredSeries": "E6",
+      "capacitorPreferredSeries": "E6",
+      "inductorPreferredSeries": "E12"
+    },
+    "nextSteps": {}
+  },
+  "CreatedDate": "2024-09-07 04:12:13 PM",
+  "UpdatedDate": "2024-09-07 04:12:13 PM"
+}
