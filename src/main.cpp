@@ -97,6 +97,8 @@ elapsedMillis volmsec = 0;
 
 std::vector<AudioConnection> patchCords;
 
+extern preset_bank_t preset_bank;
+
 void setup()
 {
 	
@@ -160,9 +162,22 @@ void setup()
     // tft.setRotation(3);
 
     // displayText("Hello");
+    while(!Serial && millis() < 3000){};
 
 	init_display();
 	create_effect_lists(effects_chain, CHAIN_LENGTH);
+
+    //Initialize preset bank
+    preset_bank = {0, NUM_PRESETS, CHAIN_LENGTH, {}};
+
+    //Load active preset
+    //TODO: save active preset when it is selected, not just when overwritten
+	LV_LOG_USER("Loading saved presets...");
+	load_presets(&preset_bank);
+	LV_LOG_USER("Applying active preset...");
+	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
+	apply_param_values_to_knobs();
+
 	displayText("");
 }
 

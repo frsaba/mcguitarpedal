@@ -109,7 +109,7 @@ void preset_pressed(lv_event_t * e)
 		LV_LOG_ERROR("Could not find preset index");
 		return;
 	}
-	LV_LOG_USER("Preset button pressed");
+	// LV_LOG_USER("Preset button pressed");
 
 	// preset_bank_t loaded_bank;
 	// load_presets(&preset_bank);
@@ -119,6 +119,8 @@ void preset_pressed(lv_event_t * e)
 	preset_bank.active_preset = preset_index;
 	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
 	apply_param_values_to_knobs();
+
+	displayText("Loaded preset " + String(preset_bank.active_preset));
 
 }
 
@@ -134,5 +136,6 @@ void preset_long_press(lv_event_t * e)
 	preset_bank.presets[preset_bank.active_preset] = effects_to_preset_data("Preset " + preset_bank.active_preset, effects_chain);
 	serialize_presets(preset_bank, true);
 
-	LV_LOG_USER("Preset button long pressed");
+	// LV_LOG_USER("Preset button long pressed");
+	displayText("Saved preset " + String(preset_bank.active_preset));
 }

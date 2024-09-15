@@ -53,6 +53,7 @@ preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]
 		effect_data->bypass = effect->bypass;
 		effect_data->num_params = effect->num_params;
 
+		effect_data->params.clear();
 		for (size_t j = 0; j < effect->num_params; j++)
 		{
 			Param* param = &effect->params[j];
@@ -134,6 +135,15 @@ void load_presets(preset_bank_t* bank){
 		displayText("deserializeJson() failed: ");
 		Serial.println(error.c_str());
 		//TODO: what should we do if deserialization fails?
+		return;
+	}
+
+	serializeJson(doc, Serial);
+	
+
+	if(bank == nullptr){
+		displayText("Preset bank is null");
+		return;
 	}
 
 	bank->active_preset = doc["active"];
@@ -145,7 +155,7 @@ void load_presets(preset_bank_t* bank){
 
 		preset_data_t* preset_data =  &bank->presets[preset_index];
 		preset_data->name = String(preset_json["name"]);
-
+		LV_LOG_USER("Loading saved preset '%s'", preset_data->name.begin());
 		size_t effect_index = 0;
 		for (JsonObject effect_json_doc : preset_json["chain"].as<JsonArray>()) {
 			effect_data_t* effect_data = &preset_data->effect_values[effect_index];
@@ -155,24 +165,23 @@ void load_presets(preset_bank_t* bank){
 
 			JsonArray params_json_array = effect_json_doc["vals"];
 			effect_data->num_params = params_json_array.size();
+			LV_LOG_USER("Loading data for effect '%s'", effect_data->name.begin());
 
-			for (size_t param_index = 0; param_index < effect_data->num_params; param_index++)
+			for (String value_string : effect_json_doc["vals"].as<JsonArray>() )
 			{
-				param_data_t* param = &effect_data->params[param_index];
-				String value_string = effect_json_doc["vals"][param_index];
+				param_data_t param;
 
 				size_t colon_index = value_string.lastIndexOf(':');
 
-				param->name = value_string.substring(0, colon_index);
-				param->current_value = value_string.substring(colon_index + 1).toFloat();
+				param.name = value_string.substring(0, colon_index);
+				param.current_value = value_string.substring(colon_index + 1).toFloat();
 
 				// Serial.printf("%s %f\n", param->name, param->current_value);
 				char buffer[64];
-				snprintf(buffer, sizeof(buffer), "%s %f\n", param->name.begin(), param->current_value);
+				snprintf(buffer, sizeof(buffer), "%s:%s = %f\n", effect_data->name.begin(), param.name.begin(), param.current_value);
 				Serial.print(buffer);
 
-				effect_data->params.push_back(*param);
-				
+				effect_data->params.push_back(param);
 				// effect_json_doc["vals"].add(param.name + ":" + String(param.current_value));
 			}
 
@@ -200,11 +209,17 @@ void apply_preset_values(effect_data_t effect_values[], Effect** effect_chain,  
 
 	for (size_t i = 0; i < num_effects; i++)
 	{
+		if(effect_values[i].name == ""){
+			LV_LOG_WARN("Effect %d name was empty. Are we loading an empty preset?", i);
+			continue;
+		}
+
 		Effect* effect = findEffectByName(effect_values[i].name, effect_chain, num_effects);
 
 		if(effect == nullptr){
 			Serial.print(F("Could not find effect: "));
 			Serial.println(effect_values[i].name);
+			continue;
 		}
 		
 		for (param_data_t param_data : effect_values[i].params)

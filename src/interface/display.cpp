@@ -103,6 +103,7 @@ void init_display()
 	// lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565A8);
 
     label = lv_label_create( lv_screen_active() );
+	lv_obj_align(label, LV_ALIGN_TOP_LEFT, 5, 5);
 
     /* Create the UI */
 	// create_side_by_side_lists();
@@ -119,17 +120,12 @@ void init_display()
 
 	set_scroll_callback(value_selector, param_encoder_turned);
 
-	//TODO: move this to main or somewhere else
-	preset_bank = {0,4,4,{effects_to_preset_data("Preset 0", effects_chain)}};
-
-	load_presets(&preset_bank);
-
 	// lv_indev_add_event_cb(param_selector, param_edited_event, LV_EVENT_ALL, NULL);
 	
 	
 	//  lv_indev_add_event_cb(value_selector, value_changed_event, LV_EVENT_ALL, params_group->obj_focus);
 
-    Serial.println( "Setup done" );
+    Serial.println( "Display initialized" );
 }
 
 // Create an arc object with styling
@@ -302,6 +298,8 @@ void apply_param_values_to_knobs(){
 		}
 
 		Effect* effect = (Effect *)effect_btn->user_data;
+		LV_LOG_USER("Setting knobs for effect: %d (%s)", effect_index, effect->name.begin());
+
 		float dry_wet_value = effect->bypass ? 0 : effect->params[0].current_value;
 		update_arc(effect_btn, dry_wet_value);
 
