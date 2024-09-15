@@ -3,25 +3,27 @@ VIN N005 0 SINE(0 100m 3k) AC 1
 V2 Vp 0 9
 V3 Vn 0 0
 V1 Vref 0 5
-XSTAGE1 STAGE1_OUT N004 Vp Vn Vref stagea_lowpasssallenkey_ada4898
+XSTAGE1 STAGE1_OUT N004 Vp Vn N006 stagea_lowpasssallenkey_ada4898
 C1 STAGE1_OUT N002 470n
-R N006 NC_01 8.2k
-L§Coil N006 N007 2.35
-C2 N007 0 570p
-R3 N007 0 200k
+R N007 NC_01 10k
+L§Coil N007 N008 2.35
+C2 N008 0 570p
+R3 N008 0 250k
 C3 PREAMP_IN N005 470n
-R4 Vp PREAMP_IN {R}
+R4 Vp PREAMP_IN {RBin}
 C4 PREAMP_OUT N004 470n
 V4 3.3V 0 3.3
 R8 3.3V PREAMP_OUT 100k
 R9 PREAMP_OUT 0 100k
-R2 PREAMP_IN 0 {R}
+R2 PREAMP_IN 0 {Rbin}
 Rg N002 N001 500
 R5 Vp STAGE1_OUT {R}
 R6 STAGE1_OUT 0 {R}
 C5 N001 0 10µ
 XU1 PREAMP_IN N002 Vp Vn N002 level1 Avol=1Meg GBW=10Meg Vos=0 En=0 Enk=0 In=0 Ink=0 Rin=500Meg
-C6 PREAMP_IN 0 470p
+R1 Vp N006 {R}
+R7 N006 0 {R}
+C7 N006 0 220n
 
 * block symbol definitions
 .subckt stagea_lowpasssallenkey_ada4898 IN OUT V+ V- REF
@@ -32,13 +34,14 @@ C1 OUT N001 4.7n
 XU1 N002 OUT V+ V- OUT Vp ADA4898
 .ends stagea_lowpasssallenkey_ada4898
 
-.ac dec 100 1 150k
+.ac dec 100 5 500k
 .save V(*?*) I(*?*)
 * If you're having trouble with simulation try the following:\n \n- Ensure that LTspice circuit folder is unzipped.  LTspice won't \nbe able to locate subcircuits if the folders are still zipped.\n \n- Update LTspice - devices that have been recently added to LTspice\nwon't be available unless you update by clicking Tools -> Sync Release.
 * .noise V(PREAMP_OUT) VIN dec 100 2k 1Meg
 .param R=100k
 * .tran 0 15ms 0 100ns
 .lib LME49710.lib
+.param Rbin=1Meg
 .lib ADA4898.lib
 .lib UniversalOpAmp1.lib
 .backanno
