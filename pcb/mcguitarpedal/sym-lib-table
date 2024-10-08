@@ -3,4 +3,5 @@
   (lib (name "LM4562")(type "KiCad")(uri "G:/repos/mcguitarpedal/pcb/lib/lm4562.kicad_sym")(options "")(descr ""))
   (lib (name "Teensy")(type "Legacy")(uri "G:/repos/mcguitarpedal/pcb/lib/teensy_library/teensy.lib")(options "")(descr ""))
   (lib (name "Audio board")(type "Legacy")(uri "G:/repos/mcguitarpedal/pcb/lib/pjrc_REVD_Audio_Adaptor/teensy4.0_audioshield_revd.lib")(options "")(descr ""))
+  (lib (name "LCD")(type "Altium")(uri "C:/Users/Csaba/Documents/PlatformIO/Projects/mcguitarpedal/pcb/lib/Altium_3.5_48pin_QD3503_Package_library/3.5inch_48pin_QD3503.SchLib")(options "")(descr ""))
 )

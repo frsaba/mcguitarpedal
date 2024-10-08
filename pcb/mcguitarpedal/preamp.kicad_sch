@@ -1024,129 +1024,6 @@
 				)
 			)
 		)
-		(symbol "ltspice:ind"
-			(pin_numbers hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "ind_0_0"
-				(arc
-					(start 0.3302 -5.4102)
-					(mid 2.6171 -4.436)
-					(end 0.3302 -3.5052)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0.3302 -3.5052)
-					(mid 2.518 -3.0472)
-					(end 1.27 -1.27)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 1.27 -7.62)
-					(mid 2.4433 -5.864)
-					(end 0.3302 -5.4102)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 1.27 -1.27 0)
-					(length 0.0005)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 1.27 -7.62 0)
-					(length 0.0005)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "ltspice:voltage"
 			(pin_numbers hide)
 			(exclude_from_sim no)
@@ -1738,16 +1615,6 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 156.21) (xy 82.55 153.67)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "508c9fe9-0fbe-49a1-afa2-4efb78a65c8c")
-	)
-	(wire
-		(pts
 			(xy 207.01 124.46) (xy 214.63 124.46)
 		)
 		(stroke
@@ -1765,16 +1632,6 @@
 			(type solid)
 		)
 		(uuid "594c05e7-5d92-40d0-bcbe-d2f5958897c1")
-	)
-	(wire
-		(pts
-			(xy 82.55 143.51) (xy 73.66 143.51)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "5b8ab1ec-193b-4dce-81d5-cb3bdef01829")
 	)
 	(wire
 		(pts
@@ -1898,16 +1755,6 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 154.94) (xy 73.66 152.4)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "92365607-546b-46cf-a696-6c03846f4413")
-	)
-	(wire
-		(pts
 			(xy 54.61 90.17) (xy 54.61 87.63)
 		)
 		(stroke
@@ -2018,16 +1865,6 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 143.51) (xy 68.58 143.51)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "aaa4f206-f516-4cbe-8049-2d1b06c17307")
-	)
-	(wire
-		(pts
 			(xy 198.12 124.46) (xy 204.47 124.46)
 		)
 		(stroke
@@ -2065,16 +1902,6 @@
 			(type default)
 		)
 		(uuid "bb310fd3-7d42-4df6-a417-a6c51b9c7407")
-	)
-	(wire
-		(pts
-			(xy 62.23 143.51) (xy 60.96 143.51)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "bb4f6ca7-ab9a-4749-858d-97e1ec014487")
 	)
 	(wire
 		(pts
@@ -2228,16 +2055,6 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 146.05) (xy 82.55 143.51)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "d9f9c25f-51a2-4b3c-b856-fdbf77b9a81b")
-	)
-	(wire
-		(pts
 			(xy 266.7 96.52) (xy 271.78 96.52)
 		)
 		(stroke
@@ -2315,16 +2132,6 @@
 			(type solid)
 		)
 		(uuid "f01d4a33-ce2f-4509-9ddd-1bafaa732b73")
-	)
-	(wire
-		(pts
-			(xy 73.66 147.32) (xy 73.66 143.51)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "f471b4b7-901a-4279-b11c-fbb70c1313c6")
 	)
 	(wire
 		(pts
@@ -2418,27 +2225,6 @@
 			(justify left top)
 		)
 		(uuid "c813103c-1a22-43d1-81e4-a13b7d43b825")
-	)
-	(text_box "Pickup sim"
-		(exclude_from_sim no)
-		(at 45.72 135.89 0)
-		(size 49.53 26.67)
-		(stroke
-			(width 0)
-			(type default)
-			(color 160 160 160 0.6)
-		)
-		(fill
-			(type color)
-			(color 247 255 181 0.1)
-		)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left top)
-		)
-		(uuid "f2e55151-1170-437a-8b46-030d9739abf3")
 	)
 	(text "Line\n"
 		(exclude_from_sim no)
@@ -2566,6 +2352,26 @@
 			)
 		)
 	)
+	(global_label "3.3V"
+		(shape bidirectional)
+		(at 38.1 77.47 90)
+		(effects
+			(font
+				(size 1.0668 1.0668)
+			)
+			(justify left)
+		)
+		(uuid "30569775-d7ca-4e3b-843a-cc93c73cedfa")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 38.1 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "9V"
 		(shape bidirectional)
 		(at 110.49 88.9 90)
@@ -2586,46 +2392,6 @@
 			)
 		)
 	)
-	(global_label "3.3V"
-		(shape bidirectional)
-		(at 38.1 77.47 90)
-		(effects
-			(font
-				(size 1.0668 1.0668)
-			)
-			(justify left)
-		)
-		(uuid "592fc97a-e59a-4b16-8f54-8a08279cf1c1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 38.1 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "5V"
-		(shape bidirectional)
-		(at 45.72 78.74 90)
-		(effects
-			(font
-				(size 1.0668 1.0668)
-			)
-			(justify left)
-		)
-		(uuid "8833afe7-1225-410a-a9fb-ce5ab4e20d46")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 45.72 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "9V"
 		(shape bidirectional)
 		(at 54.61 78.74 90)
@@ -2635,7 +2401,7 @@
 			)
 			(justify left)
 		)
-		(uuid "dc0d0fcd-da4a-4c9f-90ac-3e34d2b8990b")
+		(uuid "bef299b1-7bf7-40cc-bed7-4b594ac782c7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 54.61 78.74 0)
 			(effects
@@ -2658,6 +2424,26 @@
 		(uuid "dd5dc4e7-2406-41d9-899b-0f630c660d0a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 254 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "5V"
+		(shape bidirectional)
+		(at 45.72 78.74 90)
+		(effects
+			(font
+				(size 1.0668 1.0668)
+			)
+			(justify left)
+		)
+		(uuid "f079bcfd-4c08-4232-aadd-f8697b4974e2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 45.72 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2690,8 +2476,8 @@
 		)
 		(uuid "87851827-2ed4-4193-9b96-207e5f3b2a91")
 	)
-	(hierarchical_label "STAGE1_OUT"
-		(shape passive)
+	(hierarchical_label "STAGE1_IN"
+		(shape bidirectional)
 		(at 118.11 95.25 90)
 		(fields_autoplaced yes)
 		(effects
@@ -2723,7 +2509,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0002ffc3-1ce8-4646-a849-d1926525d887")
-		(property "Reference" "R9"
+		(property "Reference" "R7"
 			(at 188.976 97.028 90)
 			(effects
 				(font
@@ -2794,8 +2580,8 @@
 		)
 		(instances
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R9")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -2810,7 +2596,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0173a604-76ab-444c-8acf-151a84f6e2e3")
-		(property "Reference" "R2"
+		(property "Reference" "R?"
 			(at 112.522 107.3658 0)
 			(effects
 				(font
@@ -2882,13 +2668,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R2")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R6")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -2903,7 +2689,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "02eaa929-abb5-4849-bdfb-a366f4148494")
-		(property "Reference" "C6"
+		(property "Reference" "C5"
 			(at 217.424 102.108 0)
 			(effects
 				(font
@@ -2974,8 +2760,8 @@
 		)
 		(instances
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C6")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -2990,7 +2776,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0c7bca92-a44e-435e-8763-e78c7fc6552d")
-		(property "Reference" "RG"
+		(property "Reference" "RG?"
 			(at 136.144 86.868 90)
 			(effects
 				(font
@@ -3062,12 +2848,12 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "RG")
+					(reference "RG?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "RG1")
 					(unit 1)
 				)
@@ -3083,7 +2869,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "128e9415-6500-4f24-bd9b-5cfc772981a9")
-		(property "Reference" "C7"
+		(property "Reference" "C6"
 			(at 214.63 82.55 90)
 			(effects
 				(font
@@ -3154,101 +2940,8 @@
 		)
 		(instances
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:ind")
-		(at 60.96 144.78 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "152c9fd5-9726-40c1-ae96-c80ac0be4776")
-		(property "Reference" "COIL"
-			(at 65.405 142.24 90)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify top)
-			)
-		)
-		(property "Value" "2.35"
-			(at 65.405 144.3736 90)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify bottom)
-			)
-		)
-		(property "Footprint" ""
-			(at 60.96 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 60.96 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 60.96 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "L"
-			(at 60.96 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "L=${VALUE}"
-			(at 60.96 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "326ded11-ed15-42f2-bcbf-76d8adbf0ebd")
-		)
-		(pin "1"
-			(uuid "0162c128-1ead-4aa5-8547-6d85fc4a5d98")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "COIL")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "COIL1")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -3263,7 +2956,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "194377dc-7948-4e09-8502-bc9c4f0373f5")
-		(property "Reference" "R10"
+		(property "Reference" "R?"
 			(at 80.264 116.84 0)
 			(effects
 				(font
@@ -3335,13 +3028,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R10")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R3")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R1")
 					(unit 1)
 				)
 			)
@@ -3356,7 +3049,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1e721f9d-74f1-4c56-9af8-a201e1d0638d")
-		(property "Reference" "VIN"
+		(property "Reference" "VIN?"
 			(at 56.515 111.76 0)
 			(effects
 				(font
@@ -3438,12 +3131,12 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "VIN")
+					(reference "VIN?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "VIN1")
 					(unit 1)
 				)
@@ -3459,7 +3152,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1f63ae1e-2216-4352-8e58-c7c3352f28f1")
-		(property "Reference" "#GND010"
+		(property "Reference" "#GND?"
 			(at 123.19 91.44 0)
 			(effects
 				(font
@@ -3510,13 +3203,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND010")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND09")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND010")
 					(unit 1)
 				)
 			)
@@ -3531,7 +3224,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "25531ce0-038e-49d1-99bd-556c6b91d569")
-		(property "Reference" "C7"
+		(property "Reference" "C?"
 			(at 209.296 129.54 0)
 			(effects
 				(font
@@ -3603,13 +3296,85 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "C7")
+					(reference "C?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C5")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "ltspice:GND")
+		(at 45.72 90.17 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "29eb204a-436e-4660-a8eb-7d883b7f15ab")
+		(property "Reference" "#GND?"
+			(at 45.72 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "0"
+			(at 45.72 90.17 0)
+			(effects
+				(font
+					(size 1.0668 1.0668)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 45.72 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin ""
+			(uuid "b47c3d24-258a-4984-94d0-ae828ba75b93")
+		)
+		(instances
+			(project ""
+				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
+					(reference "#GND?")
+					(unit 1)
+				)
+			)
+			(project "mcguitarpedal"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND05")
 					(unit 1)
 				)
 			)
@@ -3624,7 +3389,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2d309269-99c7-4a6b-850d-018929b65896")
-		(property "Reference" "SW1"
+		(property "Reference" "SW?"
 			(at 84.328 88.9 0)
 			(effects
 				(font
@@ -3688,6 +3453,10 @@
 		(instances
 			(project ""
 				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
+					(reference "SW?")
+					(unit 1)
+				)
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "SW1")
 					(unit 1)
 				)
@@ -3703,7 +3472,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "331cec74-6fda-4a03-92eb-e0aa4505f899")
-		(property "Reference" "C3"
+		(property "Reference" "C?"
 			(at 102.87 97.79 90)
 			(effects
 				(font
@@ -3775,107 +3544,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "C3")
+					(reference "C?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:voltage")
-		(at 38.1 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "389f84e7-51fd-4271-9c9d-620cf9c8ccf4")
-		(property "Reference" "V4"
-			(at 40.005 81.28 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "3.3"
-			(at 40.005 87.63 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "SPICE"
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "type=\"V\" model=\"${VALUE}\" "
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "319d9681-01c2-4aec-af2b-7b79f33c5a2f")
-		)
-		(pin "2"
-			(uuid "22d039c2-1424-41f6-81f4-8a20584ae933")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "V4")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "3V3")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -3890,7 +3565,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "40fe0279-7df6-4694-a651-b35670fe2810")
-		(property "Reference" "C5"
+		(property "Reference" "C?"
 			(at 128.27 87.63 90)
 			(effects
 				(font
@@ -3962,13 +3637,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "C5")
+					(reference "C?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C3")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -3983,7 +3658,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "417f4e3e-0d9b-447f-8ba7-66b40bb0f25a")
-		(property "Reference" "#GND008"
+		(property "Reference" "#GND?"
 			(at 110.49 114.3 0)
 			(effects
 				(font
@@ -4034,13 +3709,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND008")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND08")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND09")
 					(unit 1)
 				)
 			)
@@ -4054,8 +3729,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4bd7cbf0-3eb8-48a3-9484-7d700eb6702a")
-		(property "Reference" "V1"
+		(uuid "5029c21f-a446-4269-adc4-792cced5d82c")
+		(property "Reference" "V?"
 			(at 47.625 81.28 0)
 			(effects
 				(font
@@ -4128,47 +3803,47 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "V1")
+					(reference "V?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "5V1")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "V2")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 57.15 143.51 270)
+		(lib_id "ltspice:voltage")
+		(at 38.1 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4cc30199-26cb-45af-814a-c0e4dbfabc44")
-		(property "Reference" "R"
-			(at 52.705 143.51 90)
+		(uuid "545a5cb3-803a-4eeb-97ab-ff9afb162d09")
+		(property "Reference" "V?"
+			(at 40.005 81.28 0)
 			(effects
 				(font
 					(size 1.0668 1.0668)
 				)
-				(justify bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "10k"
-			(at 52.705 146.05 90)
+		(property "Value" "3.3"
+			(at 40.005 87.63 0)
 			(effects
 				(font
 					(size 1.0668 1.0668)
 				)
-				(justify top)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 57.15 143.51 90)
+			(at 38.1 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4176,8 +3851,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 57.15 143.51 0)
+		(property "Datasheet" ""
+			(at 38.1 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4185,8 +3860,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
-			(at 57.15 143.51 0)
+		(property "Description" ""
+			(at 38.1 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4194,8 +3869,8 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Device" "R"
-			(at 57.15 143.51 0)
+		(property "Sim.Device" "SPICE"
+			(at 38.1 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4203,31 +3878,32 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Params" "R=${VALUE}"
-			(at 57.15 143.51 0)
+		(property "Sim.Params" "type=\"V\" model=\"${VALUE}\" "
+			(at 38.1 80.01 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.0668 1.0668)
 				)
+				(justify left)
 				(hide yes)
 			)
-		)
-		(pin "2"
-			(uuid "18ba01cd-e3a4-4d1c-9dd5-8909883ab975")
 		)
 		(pin "1"
-			(uuid "56f663e6-296f-4c13-9085-8dfb111a9325")
+			(uuid "319d9681-01c2-4aec-af2b-7b79f33c5a2f")
+		)
+		(pin "2"
+			(uuid "22d039c2-1424-41f6-81f4-8a20584ae933")
 		)
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R")
+					(reference "V?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R1")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "V1")
 					(unit 1)
 				)
 			)
@@ -4242,7 +3918,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "55d2c0a4-a11c-4f2f-8001-bbe66e2cf77e")
-		(property "Reference" "#GND007"
+		(property "Reference" "#GND?"
 			(at 254 109.22 0)
 			(effects
 				(font
@@ -4293,13 +3969,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND007")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND012")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND013")
 					(unit 1)
 				)
 			)
@@ -4314,7 +3990,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "596e2510-5b84-4f38-9b61-e6648402d6c6")
-		(property "Reference" "R8"
+		(property "Reference" "R?"
 			(at 256.54 86.0298 0)
 			(effects
 				(font
@@ -4386,13 +4062,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R8")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R13")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -4407,7 +4083,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5caec944-94a9-41e1-97a8-58e1d108ee5e")
-		(property "Reference" "#GND000"
+		(property "Reference" "#GND?"
 			(at 54.61 127 0)
 			(effects
 				(font
@@ -4458,13 +4134,107 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND000")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND04")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND07")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "ltspice:voltage")
+		(at 54.61 80.01 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5e49b14c-bc01-4f68-af8a-b1879f956f1b")
+		(property "Reference" "V?"
+			(at 56.515 81.28 0)
+			(effects
+				(font
+					(size 1.0668 1.0668)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "9"
+			(at 56.515 87.63 0)
+			(effects
+				(font
+					(size 1.0668 1.0668)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 54.61 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 54.61 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 54.61 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "SPICE"
+			(at 54.61 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Params" "type=\"V\" model=\"${VALUE}\" "
+			(at 54.61 80.01 0)
+			(effects
+				(font
+					(size 1.0668 1.0668)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b333f2d0-9af6-45f7-b13c-400eda90d90d")
+		)
+		(pin "1"
+			(uuid "8505f363-5148-48f7-86e7-47782e2ca82c")
+		)
+		(instances
+			(project ""
+				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
+					(reference "V?")
+					(unit 1)
+				)
+			)
+			(project "mcguitarpedal"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "V3")
 					(unit 1)
 				)
 			)
@@ -4478,8 +4248,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "66a6634e-983e-4d8d-825d-a23626c90623")
-		(property "Reference" "#GND006"
+		(uuid "70288b1f-30c8-4e58-ad10-b1273d0b91b6")
+		(property "Reference" "#GND?"
 			(at 38.1 90.17 0)
 			(effects
 				(font
@@ -4530,13 +4300,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND006")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND01")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND04")
 					(unit 1)
 				)
 			)
@@ -4551,7 +4321,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "72b50b97-f54c-46b3-966c-2bf81e49aba9")
-		(property "Reference" "R1"
+		(property "Reference" "R?"
 			(at 194.818 117.094 0)
 			(effects
 				(font
@@ -4623,13 +4393,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R1")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R10")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -4644,7 +4414,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "774af6c0-31b4-4d18-9052-b0322ce45548")
-		(property "Reference" "RF"
+		(property "Reference" "RF?"
 			(at 148.59 85.09 90)
 			(effects
 				(font
@@ -4716,13 +4486,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "RF")
+					(reference "RF?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R_feedback")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "RF1")
 					(unit 1)
 				)
 			)
@@ -4738,7 +4508,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8054f890-884a-4d40-9da1-bbbc7fc0e4cb")
-		(property "Reference" "U1"
+		(property "Reference" "U?"
 			(at 149.86 102.108 0)
 			(effects
 				(font
@@ -4854,272 +4624,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "U1")
+					(reference "U?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "U1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:voltage")
-		(at 54.61 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "8e50e725-bf7d-4083-8313-d07abd5306a4")
-		(property "Reference" "V2"
-			(at 56.515 81.28 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "9"
-			(at 56.515 87.63 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "SPICE"
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "type=\"V\" model=\"${VALUE}\" "
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "b333f2d0-9af6-45f7-b13c-400eda90d90d")
-		)
-		(pin "1"
-			(uuid "8505f363-5148-48f7-86e7-47782e2ca82c")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "V2")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "9V1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:GND")
-		(at 45.72 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "96dc303d-3f0d-428b-b6e2-138d169f0a9f")
-		(property "Reference" "#GND003"
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "0"
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "b47c3d24-258a-4984-94d0-ae828ba75b93")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND003")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND02")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:cap")
-		(at 72.39 147.32 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9d4f72fd-64ac-403a-8951-333265c90903")
-		(property "Reference" "C2"
-			(at 74.295 147.955 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "570p"
-			(at 74.295 151.765 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 72.39 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 72.39 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 72.39 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "C"
-			(at 72.39 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "C=${VALUE}"
-			(at 72.39 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d6d0d944-3f47-4ad7-a96a-a02347283bea")
-		)
-		(pin "2"
-			(uuid "80606e66-8a4f-4737-9100-09c783393f86")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "C2")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C1")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -5134,7 +4645,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9ef2a5a5-c63d-4224-b057-7107e623983c")
-		(property "Reference" "R5"
+		(property "Reference" "R?"
 			(at 173.228 91.1098 0)
 			(effects
 				(font
@@ -5206,13 +4717,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R5")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R7")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -5227,7 +4738,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a3c14267-ce16-47aa-9ee7-b67391988108")
-		(property "Reference" "R12"
+		(property "Reference" "R10"
 			(at 205.994 96.52 90)
 			(effects
 				(font
@@ -5298,8 +4809,8 @@
 		)
 		(instances
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R12")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -5314,7 +4825,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aa26485a-381f-4d43-84b4-c9bbc7554236")
-		(property "Reference" "R6"
+		(property "Reference" "R?"
 			(at 173.228 106.6038 0)
 			(effects
 				(font
@@ -5386,106 +4897,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+			(project "mcguitarpedal"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "R6")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 82.55 149.86 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "acaee513-6b10-4921-963f-02bb0500ac14")
-		(property "Reference" "R3"
-			(at 85.852 147.2438 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "250k"
-			(at 85.852 151.384 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 82.55 149.86 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 82.55 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 82.55 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "R"
-			(at 82.55 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "R=${VALUE}"
-			(at 82.55 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "722cc689-5fb9-4edb-b1c1-282ed93ae69a")
-		)
-		(pin "1"
-			(uuid "22c18a88-4723-4145-a63c-4dd6c74703f0")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R3")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -5500,7 +4918,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "af8c65a4-42a5-40ed-aa46-6b4935d26d07")
-		(property "Reference" "#GND009"
+		(property "Reference" "#GND?"
 			(at 171.45 113.03 0)
 			(effects
 				(font
@@ -5551,13 +4969,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND009")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND010")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND011")
 					(unit 1)
 				)
 			)
@@ -5572,7 +4990,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b42eaa67-bda2-4532-b85a-111543d675ff")
-		(property "Reference" "#GND011"
+		(property "Reference" "#GND?"
 			(at 198.12 138.43 0)
 			(effects
 				(font
@@ -5623,13 +5041,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND011")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND011")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND012")
 					(unit 1)
 				)
 			)
@@ -5644,7 +5062,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b7f4b857-0c91-47df-bdfe-8e65b7fef57f")
-		(property "Reference" "#GND012"
+		(property "Reference" "#GND?"
 			(at 78.74 123.19 0)
 			(effects
 				(font
@@ -5695,85 +5113,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND012")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND06")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:GND")
-		(at 82.55 156.21 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b9bd69e2-8496-4bae-b24d-de9a13c76dea")
-		(property "Reference" "#GND005"
-			(at 82.55 156.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "0"
-			(at 82.55 156.21 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 82.55 156.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 82.55 156.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 82.55 156.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "79ade00f-708d-4683-be8d-8f7e959b40b9")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND005")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND07")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND08")
 					(unit 1)
 				)
 			)
@@ -5788,7 +5134,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c1b447e4-0012-4e6c-b709-19b30170369c")
-		(property "Reference" "R9"
+		(property "Reference" "R?"
 			(at 256.54 101.092 0)
 			(effects
 				(font
@@ -5860,13 +5206,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R9")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R14")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -5881,7 +5227,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c24ad7fa-0184-411c-89ac-b91c49171959")
-		(property "Reference" "C1"
+		(property "Reference" "C?"
 			(at 168.91 97.79 90)
 			(effects
 				(font
@@ -5953,13 +5299,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "C1")
+					(reference "C?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C4")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -5974,7 +5320,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c6312df4-dee4-473d-b917-6d20fd5441ca")
-		(property "Reference" "R4"
+		(property "Reference" "R?"
 			(at 112.014 95.4278 0)
 			(effects
 				(font
@@ -6046,85 +5392,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R4")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:GND")
-		(at 73.66 154.94 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "cf6211ac-f75e-4eea-a1cc-193adcefab95")
-		(property "Reference" "#GND004"
-			(at 73.66 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "0"
-			(at 73.66 154.94 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 73.66 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 73.66 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 73.66 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "3bd4dc5e-7bc9-4a94-a004-89198257ba08")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND004")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND05")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -6140,7 +5414,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e0460974-e0fc-4b3c-9e3b-5ff4e0cb9665")
-		(property "Reference" "U1"
+		(property "Reference" "U3"
 			(at 232.918 99.568 0)
 			(effects
 				(font
@@ -6256,8 +5530,8 @@
 		)
 		(instances
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "U1")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "U3")
 					(unit 2)
 				)
 			)
@@ -6272,7 +5546,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e87b0637-6cda-4fe1-a409-138e7384d752")
-		(property "Reference" "R11"
+		(property "Reference" "R?"
 			(at 83.058 108.204 90)
 			(effects
 				(font
@@ -6344,12 +5618,12 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R11")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "R2")
 					(unit 1)
 				)
@@ -6365,7 +5639,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e930e500-ef97-4afb-a954-b4bcf0d95fc8")
-		(property "Reference" "R7"
+		(property "Reference" "R?"
 			(at 194.818 131.318 0)
 			(effects
 				(font
@@ -6437,13 +5711,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "R7")
+					(reference "R?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "R11")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -6457,8 +5731,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f5b139f7-6b07-4f95-a16c-9e0b3dc2732b")
-		(property "Reference" "#GND001"
+		(uuid "f5e2346d-4ca5-4e4e-be25-275d62c2990d")
+		(property "Reference" "#GND?"
 			(at 54.61 90.17 0)
 			(effects
 				(font
@@ -6509,13 +5783,13 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND001")
+					(reference "#GND?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "#GND03")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "#GND06")
 					(unit 1)
 				)
 			)
@@ -6530,7 +5804,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f91ff04f-cd5b-4896-8c67-7f94da6aab66")
-		(property "Reference" "C4"
+		(property "Reference" "C?"
 			(at 248.92 95.25 90)
 			(effects
 				(font
@@ -6602,21 +5876,16 @@
 		(instances
 			(project ""
 				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "C4")
+					(reference "C?")
 					(unit 1)
 				)
 			)
 			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d"
-					(reference "C8")
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "C7")
 					(unit 1)
 				)
 			)
-		)
-	)
-	(sheet_instances
-		(path "/"
-			(page "1")
 		)
 	)
 )
