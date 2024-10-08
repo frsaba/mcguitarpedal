@@ -4,3 +4,4 @@
 .vscode/launch.json
 .vscode/ipch
 ~$pins.xlsx
+pcb/mcguitarpedal/mcguitarpedal-backups/*
