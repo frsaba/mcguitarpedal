@@ -5,6 +5,259 @@
 	(uuid "abf63e65-3dbc-486e-8cbe-833bb40c3c0d")
 	(paper "A4")
 	(lib_symbols
+		(symbol "Amplifier_Operational:LM4562"
+			(pin_names
+				(offset 0.127)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "LM4562"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm4562.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Dual High-Performance, High-Fidelity Audio Operational Amplifier, DIP-8/SOIC-8/TO-99-8"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "dual opamp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LM4562_1_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LM4562_2_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LM4562_3_1"
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 3.81)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 3.81)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:Opamp_Dual"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1024,164 +1277,6 @@
 				)
 			)
 		)
-		(symbol "ltspice:voltage"
-			(pin_numbers hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "voltage_0_0"
-				(circle
-					(center 0 -4.445)
-					(radius 2.54)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -6.985) (xy 0 -7.62)
-					)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -3.5052) (xy 0 -2.2352)
-					)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -1.905) (xy 0 -1.27)
-					)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 -6.0452) (xy -0.635 -6.0452)
-					)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 -2.8702) (xy -0.635 -2.8702)
-					)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 0 -1.27 0)
-					(length 0.0005)
-					(name "+"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 0)
-					(length 0.0005)
-					(name "-"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 	)
 	(junction
 		(at 140.97 88.9)
@@ -1224,12 +1319,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2ad1ddc5-96be-44cc-a546-8e47931081a6")
-	)
-	(junction
-		(at 66.04 101.6)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2bc67658-c78b-4982-98b6-16cc78c0ec70")
 	)
 	(junction
 		(at 198.12 137.16)
@@ -1422,16 +1511,6 @@
 			(type solid)
 		)
 		(uuid "19448fa8-8be0-4a3d-827a-6f1843236aea")
-	)
-	(wire
-		(pts
-			(xy 54.61 101.6) (xy 63.5 101.6)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "19e984f7-d712-4781-b4b6-18d0c4701b04")
 	)
 	(wire
 		(pts
@@ -1645,16 +1724,6 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 96.52) (xy 66.04 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6503fb9a-e19e-4559-b7e9-82351d190ad1")
-	)
-	(wire
-		(pts
 			(xy 180.34 96.52) (xy 180.34 99.06)
 		)
 		(stroke
@@ -1685,13 +1754,13 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 101.6) (xy 66.04 101.6)
+			(xy 63.5 101.6) (xy 78.74 101.6)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7834e674-17e7-4be4-982c-16bd751c2846")
+		(uuid "79698a91-8f77-4d8a-9147-78efd1c7dc51")
 	)
 	(wire
 		(pts
@@ -1755,16 +1824,6 @@
 	)
 	(wire
 		(pts
-			(xy 54.61 90.17) (xy 54.61 87.63)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "95320a17-a449-441c-8549-b23c0bc1d73d")
-	)
-	(wire
-		(pts
 			(xy 78.74 91.44) (xy 78.74 96.52)
 		)
 		(stroke
@@ -1805,16 +1864,6 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 90.17) (xy 45.72 87.63)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "9b24bf2c-9988-40bc-aae4-6261d46db7be")
-	)
-	(wire
-		(pts
 			(xy 116.84 101.6) (xy 118.11 101.6)
 		)
 		(stroke
@@ -1832,16 +1881,6 @@
 			(type solid)
 		)
 		(uuid "a30060bb-be40-4e95-b706-df6a70eb9d1b")
-	)
-	(wire
-		(pts
-			(xy 38.1 90.17) (xy 38.1 87.63)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "a30381ee-85d7-430c-bca9-f9319d7ac9a9")
 	)
 	(wire
 		(pts
@@ -1905,16 +1944,6 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 81.28) (xy 45.72 78.74)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "bbd6880f-6b7e-4121-9354-c0cdc90597b7")
-	)
-	(wire
-		(pts
 			(xy 123.19 91.44) (xy 123.19 88.9)
 		)
 		(stroke
@@ -1935,23 +1964,13 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 81.28) (xy 38.1 77.47)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "be55b590-5369-455f-ba03-84a4b4b6096b")
-	)
-	(wire
-		(pts
-			(xy 66.04 101.6) (xy 78.74 101.6)
+			(xy 78.74 63.5) (xy 82.55 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c32e24b5-58c0-47eb-98b7-0d241ecd36f5")
+		(uuid "c4856aca-631c-4230-b9ee-c3e2f4e14576")
 	)
 	(wire
 		(pts
@@ -1982,16 +2001,6 @@
 			(type solid)
 		)
 		(uuid "cf7064c3-6964-4aef-ab49-84c324975c2b")
-	)
-	(wire
-		(pts
-			(xy 54.61 111.76) (xy 54.61 101.6)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "d021e245-0830-4f50-bbc6-d0a5a1a2e091")
 	)
 	(wire
 		(pts
@@ -2122,26 +2131,6 @@
 			(type solid)
 		)
 		(uuid "ef906b80-0d39-48fb-8f73-01aac0f319e9")
-	)
-	(wire
-		(pts
-			(xy 54.61 81.28) (xy 54.61 78.74)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "f01d4a33-ce2f-4509-9ddd-1bafaa732b73")
-	)
-	(wire
-		(pts
-			(xy 54.61 127) (xy 54.61 118.11)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "f475ee79-7957-405b-81bd-bc8dbccf905f")
 	)
 	(wire
 		(pts
@@ -2352,18 +2341,18 @@
 			)
 		)
 	)
-	(global_label "3.3V"
+	(global_label "9V"
 		(shape bidirectional)
-		(at 38.1 77.47 90)
+		(at 78.74 63.5 180)
 		(effects
 			(font
 				(size 1.0668 1.0668)
 			)
-			(justify left)
+			(justify right)
 		)
-		(uuid "30569775-d7ca-4e3b-843a-cc93c73cedfa")
+		(uuid "26b824af-9903-4c0f-9c54-b92607893de8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 38.1 77.47 0)
+			(at 78.74 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2392,22 +2381,24 @@
 			)
 		)
 	)
-	(global_label "9V"
-		(shape bidirectional)
-		(at 54.61 78.74 90)
+	(global_label "GND"
+		(shape input)
+		(at 97.79 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
-				(size 1.0668 1.0668)
+				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "bef299b1-7bf7-40cc-bed7-4b594ac782c7")
+		(uuid "d8503064-2210-4749-af4d-68c850b2eebe")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 54.61 78.74 0)
+			(at 104.6457 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -2424,26 +2415,6 @@
 		(uuid "dd5dc4e7-2406-41d9-899b-0f630c660d0a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 254 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "5V"
-		(shape bidirectional)
-		(at 45.72 78.74 90)
-		(effects
-			(font
-				(size 1.0668 1.0668)
-			)
-			(justify left)
-		)
-		(uuid "f079bcfd-4c08-4232-aadd-f8697b4974e2")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 45.72 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2490,13 +2461,13 @@
 	)
 	(hierarchical_label "PREAMP_IN"
 		(shape input)
-		(at 66.04 96.52 90)
+		(at 63.5 101.6 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "ce64122f-6248-405d-b7d3-a2fd3502741d")
 	)
@@ -2527,7 +2498,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 189.23 99.06 90)
 			(effects
 				(font
@@ -2614,7 +2585,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 110.49 109.22 90)
 			(effects
 				(font
@@ -2707,7 +2678,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.5mm_W6.5mm_P5.00mm"
 			(at 213.36 101.6 0)
 			(effects
 				(font
@@ -2794,7 +2765,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 135.89 87.122 90)
 			(effects
 				(font
@@ -2887,7 +2858,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W7.2mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 217.17 82.55 0)
 			(effects
 				(font
@@ -2974,7 +2945,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 78.74 116.84 90)
 			(effects
 				(font
@@ -3035,109 +3006,6 @@
 			(project "mcguitarpedal"
 				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "R1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:voltage")
-		(at 54.61 110.49 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1e721f9d-74f1-4c56-9af8-a201e1d0638d")
-		(property "Reference" "VIN?"
-			(at 56.515 111.76 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SINE(0 1 3k)"
-			(at 56.515 118.11 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 54.61 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 54.61 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 54.61 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value2" "AC 1"
-			(at 54.61 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "SPICE"
-			(at 54.61 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "type=\"V\" model=\"${VALUE} ${VALUE2}\" "
-			(at 56.515 122.555 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "eedf7fbc-87b2-490f-82c3-0169b7191db6")
-		)
-		(pin "1"
-			(uuid "843dd523-1a2e-4b33-bf8b-ba077da0cd35")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "VIN?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "VIN1")
 					(unit 1)
 				)
 			)
@@ -3242,7 +3110,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 205.74 128.27 0)
 			(effects
 				(font
@@ -3303,78 +3171,6 @@
 			(project "mcguitarpedal"
 				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "C4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:GND")
-		(at 45.72 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "29eb204a-436e-4660-a8eb-7d883b7f15ab")
-		(property "Reference" "#GND?"
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "0"
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 45.72 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "b47c3d24-258a-4984-94d0-ae828ba75b93")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "#GND05")
 					(unit 1)
 				)
 			)
@@ -3490,7 +3286,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W11.0mm_P15.00mm_FKS3_FKP3"
 			(at 105.41 100.33 0)
 			(effects
 				(font
@@ -3557,6 +3353,94 @@
 		)
 	)
 	(symbol
+		(lib_id "Amplifier_Operational:LM4562")
+		(at 90.17 60.96 90)
+		(unit 3)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3df996fb-ebd5-438a-8956-65aeb1939cd7")
+		(property "Reference" "U3"
+			(at 88.8999 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LM4562"
+			(at 91.4399 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.17 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm4562.pdf"
+			(at 90.17 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Dual High-Performance, High-Fidelity Audio Operational Amplifier, DIP-8/SOIC-8/TO-99-8"
+			(at 90.17 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "053306c5-1a12-4d6f-9522-dc576b9924e7")
+		)
+		(pin "6"
+			(uuid "e62cbac7-8ec9-4862-a028-fd8fb2f06c41")
+		)
+		(pin "7"
+			(uuid "967b9253-8095-435b-a5ac-bfc9f9f1e767")
+		)
+		(pin "8"
+			(uuid "ae465e06-0565-473e-81e2-c6d41b18feb5")
+		)
+		(pin "4"
+			(uuid "b5844319-5a0c-44ff-9489-18dff7daa215")
+		)
+		(pin "2"
+			(uuid "0bcaf8e5-0a04-45eb-9de6-52134dc7078d")
+		)
+		(pin "1"
+			(uuid "a3d5ae56-80a9-450f-8ba5-5e1a6a851c85")
+		)
+		(pin "3"
+			(uuid "53d6735e-d01b-4e7e-9d26-47a9b4c86c4a")
+		)
+		(instances
+			(project ""
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "U3")
+					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "ltspice:cap")
 		(at 130.81 87.63 270)
 		(unit 1)
@@ -3583,7 +3467,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm"
 			(at 130.81 87.63 0)
 			(effects
 				(font
@@ -3722,194 +3606,6 @@
 		)
 	)
 	(symbol
-		(lib_id "ltspice:voltage")
-		(at 45.72 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5029c21f-a446-4269-adc4-792cced5d82c")
-		(property "Reference" "V?"
-			(at 47.625 81.28 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "5"
-			(at 47.625 87.63 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 45.72 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 45.72 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 45.72 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "SPICE"
-			(at 45.72 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "type=\"V\" model=\"${VALUE}\" "
-			(at 45.72 80.01 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ab965cc7-de8f-438a-9bf6-9a47bbbc93fb")
-		)
-		(pin "2"
-			(uuid "5816d610-1efd-47fe-86f7-0669ef4fb6d2")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "V?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "V2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:voltage")
-		(at 38.1 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "545a5cb3-803a-4eeb-97ab-ff9afb162d09")
-		(property "Reference" "V?"
-			(at 40.005 81.28 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "3.3"
-			(at 40.005 87.63 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "SPICE"
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "type=\"V\" model=\"${VALUE}\" "
-			(at 38.1 80.01 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "319d9681-01c2-4aec-af2b-7b79f33c5a2f")
-		)
-		(pin "2"
-			(uuid "22d039c2-1424-41f6-81f4-8a20584ae933")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "V?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "V1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "ltspice:GND")
 		(at 254 109.22 0)
 		(unit 1)
@@ -4008,7 +3704,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 254 87.63 90)
 			(effects
 				(font
@@ -4075,244 +3771,6 @@
 		)
 	)
 	(symbol
-		(lib_id "ltspice:GND")
-		(at 54.61 127 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5caec944-94a9-41e1-97a8-58e1d108ee5e")
-		(property "Reference" "#GND?"
-			(at 54.61 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "0"
-			(at 54.61 127 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 54.61 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 54.61 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 54.61 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "d0c65578-98a5-4404-8ec0-c2cbf1f442cb")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "#GND07")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:voltage")
-		(at 54.61 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5e49b14c-bc01-4f68-af8a-b1879f956f1b")
-		(property "Reference" "V?"
-			(at 56.515 81.28 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "9"
-			(at 56.515 87.63 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "SPICE"
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "type=\"V\" model=\"${VALUE}\" "
-			(at 54.61 80.01 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "b333f2d0-9af6-45f7-b13c-400eda90d90d")
-		)
-		(pin "1"
-			(uuid "8505f363-5148-48f7-86e7-47782e2ca82c")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "V?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "V3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ltspice:GND")
-		(at 38.1 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "70288b1f-30c8-4e58-ad10-b1273d0b91b6")
-		(property "Reference" "#GND?"
-			(at 38.1 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "0"
-			(at 38.1 90.17 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 38.1 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "5977e5ce-e557-4fdd-ac2e-228e06f1ac62")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "#GND04")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 198.12 116.84 0)
 		(unit 1)
@@ -4339,7 +3797,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 198.12 116.84 90)
 			(effects
 				(font
@@ -4432,7 +3890,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 148.59 87.122 90)
 			(effects
 				(font
@@ -4663,7 +4121,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 171.45 92.71 90)
 			(effects
 				(font
@@ -4756,7 +4214,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 205.74 99.06 90)
 			(effects
 				(font
@@ -4843,7 +4301,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 171.45 107.95 90)
 			(effects
 				(font
@@ -5152,7 +4610,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 254 102.87 90)
 			(effects
 				(font
@@ -5245,7 +4703,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W11.0mm_P15.00mm_FKS3_FKP3"
 			(at 171.45 97.79 0)
 			(effects
 				(font
@@ -5338,7 +4796,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 110.49 96.52 90)
 			(effects
 				(font
@@ -5564,7 +5022,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 83.82 110.49 90)
 			(effects
 				(font
@@ -5657,7 +5115,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
 			(at 198.12 130.81 90)
 			(effects
 				(font
@@ -5724,78 +5182,6 @@
 		)
 	)
 	(symbol
-		(lib_id "ltspice:GND")
-		(at 54.61 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f5e2346d-4ca5-4e4e-be25-275d62c2990d")
-		(property "Reference" "#GND?"
-			(at 54.61 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "0"
-			(at 54.61 90.17 0)
-			(effects
-				(font
-					(size 1.0668 1.0668)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 54.61 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 54.61 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 54.61 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin ""
-			(uuid "64e3f179-8eff-4501-9977-c07d461cceda")
-		)
-		(instances
-			(project ""
-				(path "/814ab821-0da5-4bd2-b42e-b625c0004203"
-					(reference "#GND?")
-					(unit 1)
-				)
-			)
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "#GND06")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "ltspice:cap")
 		(at 251.46 95.25 270)
 		(unit 1)
@@ -5822,7 +5208,7 @@
 				(justify top)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W11.0mm_P15.00mm_FKS3_FKP3"
 			(at 251.46 95.25 0)
 			(effects
 				(font
