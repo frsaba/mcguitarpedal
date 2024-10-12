@@ -5,4 +5,7 @@
   (lib (name "Audio board")(type "Legacy")(uri "${KIPRJMOD}/lib/pjrc_REVD_Audio_Adaptor/teensy4.0_audioshield_revd.lib")(options "")(descr ""))
   (lib (name "QD3503")(type "Altium")(uri "${KIPRJMOD}/lib/Altium_3.5_48pin_QD3503_Package_library/3.5inch_48pin_QD3503.SchLib")(options "")(descr ""))
   (lib (name "LCD")(type "KiCad")(uri "${KIPRJMOD}/lib/ILI9488_module.kicad_sym")(options "")(descr ""))
+  (lib (name "Teensy (custom)")(type "KiCad")(uri "${KIPRJMOD}/lib/teensy_library/teensy48.kicad_sym")(options "")(descr ""))
+  (lib (name "mcguitarpedal")(type "KiCad")(uri "${KIPRJMOD}/lib/mcguitarpedal.kicad_sym")(options "")(descr ""))
+  (lib (name "3PDT_FOOT_SWITCH")(type "KiCad")(uri "${KIPRJMOD}/lib/3PDT_FOOT_SWITCH.kicad_sym")(options "")(descr ""))
 )

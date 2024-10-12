@@ -1,4 +1,7 @@
 (fp_lib_table
   (version 7)
-  (lib (name "LM4562")(type "KiCad")(uri "G:/repos/mcguitarpedal/pcb/lib/footprints.pretty")(options "")(descr ""))
+  (lib (name "TI_FOOTPRINTS")(type "KiCad")(uri "${KIPRJMOD}/lib/footprints.pretty")(options "")(descr ""))
+  (lib (name "ILI9488")(type "KiCad")(uri "${KIPRJMOD}/lib/ILI9488.pretty")(options "")(descr ""))
+  (lib (name "mcguitarpedal")(type "KiCad")(uri "${KIPRJMOD}/lib/mcguitarpedal.pretty")(options "")(descr ""))
+  (lib (name "teensy_audio_shield")(type "KiCad")(uri "${KIPRJMOD}/lib/pjrc_REVD_Audio_Adaptor/teensy_audio_shield.pretty")(options "")(descr ""))
 )

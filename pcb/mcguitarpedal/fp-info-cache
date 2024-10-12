@@ -1,4 +1,4 @@
-23839630077780693
+23855068674411471
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -57868,6 +57868,13 @@ heatsink
 0
 0
 0
+ILI9488
+ILI9488
+Through hole straight pin header, 1x14, 2.54mm pitch, single row
+Through hole pin header THT 1x14 2.54mm single row
+0
+14
+14
 Inductor_SMD
 L_6.3x6.3_H3
 Choke, SMD, 6.3x6.3mm 3mm height
@@ -64693,13 +64700,6 @@ Yellow 5381 Series LED
 0
 2
 2
-LM4562
-lm4562
-
-LM4562NA/NOPB 
-0
-8
-8
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -90649,6 +90649,41 @@ Logo WEEE
 0
 0
 0
+TI_FOOTPRINTS
+01-690DB_3PDT_JCV
+
+01-690DB-RH 
+0
+9
+9
+TI_FOOTPRINTS
+01-690DB_3PDT_JCV_OVAL
+
+01-690DB-RH 
+0
+9
+9
+TI_FOOTPRINTS
+DIP16_300_TEX
+
+74HC148 
+0
+16
+16
+TI_FOOTPRINTS
+N16
+
+CD74HC4094E 
+0
+16
+16
+TI_FOOTPRINTS
+lm4562
+
+LM4562NA/NOPB 
+0
+8
+8
 TerminalBlock
 TerminalBlock_Altech_AK300-2_P5.00mm
 Altech AK300 terminal block, pitch 5.0mm, 45 degree angled, see http://www.mouser.com/ds/2/16/PCBMETRC-24178.pdf
@@ -96746,3 +96781,31 @@ Varistor VF
 0
 2
 2
+mcguitarpedal
+Jack_6.35mm_Neutrik_NMJ6HCD2_Horizontal_Flipped
+M Series, 6.35mm (1/4in) stereo jack, switched, with chrome ferrule and straight PCB pins, https://www.neutrik.com/en/product/nmj6hcd2
+neutrik jack m
+0
+6
+6
+mcguitarpedal
+STOMP-SWITCH-3PDT
+
+
+0
+9
+9
+teensy_audio_shield
+4.0audioshield
+
+
+0
+48
+45
+teensy_audio_shield
+4.0audioshield_reference
+
+
+0
+0
+0
