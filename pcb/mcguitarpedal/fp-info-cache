@@ -1,4 +1,4 @@
-23858526369875853
+23860255214996586
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96802,6 +96802,13 @@ neutrik jack m
 0
 6
 6
+mcguitarpedal
+PinHeader_2x24_P2.54mm_W15.24_Vertical
+Through hole straight pin header, 1x24, 2.54mm pitch, single row
+Through hole pin header THT 1x24 2.54mm single row
+0
+48
+48
 mcguitarpedal
 STOMP-SWITCH-3PDT
 

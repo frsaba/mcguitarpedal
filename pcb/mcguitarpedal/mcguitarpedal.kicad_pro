@@ -625,6 +625,10 @@
       {
         "netclass": "Default",
         "pattern": "/preamp/STAGE2_IN"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/26_TFT_MOSI"
       }
     ]
   },

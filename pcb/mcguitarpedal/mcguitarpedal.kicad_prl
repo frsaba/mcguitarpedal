@@ -7,6 +7,7 @@
       "POWER"
     ],
     "hidden_nets": [
+      "",
       "GND",
       "5V",
       "9V"
