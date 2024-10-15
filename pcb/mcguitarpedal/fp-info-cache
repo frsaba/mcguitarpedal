@@ -1,4 +1,4 @@
-23860255214996586
+23868900058433738
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -90671,6 +90671,13 @@ DIP16_300_TEX
 16
 16
 TI_FOOTPRINTS
+DO-41_DIO
+
+1N5819-B 
+0
+2
+2
+TI_FOOTPRINTS
 N16
 
 CD74HC4094E 
@@ -96782,6 +96789,13 @@ Varistor VF
 2
 2
 mcguitarpedal
+Floating Potentiometer
+
+
+0
+0
+0
+mcguitarpedal
 Jack_6.35mm_Neutrik_NMJ6HCD2_Horizontal
 M Series, 6.35mm (1/4in) stereo jack, switched, with chrome ferrule and straight PCB pins, https://www.neutrik.com/en/product/nmj6hcd2
 neutrik jack m
@@ -96816,6 +96830,27 @@ STOMP-SWITCH-3PDT
 0
 9
 9
+mcguitarpedal
+SW_PUSH_DPDT
+FS5700 series pushbutton footswitch, DPDT, https://www.e-switch.com/system/asset/product_line/data_sheet/226/FS5700.pdf
+switch DPDT footswitch
+0
+6
+6
+mcguitarpedal
+Teensy 4.1
+Through hole straight pin header, 1x24, 2.54mm pitch, single row
+Through hole pin header THT 1x24 2.54mm single row
+0
+48
+48
+mcguitarpedal
+Teensy 4.1 with audio board
+Through hole straight pin header, 1x24, 2.54mm pitch, single row
+Through hole pin header THT 1x24 2.54mm single row
+0
+48
+48
 teensy_audio_shield
 4.0audioshield
 
