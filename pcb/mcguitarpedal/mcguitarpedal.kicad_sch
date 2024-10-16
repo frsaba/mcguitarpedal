@@ -7689,6 +7689,10 @@
 		(uuid "8dbad011-c1a3-4253-a7c7-9ccaf512514a")
 	)
 	(no_connect
+		(at 154.94 105.41)
+		(uuid "a1380d4f-9260-4f7d-911a-4b29b554901f")
+	)
+	(no_connect
 		(at 104.14 19.05)
 		(uuid "ab6077cd-cf47-4187-8a99-ed6ecbd9668d")
 	)
@@ -9516,7 +9520,7 @@
 		)
 		(uuid "4710a789-4efd-44b2-b462-ad39e4944322")
 	)
-	(text_box "FIXME: signal can still attenuated by LINE_LEVEL"
+	(text_box "FIXME: signal can still loaded by LINE_LEVEL"
 		(exclude_from_sim no)
 		(at 37.592 159.258 0)
 		(size 26.162 5.334)
@@ -10489,16 +10493,16 @@
 	)
 	(global_label "TEENSY_3.3V"
 		(shape bidirectional)
-		(at 154.94 105.41 180)
+		(at 212.09 74.93 0)
 		(effects
 			(font
 				(size 1.0668 1.0668)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "437db02e-2474-496f-83f2-c0206598af61")
+		(uuid "49d59b84-4e94-498d-9b6a-07fc1f97ee02")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 154.94 105.41 0)
+			(at 212.09 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10595,7 +10599,7 @@
 			)
 		)
 	)
-	(global_label "3.3V"
+	(global_label "TEENSY_3.3V"
 		(shape input)
 		(at 64.77 92.71 90)
 		(fields_autoplaced yes)
@@ -10607,32 +10611,12 @@
 		)
 		(uuid "59bbe2b4-5df1-4938-9a12-57dc658799e5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 64.77 87.0322 90)
+			(at 64.77 80.7427 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TEENSY_3.3V"
-		(shape bidirectional)
-		(at 212.09 74.93 0)
-		(effects
-			(font
-				(size 1.0668 1.0668)
-			)
-			(justify left)
-		)
-		(uuid "5cf44bc7-20e0-4057-bb29-26ddf18465e0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 212.09 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
