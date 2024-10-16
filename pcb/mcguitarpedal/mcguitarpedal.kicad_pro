@@ -563,7 +563,9 @@
     "pinned_footprint_libs": [
       "mcguitarpedal"
     ],
-    "pinned_symbol_libs": []
+    "pinned_symbol_libs": [
+      "mcguitarpedal"
+    ]
   },
   "meta": {
     "filename": "mcguitarpedal.kicad_pro",
