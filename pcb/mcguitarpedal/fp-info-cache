@@ -1,4 +1,4 @@
-23870752332033725
+23881126435582520
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -90685,6 +90685,27 @@ CD74HC4094E
 16
 16
 TI_FOOTPRINTS
+SOT109-1_NEX
+
+74HCT595D 
+0
+16
+16
+TI_FOOTPRINTS
+SOT109-1_NEX-L
+
+74HCT595D 
+0
+16
+16
+TI_FOOTPRINTS
+SOT109-1_NEX-M
+
+74HCT595D 
+0
+16
+16
+TI_FOOTPRINTS
 lm4562
 
 LM4562NA/NOPB 
@@ -96789,6 +96810,20 @@ Varistor VF
 2
 2
 mcguitarpedal
+4.0audioshield
+
+
+0
+9
+8
+mcguitarpedal
+Floating Encoder
+
+
+0
+0
+0
+mcguitarpedal
 Floating Potentiometer
 
 
@@ -96823,6 +96858,13 @@ neutrik jack m
 0
 6
 6
+mcguitarpedal
+LED_D3.0mm
+LED, diameter 3.0mm, 2 pins
+LED diameter 3.0mm 2 pins
+0
+2
+2
 mcguitarpedal
 PinHeader_2x24_P2.54mm_W15.24_Vertical
 Through hole straight pin header, 1x24, 2.54mm pitch, single row
@@ -96863,8 +96905,8 @@ teensy_audio_shield
 
 
 0
-48
-45
+15
+12
 teensy_audio_shield
 4.0audioshield_reference
 

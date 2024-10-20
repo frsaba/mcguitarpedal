@@ -9,4 +9,5 @@
   (lib (name "mcguitarpedal")(type "KiCad")(uri "${KIPRJMOD}/lib/mcguitarpedal.kicad_sym")(options "")(descr ""))
   (lib (name "3PDT_FOOT_SWITCH")(type "KiCad")(uri "${KIPRJMOD}/lib/3PDT_FOOT_SWITCH.kicad_sym")(options "")(descr ""))
   (lib (name "HCT4094")(type "KiCad")(uri "${KIPRJMOD}/lib/74HC4094/2024-10-16_16-03-00.kicad_sym")(options "")(descr ""))
+  (lib (name "74HCT595")(type "KiCad")(uri "${KIPRJMOD}/lib/74HCT595/74HCT595.kicad_sym")(options "")(descr ""))
 )

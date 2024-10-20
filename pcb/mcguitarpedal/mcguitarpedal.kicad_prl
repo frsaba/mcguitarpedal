@@ -1,7 +1,7 @@
 {
   "board": {
     "active_layer": 31,
-    "active_layer_preset": "",
+    "active_layer_preset": "Design mode",
     "auto_track_width": true,
     "hidden_netclasses": [
       "POWER"
@@ -69,7 +69,7 @@
       36,
       40
     ],
-    "visible_layers": "ff753ff_ffffffff",
+    "visible_layers": "fd753ff_ffffffff",
     "zone_display_mode": 0
   },
   "git": {
