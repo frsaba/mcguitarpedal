@@ -1,4 +1,4 @@
-23881126435582520
+23884585803396381
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96810,11 +96810,25 @@ Varistor VF
 2
 2
 mcguitarpedal
+2x02 Header (Double)
+
+
+0
+4
+2
+mcguitarpedal
 4.0audioshield
 
 
 0
-9
+8
+8
+mcguitarpedal
+DP3T slide switch
+
+
+0
+8
 8
 mcguitarpedal
 Floating Encoder
