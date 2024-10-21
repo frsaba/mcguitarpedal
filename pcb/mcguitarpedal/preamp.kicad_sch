@@ -1895,6 +1895,12 @@
 		(uuid "65a7a66b-b74d-4020-b854-45d7c1f5d432")
 	)
 	(junction
+		(at 25.4 109.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6d086c86-9f17-4103-98bf-3fda03c94378")
+	)
+	(junction
 		(at 25.4 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1923,12 +1929,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a01c023e-96fb-4cfa-b6a6-d05f3f33c3f1")
-	)
-	(junction
-		(at 29.21 114.3)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a13672e2-5942-49fe-9581-49136a6d69be")
 	)
 	(junction
 		(at 31.75 109.22)
@@ -2027,16 +2027,6 @@
 			(type default)
 		)
 		(uuid "0d1a2560-eab6-4bc7-b2b3-dd5be7f17278")
-	)
-	(wire
-		(pts
-			(xy 29.21 114.3) (xy 31.75 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e5b8811-456f-44fe-86fa-3a7df7c395a4")
 	)
 	(wire
 		(pts
@@ -2180,16 +2170,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 114.3) (xy 29.21 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2e56c2e6-6237-45a2-ac1f-4015b95ac5a9")
-	)
-	(wire
-		(pts
 			(xy 173.99 101.6) (xy 182.88 101.6)
 		)
 		(stroke
@@ -2197,6 +2177,16 @@
 			(type default)
 		)
 		(uuid "31369549-b3ff-413e-9090-af59db7adada")
+	)
+	(wire
+		(pts
+			(xy 25.4 109.22) (xy 31.75 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "326a804a-1a3f-4b7c-8397-363561891a40")
 	)
 	(wire
 		(pts
@@ -2300,16 +2290,6 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 109.22) (xy 31.75 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a08796c-76e5-4282-a01d-06d40a4994ae")
-	)
-	(wire
-		(pts
 			(xy 213.36 99.06) (xy 210.82 99.06)
 		)
 		(stroke
@@ -2387,6 +2367,16 @@
 			(type default)
 		)
 		(uuid "607542bd-e214-4832-8274-674a8f23d8e7")
+	)
+	(wire
+		(pts
+			(xy 25.4 114.3) (xy 31.75 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6126a9b3-ed29-48e4-8f2b-742679a8d700")
 	)
 	(wire
 		(pts
@@ -5028,102 +5018,6 @@
 			(project "mcguitarpedal"
 				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "R8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_Small")
-		(at 29.21 111.76 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "759d5415-3f05-4aa1-96e4-276acf81ebd8")
-		(property "Reference" "R35"
-			(at 27.686 112.522 90)
-			(effects
-				(font
-					(size 0.7 0.7)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10k"
-			(at 29.21 112.776 90)
-			(effects
-				(font
-					(size 0.7 0.7)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 29.21 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 29.21 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor, small symbol"
-			(at 29.21 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "R"
-			(at 29.21 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Params" "R=${VALUE}"
-			(at 29.21 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value2" ""
-			(at 29.21 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "87717d40-74cc-496a-869a-4db4bc7ba2c7")
-		)
-		(pin "2"
-			(uuid "1ec05588-a48e-4977-8ed5-14a8f710581d")
-		)
-		(instances
-			(project "mcguitarpedal"
-				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
-					(reference "R35")
 					(unit 1)
 				)
 			)
