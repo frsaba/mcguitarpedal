@@ -3,11 +3,11 @@
 	(generator "pcbnew")
 	(generator_version "8.0")
 	(layer "F.Cu")
-	(property "Reference" "REF**"
-		(at 0 -0.5 0)
+	(property "Reference" "POT1"
+		(at 1 -1 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "b413ce68-13d7-4759-87fd-186a0fc36201")
+		(uuid "1105b3b2-23a3-4afa-b90e-f5caf624f584")
 		(effects
 			(font
 				(size 1 1)
@@ -15,11 +15,12 @@
 			)
 		)
 	)
-	(property "Value" "Floating Potentiometer"
+	(property "Value" "Logo_Open_Hardware_Small"
 		(at 0 1 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "fd6382be-4530-4d74-a50f-74ca87779b09")
+		(hide yes)
+		(uuid "e796e74f-7e9b-4d47-bf85-308affc479ce")
 		(effects
 			(font
 				(size 1 1)
@@ -27,12 +28,12 @@
 			)
 		)
 	)
-	(property "Footprint" ""
+	(property "Footprint" "mcguitarpedal:Floating Potentiometer"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "027d7dc9-4293-4855-98f7-e3064a200885")
+		(uuid "b9f0fb0c-d2ab-4b7d-b8da-eb26fcbabbff")
 		(effects
 			(font
 				(size 1 1)
@@ -45,7 +46,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "28a1f743-7177-48c4-92b9-6f0b310ac3f4")
+		(uuid "89dcdf08-e1dd-406c-bbeb-f564ae2980b6")
 		(effects
 			(font
 				(size 1 1)
@@ -53,12 +54,12 @@
 			)
 		)
 	)
-	(property "Description" ""
+	(property "Description" "Open Hardware logo, small"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "4ecebc33-8526-4f57-9bdc-fa7a26e13ff6")
+		(uuid "368b943b-9cfa-44d9-b1dd-bb09b3ee15a4")
 		(effects
 			(font
 				(size 1 1)
@@ -66,6 +67,7 @@
 			)
 		)
 	)
+	(attr exclude_from_bom)
 	(fp_circle
 		(center 0 0)
 		(end 6.5 0)
@@ -75,30 +77,18 @@
 		)
 		(fill none)
 		(layer "Dwgs.User")
-		(uuid "aa624b4a-1499-42bb-ae17-351b03565bdd")
+		(uuid "548b7d32-16d3-4932-a8d2-4b85b8eb824e")
 	)
 	(fp_circle
 		(center 0 0)
 		(end 8.5 0)
 		(stroke
 			(width 0.1)
-			(type default)
+			(type dash)
 		)
 		(fill none)
 		(layer "Dwgs.User")
-		(uuid "b9fca3ec-a966-4ec7-b6bd-f978ec6447a0")
-	)
-	(fp_text user "${REFERENCE}"
-		(at 0 2.5 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(uuid "2b9ba4ba-0930-4a88-83c4-55ff5fccf47e")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
+		(uuid "fc1bc16e-98a5-4986-9127-e867bf9376c5")
 	)
 	(model "${KIPRJMOD}/lib/3D_models/potentiometer.step"
 		(offset

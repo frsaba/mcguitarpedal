@@ -1,4 +1,4 @@
-23884590241536774
+23886316990823349
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96893,6 +96893,13 @@ STOMP-SWITCH-3PDT
 0
 9
 9
+mcguitarpedal
+STPDN-3A24-ADJ
+Through hole straight socket strip, 1x04, 2.54mm pitch, single row (from Kicad 4.0.7), script generated
+Through hole socket strip THT 1x04 2.54mm single row
+0
+4
+4
 mcguitarpedal
 SW_PUSH_DPDT
 FS5700 series pushbutton footswitch, DPDT, https://www.e-switch.com/system/asset/product_line/data_sheet/226/FS5700.pdf
