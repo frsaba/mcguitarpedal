@@ -2,7 +2,6 @@
 	(version 20240108)
 	(generator "pcbnew")
 	(generator_version "8.0")
-	(locked yes)
 	(layer "F.Cu")
 	(descr "Through hole straight pin header, 1x14, 2.54mm pitch, single row")
 	(tags "Through hole pin header THT 1x14 2.54mm single row")
@@ -150,7 +149,7 @@
 			(type default)
 		)
 		(fill none)
-		(layer "F.SilkS")
+		(layer "Dwgs.User")
 		(uuid "8042a3b4-e43f-485f-906c-24b2f4fb476a")
 	)
 	(fp_rect
@@ -161,7 +160,7 @@
 			(type default)
 		)
 		(fill none)
-		(layer "F.SilkS")
+		(layer "Dwgs.User")
 		(uuid "46fbd6a1-0931-40d1-9964-0811bb3638df")
 	)
 	(fp_line

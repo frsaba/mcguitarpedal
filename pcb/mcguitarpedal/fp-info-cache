@@ -1,4 +1,4 @@
-23886316990823349
+23889777295747733
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96880,6 +96880,13 @@ LED diameter 3.0mm 2 pins
 2
 2
 mcguitarpedal
+POTS_HEADER
+Through hole straight pin header, 1x09, 2.54mm pitch, single row
+Through hole pin header THT 1x09 2.54mm single row
+0
+8
+8
+mcguitarpedal
 PinHeader_2x24_P2.54mm_W15.24_Vertical
 Through hole straight pin header, 1x24, 2.54mm pitch, single row
 Through hole pin header THT 1x24 2.54mm single row
@@ -96900,6 +96907,13 @@ Through hole socket strip THT 1x04 2.54mm single row
 0
 4
 4
+mcguitarpedal
+STPDWN-3P-5V
+TO-220-3, Horizontal, RM 2.54mm, see https://www.vishay.com/docs/66542/to-220-1.pdf
+TO-220-3 Horizontal RM 2.54mm
+0
+3
+3
 mcguitarpedal
 SW_PUSH_DPDT
 FS5700 series pushbutton footswitch, DPDT, https://www.e-switch.com/system/asset/product_line/data_sheet/226/FS5700.pdf

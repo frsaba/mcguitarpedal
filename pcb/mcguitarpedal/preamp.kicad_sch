@@ -1141,7 +1141,8 @@
 		)
 		(symbol "mcguitarpedal:3x2_Headers"
 			(pin_names
-				(offset 0.762) hide)
+				(offset 0.762)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1190,8 +1191,8 @@
 			)
 			(symbol "3x2_Headers_0_1"
 				(rectangle
-					(start 5.08 3.81)
-					(end 1.27 -5.08)
+					(start 1.27 3.81)
+					(end 5.08 -2.54)
 					(stroke
 						(width 0)
 						(type default)
@@ -1202,18 +1203,6 @@
 				)
 			)
 			(symbol "3x2_Headers_1_1"
-				(polyline
-					(pts
-						(xy 1.27 -3.81) (xy 0.8636 -3.81)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
 				(polyline
 					(pts
 						(xy 1.27 -1.27) (xy 0.8636 -1.27)
@@ -1236,17 +1225,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(rectangle
-					(start 0.8636 -3.683)
-					(end 0 -3.937)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(rectangle
@@ -1300,24 +1278,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 6.35 -3.81 180)
-					(length 6.35)
-					(name "Pin_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1983,10 +1943,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "efef206f-86d3-458e-80bf-cb0977ea3884")
-	)
-	(no_connect
-		(at 119.38 90.17)
-		(uuid "18325eed-b1e2-45e9-9d97-f7449a46c607")
 	)
 	(wire
 		(pts
@@ -4672,7 +4628,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nf"
+		(property "Value" "100n"
 			(at 242.57 129.5399 0)
 			(effects
 				(font
@@ -5196,7 +5152,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical"
+		(property "Footprint" "mcguitarpedal:POTS_HEADER"
 			(at 115.57 83.82 0)
 			(effects
 				(font
@@ -5237,9 +5193,6 @@
 		)
 		(pin "4"
 			(uuid "c317ca46-9efe-4b6e-a597-ce23bdd2f56e")
-		)
-		(pin "3"
-			(uuid "d7dd4598-53e8-453c-a895-98e21eb46424")
 		)
 		(pin "2"
 			(uuid "2f606a20-bec2-4ef3-a156-28de4fe7ff1a")
