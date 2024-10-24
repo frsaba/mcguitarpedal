@@ -77,21 +77,18 @@ AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 const int myInput = AUDIO_INPUT_LINEIN;
 // const int myInput = AUDIO_INPUT_MIC;
 
-Encoder encoder_1(27, 28);
-int encoder_1_prev = 0;
+OneButton button_1(3, true);
+Encoder encoder_1(4, 5);
 
-Encoder encoder_2(25, 26);
-int encoder_2_prev = 0;
+OneButton button_2(25, true);
+Encoder encoder_2(28, 29);
 
-Encoder encoder_3(29, 30);
-int encoder_3_prev = 0;
+OneButton button_3(30, true);
+Encoder encoder_3(31, 32);
 
 
 extern TFT_eSPI tft;
 
-OneButton button_1(37, true);
-OneButton button_2(38, true);
-OneButton button_3(39, true);
 
 elapsedMillis volmsec = 0;
 
