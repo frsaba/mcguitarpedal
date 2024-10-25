@@ -258,6 +258,108 @@
 				)
 			)
 		)
+		(symbol "Connector:TestPoint"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.762) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:C"
 			(pin_numbers hide)
 			(pin_names
@@ -1849,16 +1951,22 @@
 		(uuid "558a7c7a-e7f4-499f-bd44-467f49718f15")
 	)
 	(junction
+		(at 156.21 86.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5acc9712-83b2-475b-bdf0-9b1c4d58838f")
+	)
+	(junction
+		(at 92.71 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5c15da4f-f226-44ea-8d2c-1479b0653a0a")
+	)
+	(junction
 		(at 41.91 110.49)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "65a7a66b-b74d-4020-b854-45d7c1f5d432")
-	)
-	(junction
-		(at 25.4 109.22)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6d086c86-9f17-4103-98bf-3fda03c94378")
 	)
 	(junction
 		(at 25.4 104.14)
@@ -1871,6 +1979,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7aaa73bf-d074-4429-8b6c-62adaf60aeff")
+	)
+	(junction
+		(at 55.88 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8dd26939-4a78-45ca-a013-6a0b9fd1a912")
 	)
 	(junction
 		(at 25.4 99.06)
@@ -1889,12 +2003,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a01c023e-96fb-4cfa-b6a6-d05f3f33c3f1")
-	)
-	(junction
-		(at 31.75 109.22)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ac5a8776-8c32-4316-9ea0-caf7bfd6ed16")
 	)
 	(junction
 		(at 157.48 127)
@@ -1943,6 +2051,16 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "efef206f-86d3-458e-80bf-cb0977ea3884")
+	)
+	(wire
+		(pts
+			(xy 156.21 86.36) (xy 171.45 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "049785c9-44ca-42c1-9b6c-9751d2cc4acb")
 	)
 	(wire
 		(pts
@@ -1996,7 +2114,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 110.49) (xy 45.72 115.57)
+			(xy 45.72 110.49) (xy 45.72 116.84)
 		)
 		(stroke
 			(width 0)
@@ -2066,6 +2184,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 104.14) (xy 59.69 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23c42ea7-61fb-4ead-94a3-4c561298cca1")
+	)
+	(wire
+		(pts
 			(xy 213.36 111.76) (xy 213.36 109.22)
 		)
 		(stroke
@@ -2106,16 +2234,6 @@
 	)
 	(wire
 		(pts
-			(xy 16.51 104.14) (xy 25.4 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2a178c8e-aeab-4fd0-86c7-2e8fc2ff3cfa")
-	)
-	(wire
-		(pts
 			(xy 69.85 104.14) (xy 76.2 104.14)
 		)
 		(stroke
@@ -2123,26 +2241,6 @@
 			(type solid)
 		)
 		(uuid "2c0ede85-f31d-499c-a6d1-379a1d2b9275")
-	)
-	(wire
-		(pts
-			(xy 173.99 101.6) (xy 182.88 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "31369549-b3ff-413e-9090-af59db7adada")
-	)
-	(wire
-		(pts
-			(xy 25.4 109.22) (xy 31.75 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "326a804a-1a3f-4b7c-8397-363561891a40")
 	)
 	(wire
 		(pts
@@ -2216,6 +2314,16 @@
 	)
 	(wire
 		(pts
+			(xy 41.91 114.3) (xy 50.8 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "460df28d-5952-4afc-8056-1279a849bd92")
+	)
+	(wire
+		(pts
 			(xy 166.37 127) (xy 166.37 130.81)
 		)
 		(stroke
@@ -2226,7 +2334,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 104.14) (xy 100.33 104.14)
+			(xy 77.47 104.14) (xy 92.71 104.14)
 		)
 		(stroke
 			(width 0)
@@ -2263,6 +2371,16 @@
 			(type default)
 		)
 		(uuid "4d66bcc8-7c1d-4d3f-8d6f-38b55c7458d4")
+	)
+	(wire
+		(pts
+			(xy 173.99 101.6) (xy 182.88 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4f5544c8-3c69-446a-b3ef-580ee591ef7b")
 	)
 	(wire
 		(pts
@@ -2353,6 +2471,16 @@
 			(type solid)
 		)
 		(uuid "6b0737e2-250a-435e-b90b-27872b2fa369")
+	)
+	(wire
+		(pts
+			(xy 16.51 104.14) (xy 25.4 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c92cb19-e49a-48a5-8bb7-0ef95ba9572d")
 	)
 	(wire
 		(pts
@@ -2496,6 +2624,26 @@
 	)
 	(wire
 		(pts
+			(xy 92.71 104.14) (xy 100.33 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "927385b7-4f41-4cbe-87d7-1a3868c3db4b")
+	)
+	(wire
+		(pts
+			(xy 173.99 99.06) (xy 173.99 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "94a8fd8b-e4aa-4345-b920-53e389468fe7")
+	)
+	(wire
+		(pts
 			(xy 25.4 93.98) (xy 25.4 99.06)
 		)
 		(stroke
@@ -2533,16 +2681,6 @@
 			(type default)
 		)
 		(uuid "98286a51-91d0-4fb4-92f2-5859bbb2ab40")
-	)
-	(wire
-		(pts
-			(xy 41.91 114.3) (xy 50.8 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9ac99111-6d0a-4c07-8c5f-43df2502671b")
 	)
 	(wire
 		(pts
@@ -2616,7 +2754,7 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 104.14) (xy 59.69 104.14)
+			(xy 50.8 104.14) (xy 55.88 104.14)
 		)
 		(stroke
 			(width 0)
@@ -2683,16 +2821,6 @@
 			(type solid)
 		)
 		(uuid "cc305484-7cdc-4e49-a66a-7bf7d6637d7d")
-	)
-	(wire
-		(pts
-			(xy 171.45 86.36) (xy 156.21 86.36)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "cf7064c3-6964-4aef-ab49-84c324975c2b")
 	)
 	(wire
 		(pts
@@ -2884,27 +3012,6 @@
 			(justify left top)
 		)
 		(uuid "939c195d-c09f-4f85-a2a9-8b66933670d5")
-	)
-	(text_box "Line level attenuator\n(1x, 0.5x, 0.66x)"
-		(exclude_from_sim no)
-		(at 22.86 78.74 0)
-		(size 31.496 50.8)
-		(stroke
-			(width 0)
-			(type default)
-			(color 160 160 160 0.6)
-		)
-		(fill
-			(type color)
-			(color 247 255 181 0.1)
-		)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left top)
-		)
-		(uuid "a719260a-4ff0-484d-8ea7-bf5d74ba1cb5")
 	)
 	(text_box "Low pass filter 25kHz -40dB/dec"
 		(exclude_from_sim no)
@@ -3439,7 +3546,7 @@
 	)
 	(symbol
 		(lib_id "ltspice:GND")
-		(at 45.72 120.65 0)
+		(at 45.72 121.92 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3447,7 +3554,7 @@
 		(dnp no)
 		(uuid "02153b96-aded-406e-9af7-d082835f1543")
 		(property "Reference" "#GND03"
-			(at 45.72 120.65 0)
+			(at 45.72 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3456,7 +3563,7 @@
 			)
 		)
 		(property "Value" "0"
-			(at 45.72 120.65 0)
+			(at 45.72 121.92 0)
 			(effects
 				(font
 					(size 1.0668 1.0668)
@@ -3465,7 +3572,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 45.72 120.65 0)
+			(at 45.72 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3474,7 +3581,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 45.72 120.65 0)
+			(at 45.72 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3483,7 +3590,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 45.72 120.65 0)
+			(at 45.72 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3696,6 +3803,73 @@
 			(project "mcguitarpedal"
 				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "RG1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 55.88 104.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1281ac27-40dd-474e-9c81-f39d298b3b81")
+		(property "Reference" "TP2"
+			(at 57.15 100.838 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 58.42 102.1079 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Loop_D1.80mm_Drill1.0mm_Beaded"
+			(at 60.96 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 55.88 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0390694c-ff62-49bd-b111-20177b79a680")
+		)
+		(instances
+			(project "mcguitarpedal"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "TP2")
 					(unit 1)
 				)
 			)
@@ -4173,6 +4347,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 100.33 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "385b80c2-4ec5-467e-a8f6-925ba30331ef")
+		(property "Reference" "TP4"
+			(at 101.346 87.884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 102.87 89.4079 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Loop_D1.80mm_Drill1.0mm_Beaded"
+			(at 105.41 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 105.41 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 100.33 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e144b62c-c680-42b5-ac06-57b2df3b61fd")
+		)
+		(instances
+			(project "mcguitarpedal"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "TP4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Amplifier_Operational:LM4562")
 		(at 236.22 128.27 0)
 		(unit 3)
@@ -4637,7 +4878,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W2.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 239.7252 132.08 0)
 			(effects
 				(font
@@ -4783,7 +5024,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 45.72 118.11 180)
+		(at 45.72 119.38 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4791,7 +5032,7 @@
 		(dnp no)
 		(uuid "59e7becb-c609-4851-a9e2-28231d40bfb5")
 		(property "Reference" "R1"
-			(at 47.244 117.348 90)
+			(at 47.244 118.618 90)
 			(effects
 				(font
 					(size 0.7 0.7)
@@ -4800,7 +5041,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 45.72 117.094 90)
+			(at 45.72 118.364 90)
 			(effects
 				(font
 					(size 0.7 0.7)
@@ -4809,7 +5050,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 45.72 118.11 0)
+			(at 45.72 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4818,7 +5059,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 45.72 118.11 0)
+			(at 45.72 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4827,7 +5068,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 45.72 118.11 0)
+			(at 45.72 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4836,7 +5077,7 @@
 			)
 		)
 		(property "Sim.Device" "R"
-			(at 45.72 118.11 0)
+			(at 45.72 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4845,7 +5086,7 @@
 			)
 		)
 		(property "Sim.Params" "R=${VALUE}"
-			(at 45.72 118.11 0)
+			(at 45.72 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4854,7 +5095,7 @@
 			)
 		)
 		(property "Value2" ""
-			(at 45.72 118.11 0)
+			(at 45.72 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5405,6 +5646,73 @@
 			(project "mcguitarpedal"
 				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "R10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 156.21 86.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a5c853d2-4f32-4a54-a9d6-41d3e73e9cf9")
+		(property "Reference" "TP5"
+			(at 157.48 82.042 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 158.75 84.3279 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Loop_D1.80mm_Drill1.0mm_Beaded"
+			(at 161.29 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 161.29 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 156.21 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "601c920b-d469-4bb4-aedd-a8038bbe0d1d")
+		)
+		(instances
+			(project "mcguitarpedal"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "TP5")
 					(unit 1)
 				)
 			)
@@ -6029,6 +6337,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 173.99 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d23522fc-f012-43d6-9bb5-4435ab816963")
+		(property "Reference" "TP6"
+			(at 174.752 94.488 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 176.53 97.0279 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Loop_D1.80mm_Drill1.0mm_Beaded"
+			(at 179.07 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 179.07 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 173.99 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f10e618a-9baa-4a27-bb33-1b56a7798f55")
+		)
+		(instances
+			(project ""
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "TP6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:Opamp_Dual")
 		(at 190.5 99.06 0)
 		(mirror x)
@@ -6267,6 +6642,73 @@
 			(project "mcguitarpedal"
 				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
 					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 92.71 104.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e893842b-f108-4483-8e5b-e5a5a391276c")
+		(property "Reference" "TP3"
+			(at 93.98 100.838 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 95.25 102.1079 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Loop_D1.80mm_Drill1.0mm_Beaded"
+			(at 97.79 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 97.79 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 92.71 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4ce3589a-ac0d-4ebb-8a3e-b0ce9854a688")
+		)
+		(instances
+			(project "mcguitarpedal"
+				(path "/abf63e65-3dbc-486e-8cbe-833bb40c3c0d/c177d22b-45a9-4502-a618-667d0401078d"
+					(reference "TP3")
 					(unit 1)
 				)
 			)
