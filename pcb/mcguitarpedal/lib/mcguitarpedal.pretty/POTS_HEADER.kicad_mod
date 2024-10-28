@@ -129,7 +129,7 @@
 	)
 	(fp_line
 		(start -1.8 -1.8)
-		(end -1.8 22.1)
+		(end -1.8 19.3)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -138,8 +138,8 @@
 		(uuid "0ad5ce3d-865e-4c96-88ac-3b2a730dfd33")
 	)
 	(fp_line
-		(start -1.8 22.1)
-		(end 1.8 22.1)
+		(start -1.8 19.3)
+		(end 1.8 19.3)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -158,7 +158,7 @@
 		(uuid "d1aecaf3-82cb-4710-aaa4-6a9f74e1dba9")
 	)
 	(fp_line
-		(start 1.8 22.1)
+		(start 1.8 19.3)
 		(end 1.8 -1.8)
 		(stroke
 			(width 0.05)
@@ -404,7 +404,7 @@
 		(remove_unused_layers no)
 		(uuid "21a8aebf-0e16-4fb3-b566-a259c911f1c6")
 	)
-	(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x09_P2.54mm_Vertical.wrl"
+	(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x08_P2.54mm_Vertical.wrl"
 		(offset
 			(xyz 0 0 0)
 		)
