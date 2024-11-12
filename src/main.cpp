@@ -24,6 +24,11 @@
 #define TFT_RGB_ORDER TFT_BGR
 #include <presets/presets.h>
 
+#define MASTER_POT A1
+#define HP_VOLUME_POT A2
+#define EXP A3
+#define BACKLIGHT_PWM 37
+
 #define CHAIN_LENGTH 4
 Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
 Effect *chorus_effect = effects_chain[0];
@@ -130,7 +135,12 @@ void setup()
     sgtl5000_1.volume(0.5);
     sgtl5000_1.lineInLevel(10);
 
-    pinMode(A10, INPUT);
+    pinMode(MASTER_POT, INPUT);
+    pinMode(HP_VOLUME_POT, INPUT);
+    pinMode(EXP, INPUT);
+
+    pinMode(BACKLIGHT_PWM, OUTPUT);
+    
     // button_1.attachClick([]()
     //                     {	
 	// 						//TODO: Create macro for selected effect
@@ -182,10 +192,12 @@ void loop()
 {
     if (volmsec > 150)
     {
-        float vol = analogRead(A10);
+        float vol = analogRead(HP_VOLUME_POT);
+        analogWrite(BACKLIGHT_PWM, 192);
         vol = vol / 1023.0;
         sgtl5000_1.volume(vol); // <-- uncomment if you have the optional
         volmsec = 0;            //     volume pot on your audio shield
+        
 
 		//TODO: base inputs entirely on encoder_input.h and remove all references to it in main
 		

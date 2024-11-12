@@ -260,7 +260,7 @@ void setup() {
 
   tft.begin();
   tft.fillScreen(ILI9488_BLACK);
-  tft.setRotation(3);
+  tft.setRotation(1);
   tft.setTextColor(ILI9488_YELLOW);
   tft.setTextSize(2);
   tft.println("Waiting for Arduino Serial Monitor...");

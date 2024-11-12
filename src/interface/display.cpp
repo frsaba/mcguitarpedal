@@ -11,9 +11,9 @@ void displayText(const String &s)
 }
 
 /*Set to your screen resolution and rotation*/
-#define TFT_HOR_RES   320
-#define TFT_VER_RES   480
-#define TFT_ROTATION  LV_DISPLAY_ROTATION_270
+#define TFT_HOR_RES   480
+#define TFT_VER_RES   320
+#define TFT_ROTATION  LV_DISPLAY_ROTATION_90
 
 /*LVGL draw into this buffer, 1/10 screen size usually works well. The size is in bytes*/
 #define DRAW_BUF_SIZE (TFT_HOR_RES * TFT_VER_RES / 10 * (LV_COLOR_DEPTH / 8))
@@ -96,7 +96,9 @@ void init_display()
     /*TFT_eSPI can be enabled lv_conf.h to initialize the display in a simple way*/
     disp = lv_tft_espi_create(TFT_HOR_RES, TFT_VER_RES, draw_buf, sizeof(draw_buf));
 	lv_display_set_flush_cb(disp, swapped_flush_cb);
-    lv_display_set_rotation(disp, TFT_ROTATION);
+    // lv_display_set_rotation(disp, TFT_ROTATION);
+	lv_tft_espi_t * dsc = (lv_tft_espi_t *)lv_display_get_driver_data(disp);
+	dsc->tft->setRotation(1);
 	// lv_tft_espi_t* dsc = (lv_tft_espi_t*)lv_display_get_driver_data(disp);
 	// dsc->tft->
 	// lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565);
