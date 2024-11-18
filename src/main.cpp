@@ -23,6 +23,7 @@
 #include <lvgl.h>
 #define TFT_RGB_ORDER TFT_BGR
 #include <presets/presets.h>
+#include "interface/led_driver.h"
 
 #define MASTER_POT A1
 #define HP_VOLUME_POT A2
@@ -45,6 +46,7 @@ AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
 
 // Create connections manually
 AudioConnection patchCord1(audio_input, 0, chorus_effect->input_amp, 0);
+AudioConnection patchCord24(audio_input, 0, dry_wet_mixer, 1);
 
 AudioConnection patchCord17(chorus_effect->input_amp, 0, chorus_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
 AudioConnection patchCord18(chorus_effect->input_amp, 0, *chorus_effect->chain_start, 0);  // Wet in
@@ -186,15 +188,18 @@ void setup()
 	apply_param_values_to_knobs();
 
 	displayText("");
+	analogWrite(BACKLIGHT_PWM, 192);
+	setup_leds();
 }
 
 void loop()
 {
-    if (volmsec > 150)
+	static uint8_t led_state = 0;
+    if (volmsec > 1000)
     {
         float vol = analogRead(HP_VOLUME_POT);
-        analogWrite(BACKLIGHT_PWM, 192);
-        vol = vol / 1023.0;
+
+        vol = vol / 1023.0 * 0.65;
         sgtl5000_1.volume(vol); // <-- uncomment if you have the optional
         volmsec = 0;            //     volume pot on your audio shield
         
@@ -231,6 +236,8 @@ void loop()
         // Serial.print(AudioMemoryUsageMax());
         // Serial.print("    ");
         // Serial.println();
+
+		write_to_shift_register(led_state++);
     }
     button_1.tick();
     button_2.tick();

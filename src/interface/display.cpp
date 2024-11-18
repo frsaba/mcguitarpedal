@@ -75,7 +75,7 @@ static void swapped_flush_cb(lv_display_t * disp, const lv_area_t * area, uint8_
 
 }
 
-void init_display()
+FLASHMEM void init_display()
 {
     String LVGL_Arduino = "Hello Arduino! ";
     LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
@@ -131,7 +131,7 @@ void init_display()
 }
 
 // Create an arc object with styling
-lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
+FLASHMEM lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
 	// Arc styling
 	static lv_style_t style_arc_main;
 	static lv_style_t style_arc_indicator;
@@ -167,7 +167,7 @@ lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25){
 } 
 
 //TODO: rename and break up this function
-void create_effect_lists(Effect *effects_chain[], size_t length){
+FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 	chain_length = length;
 	    /* Create a parent container */
     lv_obj_t * main_container = lv_obj_create(lv_scr_act());
@@ -179,7 +179,7 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 
     // Create the first lists we'll add the effects to
     effects_list = lv_list_create(main_container);
-    lv_obj_set_size(effects_list, 150, 200);
+    lv_obj_set_size(effects_list, 180, 200);
 
     lv_list_add_text(effects_list, "Effects");
 
@@ -249,7 +249,7 @@ void create_effect_lists(Effect *effects_chain[], size_t length){
 	//TODO: grey out empty presets
 	for (size_t i = 0; i < 4; i++)
 	{
-		lv_obj_t* preset_btn =  lv_list_add_btn(presets_list, LV_SYMBOL_FILE, ("Preset " + String(i)).begin());
+		lv_obj_t* preset_btn =  lv_list_add_btn(presets_list, LV_SYMBOL_FILE, ("P " + String(i)).begin());
 		lv_group_add_obj(presets_group, preset_btn);
 		lv_obj_set_width(preset_btn, lv_pct(25));
 
