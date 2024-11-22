@@ -29,6 +29,7 @@
 #define HP_VOLUME_POT A2
 #define EXP A3
 #define BACKLIGHT_PWM 37
+#define SW_BYPASS 0
 
 #define CHAIN_LENGTH 4
 Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
@@ -88,7 +89,7 @@ OneButton button_1(3, true);
 Encoder encoder_1(4, 5);
 
 OneButton button_2(25, true);
-Encoder encoder_2(28, 29);
+Encoder encoder_2(29, 28);
 
 OneButton button_3(30, true);
 Encoder encoder_3(31, 32);
@@ -112,7 +113,7 @@ void setup()
     AudioMemory(1200);
 
 	//TODO: toggle dry/wet for entire chain
-    dry_wet_mixer.gain(0, 0.3);
+    dry_wet_mixer.gain(0, 0);
     dry_wet_mixer.gain(1, 1);
 
 
@@ -135,42 +136,15 @@ void setup()
     sgtl5000_1.inputSelect(myInput);
     sgtl5000_1.adcHighPassFilterDisable();
     sgtl5000_1.volume(0.5);
-    sgtl5000_1.lineInLevel(10);
+    sgtl5000_1.lineInLevel(0);
 
     pinMode(MASTER_POT, INPUT);
     pinMode(HP_VOLUME_POT, INPUT);
     pinMode(EXP, INPUT);
+    pinMode(SW_BYPASS, INPUT_PULLUP);
 
     pinMode(BACKLIGHT_PWM, OUTPUT);
-    
-    // button_1.attachClick([]()
-    //                     {	
-	// 						//TODO: Create macro for selected effect
-    //                         selected_effect_index = (selected_effect_index + 1) % CHAIN_LENGTH;
-    //                         displayText("Selected effect: " + String(effects_chain[selected_effect_index]->name)); });
-    // button2.attachClick([]()
-    //                     { 
-    //                         effects_chain[selected_effect_index]->toggle_bypass(); 
-    //                         });
-    //TODO: long press to reset
-	// button_1.attachClick([]()
-    //                     { 
-	// 						load_preset(effects_chain, CHAIN_LENGTH);
-	// 						displayText("Loading preset"); 
-							
-	// 					});
-	// button_1.attachLongPressStart([]()
-    //                     { 
-	// 						save_preset(effects_chain, CHAIN_LENGTH);
-	// 						displayText("Button 3 long-pressed"); 
-							
-	// 					});
     tuner.begin(0.3);
-    // tft.begin();
-    // tft.fillScreen(TFT_BLACK);
-    // tft.setRotation(3);
-
-    // displayText("Hello");
     while(!Serial && millis() < 3000){};
 
 	init_display();
@@ -188,57 +162,30 @@ void setup()
 	apply_param_values_to_knobs();
 
 	displayText("");
-	analogWrite(BACKLIGHT_PWM, 192);
+	analogWrite(BACKLIGHT_PWM, 50);
 	setup_leds();
 }
 
 void loop()
 {
-	static uint8_t led_state = 0;
-    if (volmsec > 1000)
+    if (volmsec > 350)
     {
-        float vol = analogRead(HP_VOLUME_POT);
+        volmsec = 0;  
 
-        vol = vol / 1023.0 * 0.65;
-        sgtl5000_1.volume(vol); // <-- uncomment if you have the optional
-        volmsec = 0;            //     volume pot on your audio shield
-        
+        float volume = analogRead(HP_VOLUME_POT);
+        volume = volume / 1023.0 * 0.5;
+        sgtl5000_1.volume(volume); // <-- uncomment if you have the optional
+                  //     volume pot on your audio shield
 
-		//TODO: base inputs entirely on encoder_input.h and remove all references to it in main
-		
-        // int param_selector_new = encoder_2.read() / 4;
-        // if (param_selector_new != encoder_2_prev)
-        // {
-        //     effects_chain[selected_effect_index]->next_param(param_selector_new - encoder_2_prev);
-        //     encoder_2_prev = param_selector_new;
-        // }
+        float mix = analogRead(MASTER_POT) / 1023;
+        dry_wet_mixer.gain(0, mix);
+        dry_wet_mixer.gain(1, 1-mix);
 
-        // int value_selector_new = encoder_3.read() / 4;
-        // if (value_selector_new != encoder_3_prev)
-        // {
-        //     effects_chain[selected_effect_index]->change_param(value_selector_new - encoder_3_prev);
-        //     encoder_3_prev = value_selector_new;
-        // }
 
-        // if (tuner.available())
-        // {
-        //     displayText("Freq: " + String(tuner.read()) + " Probability: " + String(String(tuner.probability())));
-        // }
-
-        // Serial.print("all=");
-        // Serial.print(AudioProcessorUsage());
-        // Serial.print(",");
-        // Serial.print(AudioProcessorUsageMax());
-        // Serial.print("    ");
-        // Serial.print("Memory: ");
-        // Serial.print(AudioMemoryUsage());
-        // Serial.print(",");
-        // Serial.print(AudioMemoryUsageMax());
-        // Serial.print("    ");
-        // Serial.println();
-
-		write_to_shift_register(led_state++);
+		led_toggle(LED_STATUS);
+        led_set(LED_BYPASS, !digitalRead(SW_BYPASS));
     }
+
     button_1.tick();
     button_2.tick();
     button_3.tick();
