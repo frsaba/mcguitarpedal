@@ -312,7 +312,7 @@ void apply_param_values_to_knobs(){
 			lv_obj_t * param_btn = lv_obj_get_child_by_type(params_lists[effect_index], param_index, &lv_list_button_class);
 			Param* param = (Param*)param_btn->user_data;
 			update_value_label(param_btn, param->current_value, param->unit.begin());
-			update_arc(param_btn, param->current_value);
+			update_arc(param_btn, param->get_as_percentage());
 		}
 	}
 

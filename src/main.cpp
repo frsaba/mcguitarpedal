@@ -1,18 +1,8 @@
 #include <Arduino.h>
-
-/*
- * A simple hardware test which receives audio from the audio shield
- * Line-In pins and send it to the Line-Out pins and headphone jack.
- *
- * This example code is in the public domain.
- */
 #include <Encoder.h>
 #include <Audio.h>
-#include <Wire.h>
 #include "SPI.h"
 #include <TFT_eSPI.h> 
-#include <SD.h>
-#include <SerialFlash.h>
 #include "OneButton.h"
 
 #include <effects/delay.cpp>
@@ -24,6 +14,7 @@
 #define TFT_RGB_ORDER TFT_BGR
 #include <presets/presets.h>
 #include "interface/led_driver.h"
+#include <interface/button_decoder.h>
 
 #define MASTER_POT A1
 #define HP_VOLUME_POT A2
@@ -92,7 +83,7 @@ OneButton button_2(25, true);
 Encoder encoder_2(29, 28);
 
 OneButton button_3(30, true);
-Encoder encoder_3(31, 32);
+Encoder encoder_3(32, 31);
 
 
 extern TFT_eSPI tft;
@@ -106,8 +97,9 @@ extern preset_bank_t preset_bank;
 
 void setup()
 {
-	
+    analogWrite(BACKLIGHT_PWM, 0); //Initalize display pwm early to avoid flicker
     Serial.begin( 115200 );
+    setup_leds(); // TODO: blink all leds on startup
     // Audio connections require memory to work.  For more
     // detailed information, see the MemoryAndCpuUsage example
     AudioMemory(1200);
@@ -145,7 +137,7 @@ void setup()
 
     pinMode(BACKLIGHT_PWM, OUTPUT);
     tuner.begin(0.3);
-    while(!Serial && millis() < 3000){};
+    while(!Serial && millis() < 2500){};
 
 	init_display();
 	create_effect_lists(effects_chain, CHAIN_LENGTH);
@@ -163,7 +155,9 @@ void setup()
 
 	displayText("");
 	analogWrite(BACKLIGHT_PWM, 50);
-	setup_leds();
+
+    setup_decoder();
+
 }
 
 void loop()
@@ -190,5 +184,6 @@ void loop()
     button_2.tick();
     button_3.tick();
 	lv_timer_handler();
-    delay(10);
+    delay(50);
+    get_pressed_button();
 }

@@ -21,7 +21,7 @@ void set_scroll_callback(lv_indev_t* indev, void(*callback)(int)){
 void encoder_read(lv_indev_t * indev, lv_indev_data_t*data){
 	input_device_data* idd = (input_device_data*)lv_indev_get_user_data(indev);
 	//Divide by 4 as there are 4 pulses sent for every encoder step
-	int encoder_value = idd->encoder->read() / 4;
+	int encoder_value = (idd->encoder->read() + 2) / 4;
 	
 	data->enc_diff = encoder_value - idd->prev_encoder_value;
 
