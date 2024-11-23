@@ -178,6 +178,10 @@ void loop()
 
 		led_toggle(LED_STATUS);
         led_set(LED_BYPASS, !digitalRead(SW_BYPASS));
+
+        #ifdef LOG_RAM_USAGE
+            Serial.printf("CPU: %f, %f\nMemory: %d, %d\n", AudioProcessorUsage(), AudioProcessorUsageMax(), AudioMemoryUsage(), AudioMemoryUsageMax());
+        #endif
     }
 
     button_1.tick();
