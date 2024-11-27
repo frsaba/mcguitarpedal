@@ -10,7 +10,7 @@ void setup_leds()
 	pinMode(LED_SHIFT_CLOCK, OUTPUT);
 	pinMode(LED_STORE_CLOCK, OUTPUT);
 
-	analogWrite(LED_PWM, 250);
+	// analogWrite(LED_PWM, 250);
 }
 
 void write_to_shift_register(uint8_t data)

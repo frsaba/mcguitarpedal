@@ -21,6 +21,7 @@
 #define EXP A3
 #define BACKLIGHT_PWM 37
 #define SW_BYPASS 0
+#define PWM_FREQ 100000
 
 #define CHAIN_LENGTH 4
 Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
@@ -32,13 +33,13 @@ Effect *reverb_effect = effects_chain[3];
 int selected_effect_index = 0;
 // GUItool: begin automatically generated code
 AudioInputI2S audio_input;       // xy=334.1037826538086,172.99997901916504
-AudioMixer4 dry_wet_mixer;       // xy=681.1037902832031,179
+AudioMixer4 final_mixer;       // xy=681.1037902832031,179
 AudioAnalyzeNoteFrequency tuner; // xy=1014.1037216186523,270.00000953674316
 AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
 
 // Create connections manually
 AudioConnection patchCord1(audio_input, 0, chorus_effect->input_amp, 0);
-AudioConnection patchCord24(audio_input, 0, dry_wet_mixer, 1);
+AudioConnection patchCord24(audio_input, 0, final_mixer, 1);
 
 AudioConnection patchCord17(chorus_effect->input_amp, 0, chorus_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
 AudioConnection patchCord18(chorus_effect->input_amp, 0, *chorus_effect->chain_start, 0);  // Wet in
@@ -61,12 +62,12 @@ AudioConnection patchCord6(reverb_effect->input_amp, 0, reverb_effect->dry_wet_m
 AudioConnection patchCord7(reverb_effect->input_amp, 0, *reverb_effect->chain_start, 0);  // Wet in
 AudioConnection patchCord8(*reverb_effect->chain_end, 0, reverb_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
 
-AudioConnection patchCord9(reverb_effect->dry_wet_mixer, 0, dry_wet_mixer, 1); // Final mix to main dry/wet mixer
+AudioConnection patchCord9(reverb_effect->dry_wet_mixer, 0, final_mixer, 0); // Final mix to main dry/wet mixer
 
 // Final output connections
-AudioConnection patchCord10(dry_wet_mixer, 0, audio_output, 0);
-AudioConnection patchCord11(dry_wet_mixer, 0, audio_output, 1);
-AudioConnection patchCord12(dry_wet_mixer, tuner);
+AudioConnection patchCord10(final_mixer, 0, audio_output, 0);
+AudioConnection patchCord11(final_mixer, 0, audio_output, 1);
+AudioConnection patchCord12(final_mixer, tuner);
 
 AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 // GUItool: end automatically generated code
@@ -97,16 +98,19 @@ extern preset_bank_t preset_bank;
 
 void setup()
 {
-    analogWrite(BACKLIGHT_PWM, 0); //Initalize display pwm early to avoid flicker
+    analogWriteFrequency(BACKLIGHT_PWM, PWM_FREQ);
+    analogWriteFrequency(LED_PWM, PWM_FREQ);
+
+    // analogWrite(BACKLIGHT_PWM, 0); //Initalize display pwm early to avoid flicker
     Serial.begin( 115200 );
-    setup_leds(); // TODO: blink all leds on startup
+    // setup_leds(); // TODO: blink all leds on startup
     // Audio connections require memory to work.  For more
     // detailed information, see the MemoryAndCpuUsage example
     AudioMemory(1200);
 
 	//TODO: toggle dry/wet for entire chain
-    dry_wet_mixer.gain(0, 0);
-    dry_wet_mixer.gain(1, 1);
+    final_mixer.gain(0, 0);
+    final_mixer.gain(1, 1);
 
 
     // //connect input to the start of the effects chain
@@ -154,14 +158,15 @@ void setup()
 	apply_param_values_to_knobs();
 
 	displayText("");
-	analogWrite(BACKLIGHT_PWM, 50);
+	digitalWrite(BACKLIGHT_PWM, 1);
 
-    setup_decoder();
+    // setup_decoder();
 
 }
 
 void loop()
 {
+    static bool blink_state = 0;
     if (volmsec > 350)
     {
         volmsec = 0;  
@@ -171,17 +176,21 @@ void loop()
         sgtl5000_1.volume(volume); // <-- uncomment if you have the optional
                   //     volume pot on your audio shield
 
-        float mix = analogRead(MASTER_POT) / 1023;
-        dry_wet_mixer.gain(0, mix);
-        dry_wet_mixer.gain(1, 1-mix);
+        float mix = analogRead(MASTER_POT) / 1023.0;
+        final_mixer.gain(0, mix);
+        final_mixer.gain(1, 1-mix);
+        // Serial.println(mix);
 
 
-		led_toggle(LED_STATUS);
-        led_set(LED_BYPASS, !digitalRead(SW_BYPASS));
+		// led_toggle(LED_STATUS);
+        // led_set(LED_BYPASS, !digitalRead(SW_BYPASS));
 
         #ifdef LOG_RAM_USAGE
             Serial.printf("CPU: %f, %f\nMemory: %d, %d\n", AudioProcessorUsage(), AudioProcessorUsageMax(), AudioMemoryUsage(), AudioMemoryUsageMax());
         #endif
+
+        blink_state = !blink_state;
+        digitalWrite(LED_BUILTIN, blink_state);
     }
 
     button_1.tick();
