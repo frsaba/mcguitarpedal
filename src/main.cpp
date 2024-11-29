@@ -77,8 +77,8 @@ AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 const int myInput = AUDIO_INPUT_LINEIN;
 // const int myInput = AUDIO_INPUT_MIC;
 
-OneButton button_1(3, true);
-Encoder encoder_1(4, 5);
+// OneButton button_1(3, true);
+// Encoder encoder_1(4, 5);
 
 OneButton button_2(25, true);
 Encoder encoder_2(29, 28);
@@ -143,6 +143,9 @@ void setup()
     tuner.begin(0.3);
     while(!Serial && millis() < 2500){};
 
+	if(Serial)
+		Serial.printf("Serial connected in %d\n", millis());
+
 	init_display();
 	create_effect_lists(effects_chain, CHAIN_LENGTH);
 
@@ -159,8 +162,8 @@ void setup()
 
 	displayText("");
 	digitalWrite(BACKLIGHT_PWM, 1);
-
-    // setup_decoder();
+	
+	setup_decoder();
 
 }
 
@@ -193,10 +196,11 @@ void loop()
         digitalWrite(LED_BUILTIN, blink_state);
     }
 
-    button_1.tick();
+    // button_1.tick();
     button_2.tick();
     button_3.tick();
+
 	lv_timer_handler();
     delay(50);
-    get_pressed_button();
+    decoder_tick();
 }

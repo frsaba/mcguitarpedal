@@ -3,12 +3,12 @@
 #include <OneButton.h>
 #include <Encoder.h>
 
-extern lv_indev_t* preset_selector;
+// extern lv_indev_t* preset_selector;
 extern lv_indev_t* param_selector;
 extern lv_indev_t* value_selector;
 
-extern OneButton button_1;
-extern Encoder encoder_1;
+// extern OneButton button_1;
+// extern Encoder encoder_1;
 extern OneButton button_2;
 extern Encoder encoder_2;
 extern OneButton button_3;

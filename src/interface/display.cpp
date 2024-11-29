@@ -118,7 +118,7 @@ FLASHMEM void init_display()
 
     lv_indev_set_group(param_selector, effects_group);
     lv_indev_set_group(value_selector, params_group);
-	lv_indev_set_group(preset_selector, presets_group);
+	// lv_indev_set_group(preset_selector, presets_group);
 
 	set_scroll_callback(value_selector, param_encoder_turned);
 

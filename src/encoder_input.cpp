@@ -1,7 +1,7 @@
 #include <encoder_input.h>
 
 
-lv_indev_t* preset_selector;
+// lv_indev_t* preset_selector;
 lv_indev_t* param_selector;
 lv_indev_t* value_selector;
 
@@ -36,10 +36,10 @@ void encoder_read(lv_indev_t * indev, lv_indev_data_t*data){
 }
 
 void setup_input_devices(){
-	preset_selector = lv_indev_create();
-	lv_indev_set_user_data(preset_selector, new input_device_data{&encoder_1, &button_1});
-	lv_indev_set_type(preset_selector, LV_INDEV_TYPE_ENCODER);
-	lv_indev_set_read_cb(preset_selector, encoder_read);
+	// preset_selector = lv_indev_create();
+	// lv_indev_set_user_data(preset_selector, new input_device_data{&encoder_1, &button_1});
+	// lv_indev_set_type(preset_selector, LV_INDEV_TYPE_ENCODER);
+	// lv_indev_set_read_cb(preset_selector, encoder_read);
 
 	param_selector = lv_indev_create();
 	lv_indev_set_user_data(param_selector, new input_device_data{&encoder_2, &button_2});
