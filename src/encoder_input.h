@@ -3,7 +3,14 @@
 #include <OneButton.h>
 #include <Encoder.h>
 
-// extern lv_indev_t* preset_selector;
+typedef struct {
+	Encoder* encoder;
+	OneButton* button;
+	int prev_encoder_value;
+	void(*encoder_scroll_cb)(int); //TODO: ability to register multiple event functions
+} input_device_data;
+
+extern lv_indev_t* preset_selector;
 extern lv_indev_t* param_selector;
 extern lv_indev_t* value_selector;
 

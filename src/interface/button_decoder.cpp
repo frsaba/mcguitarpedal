@@ -19,18 +19,6 @@ void setup_decoder()
     pinMode(BUTTON_MTX_C, INPUT);
     pinMode(BUTTON_MTX_GS, INPUT);
 
-	decoder_attach_click(BUTTON_TUNER, []() { 
-		Serial.println(">---- Previous preset"); 
-	});
-	
-	decoder_attach_long_press(BUTTON_TUNER, []() { 
-		Serial.println(">---- Tuner mode"); 
-	});
-
-		decoder_attach_click(BUTTON_BANK, []() { 
-		Serial.println(">---- Next preset"); 
-	});
-
 	LV_LOG_USER("Decoder setup finished");
 }
 

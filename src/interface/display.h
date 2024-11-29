@@ -4,6 +4,7 @@
 #include <lvgl.h>
 #include "encoder_input.h"
 #include <presets/presets.h>
+#include <interface/input_events.h>
 
 // #define TFT_RST 34
 // #define TFT_DC 9

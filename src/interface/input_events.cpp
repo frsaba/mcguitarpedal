@@ -1,5 +1,61 @@
 #include <interface/input_events.h>
 
+void preset_buttons_read(lv_indev_t * indev, lv_indev_data_t*data)
+{
+	//Not implemented because decoder button events are used instead
+}
+
+void setup_input_devices(){
+	preset_selector = lv_indev_create();
+	// lv_indev_set_user_data(preset_selector, new input_device_data{&encoder_1, &button_1});
+	// lv_indev_set_type(preset_selector, LV_INDEV_TYPE_ENCODER);
+	// lv_indev_set_read_cb(preset_selector, preset_buttons_read);
+
+	param_selector = lv_indev_create();
+	lv_indev_set_user_data(param_selector, new input_device_data{&encoder_2, &button_2});
+	lv_indev_set_type(param_selector, LV_INDEV_TYPE_ENCODER);
+	lv_indev_set_read_cb(param_selector, encoder_read);
+
+	value_selector = lv_indev_create();
+	lv_indev_set_user_data(value_selector, new input_device_data{&encoder_3, &button_3});
+	lv_indev_set_type(value_selector, LV_INDEV_TYPE_ENCODER);
+	lv_indev_set_read_cb(value_selector, encoder_read);
+
+	setup_button_events();
+}
+
+void setup_button_events()
+{
+	decoder_attach_click(BUTTON_TUNER, []() { 
+		previous_preset();
+	});
+	
+	decoder_attach_long_press(BUTTON_TUNER, []() { 
+		Serial.println(">---- Tuner mode"); 
+	});
+
+	decoder_attach_click(BUTTON_BANK, next_preset);
+}
+
+//Select previous preset and load it
+void previous_preset()
+{
+	lv_group_focus_prev(presets_group);
+	lv_obj_t * focused = lv_group_get_focused(presets_group);
+    lv_obj_send_event(focused, LV_EVENT_SHORT_CLICKED, NULL);
+	Serial.println(">---- Previous preset"); 
+}
+
+void next_preset()
+{
+	lv_group_focus_next(presets_group);
+	lv_group_send_data(presets_group, LV_KEY_ENTER);
+
+	lv_obj_t * focused = lv_group_get_focused(presets_group);
+    lv_obj_send_event(focused, LV_EVENT_SHORT_CLICKED, NULL);
+	Serial.println(">---- Next preset"); 
+}
+
 //Called when the param selection button is pressed. Toggles value set mode
 void param_selected_event(lv_event_t * e)
 {
@@ -101,6 +157,7 @@ void effect_focused_event(lv_event_t * e)
 	lv_obj_remove_state(*params_group->obj_focus, LV_STATE_PRESSED);
 }
 
+//Load preset that was clicked
 void preset_pressed(lv_event_t * e)
 {
 	lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);

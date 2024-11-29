@@ -1,5 +1,5 @@
 #include <interface/display.h>
-#include <interface/input_events.h>
+
 
 lv_obj_t *label;
 preset_bank_t preset_bank;
@@ -118,7 +118,7 @@ FLASHMEM void init_display()
 
     lv_indev_set_group(param_selector, effects_group);
     lv_indev_set_group(value_selector, params_group);
-	// lv_indev_set_group(preset_selector, presets_group);
+	lv_indev_set_group(preset_selector, presets_group);
 
 	set_scroll_callback(value_selector, param_encoder_turned);
 
@@ -258,6 +258,9 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 
 		lv_obj_set_user_data(preset_btn, &preset_bank.presets[i]);
 	}
+
+	lv_group_focus_obj(lv_obj_get_child(presets_list, 1));
+
 }
 
 
