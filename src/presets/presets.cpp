@@ -132,7 +132,7 @@ void load_presets(preset_bank_t* bank){
 	DeserializationError error = deserializeJson(doc, eepromStream);
 
 	if (error) {
-		displayText("deserializeJson() failed: ");
+		statusbar_log("deserializeJson() failed: ");
 		Serial.println(error.c_str());
 		//TODO: what should we do if deserialization fails?
 		return;
@@ -142,7 +142,7 @@ void load_presets(preset_bank_t* bank){
 	
 
 	if(bank == nullptr){
-		displayText("Preset bank is null");
+		statusbar_log("Preset bank is null");
 		return;
 	}
 

@@ -101,6 +101,9 @@ void setup()
     analogWriteFrequency(BACKLIGHT_PWM, PWM_FREQ);
     analogWriteFrequency(LED_PWM, PWM_FREQ);
 
+    setup_leds();
+    
+
     // analogWrite(BACKLIGHT_PWM, 0); //Initalize display pwm early to avoid flicker
     Serial.begin( 115200 );
     // setup_leds(); // TODO: blink all leds on startup
@@ -147,6 +150,7 @@ void setup()
 		Serial.printf("Serial connected in %d\n", millis());
 
 	init_display();
+    create_status_bar();
 	create_effect_lists(effects_chain, CHAIN_LENGTH);
 
     //Initialize preset bank
@@ -160,7 +164,7 @@ void setup()
 	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
 	apply_param_values_to_knobs();
 
-	displayText("");
+	statusbar_log("");
 	digitalWrite(BACKLIGHT_PWM, 1);
 	
 	setup_decoder();
@@ -172,6 +176,7 @@ void loop()
     static bool blink_state = 0;
     if (volmsec > 350)
     {
+        led_toggle(255);
         volmsec = 0;  
 
         float volume = analogRead(HP_VOLUME_POT);

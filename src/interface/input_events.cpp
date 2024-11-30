@@ -8,8 +8,8 @@ void preset_buttons_read(lv_indev_t * indev, lv_indev_data_t*data)
 void setup_input_devices(){
 	preset_selector = lv_indev_create();
 	// lv_indev_set_user_data(preset_selector, new input_device_data{&encoder_1, &button_1});
-	// lv_indev_set_type(preset_selector, LV_INDEV_TYPE_ENCODER);
-	// lv_indev_set_read_cb(preset_selector, preset_buttons_read);
+	lv_indev_set_type(preset_selector, LV_INDEV_TYPE_ENCODER);
+	lv_indev_set_read_cb(preset_selector, preset_buttons_read);
 
 	param_selector = lv_indev_create();
 	lv_indev_set_user_data(param_selector, new input_device_data{&encoder_2, &button_2});
@@ -177,7 +177,7 @@ void preset_pressed(lv_event_t * e)
 	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
 	apply_param_values_to_knobs();
 
-	displayText("Loaded preset " + String(preset_bank.active_preset));
+	statusbar_log("Loaded preset " + String(preset_bank.active_preset));
 
 }
 
@@ -194,5 +194,5 @@ void preset_long_press(lv_event_t * e)
 	serialize_presets(preset_bank, true);
 
 	// LV_LOG_USER("Preset button long pressed");
-	displayText("Saved preset " + String(preset_bank.active_preset));
+	statusbar_log("Saved preset " + String(preset_bank.active_preset));
 }

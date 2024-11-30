@@ -41,14 +41,14 @@ float Effect::set_bypass(bool bypass)
 	this->bypass = bypass;
 	float value = bypass ? 0 : params[0].current_value;
 	update_dry_wet(value);
-	displayText("Set wet to " + String(bypass ? 0 : value) + "%");
+	statusbar_log("Set wet to " + String(bypass ? 0 : value) + "%");
 	return value;
 }
 
 void Effect::next_param(int change = 1)
 {
 	selected_param = (selected_param + change + num_params) % num_params;
-	displayText("Selected parameter: " + String(params[selected_param].name));
+	statusbar_log("Selected parameter: " + String(params[selected_param].name));
 }
 
 void Effect::increment()
@@ -64,6 +64,6 @@ void Effect::change_param(int steps)
 {
 	Param p = params[selected_param];
 	p.change(steps);
-	displayText(String(p.name) + ": " + String(p.current_value));
+	statusbar_log(String(p.name) + ": " + String(p.current_value));
 	params[selected_param] = p;
 }

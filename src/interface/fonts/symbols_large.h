@@ -1,0 +1,4 @@
+#define LV_LVGL_H_INCLUDE_SIMPLE
+
+#define SYMBOL_HEADPHONES  "\xEF\x80\xA5"
+#define SYMBOL_SLIDERS "\xEF\x87\x9E"
