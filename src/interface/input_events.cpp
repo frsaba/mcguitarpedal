@@ -158,7 +158,7 @@ void effect_focused_event(lv_event_t * e)
 }
 
 //Load preset that was clicked
-void preset_pressed(lv_event_t * e)
+void load_preset(lv_event_t * e)
 {
 	lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
 	int preset_index = lv_obj_get_index_by_type(target, &lv_list_button_class);
@@ -178,9 +178,10 @@ void preset_pressed(lv_event_t * e)
 	apply_param_values_to_knobs();
 
 	statusbar_log("Loaded preset " + String(preset_bank.active_preset));
+	led_set_preset(preset_index);
 }
 
-void preset_long_press(lv_event_t * e)
+void save_preset(lv_event_t * e)
 {
 	lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
     int preset_index = lv_obj_get_index_by_type(target, &lv_list_button_class);

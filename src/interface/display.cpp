@@ -249,8 +249,8 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 		lv_group_add_obj(presets_group, preset_btn);
 		lv_obj_set_width(preset_btn, lv_pct(25));
 
-		lv_obj_add_event_cb(preset_btn, preset_pressed, LV_EVENT_SHORT_CLICKED, NULL);
-		lv_obj_add_event_cb(preset_btn, preset_long_press, LV_EVENT_LONG_PRESSED, NULL); 
+		lv_obj_add_event_cb(preset_btn, load_preset, LV_EVENT_SHORT_CLICKED, NULL);
+		lv_obj_add_event_cb(preset_btn, save_preset, LV_EVENT_LONG_PRESSED, NULL); 
 
 		lv_obj_set_user_data(preset_btn, &preset_bank.presets[i]);
 	}

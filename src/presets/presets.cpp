@@ -125,7 +125,7 @@ size_t serialize_presets(const preset_bank_t& bank, bool write_to_eeprom){
 	return len;
 }
 
-void load_presets(preset_bank_t* bank){
+void load_presets_from_eeprom(preset_bank_t* bank){
 	EepromStream eepromStream(0, 4096);
 	JsonDocument doc;
 

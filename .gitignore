@@ -8,3 +8,5 @@ pcb/mcguitarpedal/mcguitarpedal-backups/*
 pcb/mcguitarpedal/~mcguitarpedal.kicad_sch.lck
 pcb/mcguitarpedal/~mcguitarpedal.kicad_pcb.lck
 mechanical/frontplate/case.20241117-191052.FCBak
+*.FCBak
+symbols.txt

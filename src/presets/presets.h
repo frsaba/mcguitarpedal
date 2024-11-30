@@ -40,7 +40,7 @@ void save_preset(Effect** effect_chain, size_t num_effects);
 
 FLASHMEM size_t serialize_presets(const preset_bank_t& presets, bool write_to_eeprom = false);
 
-FLASHMEM void load_presets(preset_bank_t* bank);
+FLASHMEM void load_presets_from_eeprom(preset_bank_t* bank);
 void apply_preset_values(effect_data_t effect_values[], Effect** effect_chain,  size_t num_effects);
 
 preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]);

@@ -4,6 +4,7 @@
 #include "button_decoder.h"
 #include <encoder_input.h>
 #include "statusbar.h"
+#include "led_driver.h"
 
 extern Effect *effects_chain[];
 
@@ -30,5 +31,5 @@ void param_selected_event(lv_event_t * e);
 void param_encoder_turned(int enc_diff);
 void bypass_event(lv_event_t * e);
 void effect_focused_event(lv_event_t * e);
-void preset_pressed(lv_event_t * e);
-void preset_long_press(lv_event_t * e);
+void load_preset(lv_event_t * e);
+void save_preset(lv_event_t * e);

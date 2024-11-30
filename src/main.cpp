@@ -75,12 +75,7 @@ AudioConnection patchCord12(final_mixer, tuner);
 AudioConnection patchCordRMS(audio_input, rms_meter);
 
 AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
-// GUItool: end automatically generated code
 
-// TODO: feedback delay?
-
-const int myInput = AUDIO_INPUT_LINEIN;
-// const int myInput = AUDIO_INPUT_MIC;
 
 // OneButton button_1(3, true);
 // Encoder encoder_1(4, 5);
@@ -137,7 +132,7 @@ void setup()
     // patchCords.push_back(*connectionLast);
 
     sgtl5000_1.lineInLevel(0);
-    sgtl5000_1.inputSelect(myInput);
+    sgtl5000_1.inputSelect(AUDIO_INPUT_LINEIN);
     sgtl5000_1.adcHighPassFilterDisable();
     sgtl5000_1.volume(0.5);
     sgtl5000_1.enable();
@@ -164,15 +159,19 @@ void setup()
     //Load active preset
     //TODO: save active preset when it is selected, not just when overwritten
 	LV_LOG_USER("Loading saved presets...");
-	load_presets(&preset_bank);
+	load_presets_from_eeprom(&preset_bank);
 	LV_LOG_USER("Applying active preset...");
 	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
 	apply_param_values_to_knobs();
+
 
 	statusbar_log("");
 	digitalWrite(BACKLIGHT_PWM, 1);
 	
 	setup_decoder();
+
+
+    led_set(255, false);
 
 }
 
@@ -184,7 +183,7 @@ void loop()
 
     if (volmsec > 350)
     {
-        led_toggle(255 - LED_STATUS);
+        // led_toggle(255 - LED_STATUS);
         volmsec = 0;  
 
 
@@ -230,7 +229,6 @@ void loop()
     button_3.tick();
 
 	lv_timer_handler();
-    delay(50);
     decoder_tick();
 
     if(rms_meter.available())
@@ -241,4 +239,6 @@ void loop()
         led_set(LED_STATUS, rms > 0.15f);
     }
     else led_set(LED_STATUS, 0);
+
+    delay(50);
 }
