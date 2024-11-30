@@ -18,16 +18,18 @@ void update_preset_number(String preset_name) {
 FLASHMEM void create_status_bar() {
     // Create the status bar container
     status_bar = lv_obj_create(lv_scr_act());
-    lv_obj_set_size(status_bar, lv_pct(100), lv_pct(25)); // Full width
-    lv_obj_align(status_bar, LV_ALIGN_TOP_MID, 0, 3);  // Center the container on the screen
-    lv_obj_set_flex_flow(status_bar, LV_FLEX_FLOW_ROW); // Horizontal layout
-    lv_obj_set_flex_align(status_bar, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_set_size(status_bar, lv_pct(100), LV_SIZE_CONTENT);
+    lv_obj_align(status_bar, LV_ALIGN_TOP_MID, 0, 0);
+    lv_obj_set_flex_flow(status_bar, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(status_bar, LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
 
     // Log message area
     log_label = lv_label_create(status_bar);
     lv_label_set_long_mode(log_label, LV_LABEL_LONG_SCROLL_CIRCULAR); // Scrolling log message
-    lv_obj_set_width(log_label, lv_pct(50));
+    // lv_obj_set_width(log_label, lv_pct(50));
+    lv_obj_set_flex_grow(log_label, 1);
+    lv_obj_set_style_pad_all(status_bar, 5, LV_PART_MAIN);
     lv_label_set_text(log_label, "Ready"); // Initial log message
 
     // Preset number (styled label)
@@ -39,9 +41,14 @@ FLASHMEM void create_status_bar() {
     // Add an outline
     // lv_style_set_outline_width(&preset_label_style, 3);           // Outline thickness
 
-    preset_label = lv_label_create(status_bar);
-    lv_obj_set_width(preset_label, lv_pct(10));
+    lv_obj_t *preset_num_container = lv_obj_create(status_bar);
+    lv_obj_set_size(preset_num_container, LV_SIZE_CONTENT, LV_SIZE_CONTENT); // Container for the Mix arc
+    lv_obj_set_flex_flow(preset_num_container, LV_FLEX_FLOW_ROW);
+
+    preset_label = lv_label_create(preset_num_container);
+    lv_obj_set_width(preset_num_container, lv_pct(12));
     lv_obj_add_style(preset_label, &preset_label_style, LV_PART_MAIN); 
+    lv_obj_set_flex_align(preset_num_container, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
     // lv_obj_add_style(preset_label, &lv_style_plain_color, 0);
 	lv_style_set_text_font(&preset_label_style, &symbols_large);

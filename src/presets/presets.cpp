@@ -2,6 +2,18 @@
 #include <StreamUtils.h>
 #include <ArduinoJson.h>
 
+preset_bank_t preset_bank;
+
+size_t preset_get_active_index()
+{
+	return preset_bank.active_preset;
+}
+
+preset_data_t preset_get_active()
+{
+	return preset_bank.presets[preset_bank.active_preset];
+}
+
 void save_preset(Effect** effect_chain, size_t num_effects){
 	EepromStream eepromStream(0, 2048);
 

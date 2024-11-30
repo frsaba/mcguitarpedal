@@ -36,6 +36,11 @@ typedef struct{
 // (with the friend declaration)
 #include <effects/effect.h>
 
+extern preset_bank_t preset_bank;
+
+size_t preset_get_active_index();
+preset_data_t preset_get_active();
+
 void save_preset(Effect** effect_chain, size_t num_effects);
 
 FLASHMEM size_t serialize_presets(const preset_bank_t& presets, bool write_to_eeprom = false);

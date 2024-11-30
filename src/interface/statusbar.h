@@ -14,4 +14,4 @@ void create_status_bar();
 
 void statusbar_set_headphone_arc(float new_value);
 void statusbar_set_mix_arc(float new_value);
-void preset_number_display(uint8_t preset_index);
+void statusbar_set_preset_num(uint8_t preset_index);

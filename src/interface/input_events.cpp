@@ -40,20 +40,16 @@ void setup_button_events()
 //Select previous preset and load it
 void previous_preset()
 {
-	lv_group_focus_prev(presets_group);
-	lv_obj_t * focused = lv_group_get_focused(presets_group);
-    lv_obj_send_event(focused, LV_EVENT_SHORT_CLICKED, NULL);
 	Serial.println(">---- Previous preset"); 
+	load_preset((preset_get_active_index() - 1) % NUM_PRESETS);
+	statusbar_set_preset_num(preset_get_active_index());
 }
 
 void next_preset()
 {
-	lv_group_focus_next(presets_group);
-	lv_group_send_data(presets_group, LV_KEY_ENTER);
-
-	lv_obj_t * focused = lv_group_get_focused(presets_group);
-    lv_obj_send_event(focused, LV_EVENT_SHORT_CLICKED, NULL);
 	Serial.println(">---- Next preset"); 
+	load_preset((preset_get_active_index() + 1) % NUM_PRESETS);
+	statusbar_set_preset_num(preset_get_active_index());
 }
 
 //Called when the param selection button is pressed. Toggles value set mode
@@ -158,12 +154,12 @@ void effect_focused_event(lv_event_t * e)
 }
 
 //Load preset that was clicked
-void load_preset(lv_event_t * e)
+void load_preset(size_t preset_index)
 {
-	lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
-	int preset_index = lv_obj_get_index_by_type(target, &lv_list_button_class);
-	if(preset_index < 0){
-		LV_LOG_ERROR("Could not find preset index");
+	// lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	// int preset_index = lv_obj_get_index_by_type(target, &lv_list_button_class);
+	if(preset_index < 0 || preset_index >= NUM_PRESETS){
+		LV_LOG_ERROR("Invalid preset index");
 		return;
 	}
 	// LV_LOG_USER("Preset button pressed");

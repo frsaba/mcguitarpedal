@@ -1,7 +1,6 @@
 #include <interface/display.h>
 
 lv_obj_t *log_label;  // Label for log messages
-preset_bank_t preset_bank;
 
 void statusbar_log(const String &s)
 {
@@ -167,17 +166,20 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 	chain_length = length;
 	    /* Create a parent container */
     lv_obj_t * main_container = lv_obj_create(lv_scr_act());
-    lv_obj_set_size(main_container, lv_pct(100), lv_pct(70));  // Set size of the container
-    lv_obj_align(main_container, LV_ALIGN_BOTTOM_MID, 0, -3);  // Center the container on the screen
-    lv_obj_set_layout(main_container, LV_LAYOUT_FLEX);  // Set the container layout to flex
-    lv_obj_set_flex_flow(main_container, LV_FLEX_FLOW_ROW);  // Set the flex flow to row
-    lv_obj_set_flex_align(main_container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START); // Align items to start
+    lv_obj_set_size(main_container, lv_pct(100), lv_pct(75));
+    lv_obj_align(main_container, LV_ALIGN_BOTTOM_MID, 0, -3);
+    lv_obj_set_layout(main_container, LV_LAYOUT_FLEX);
+	lv_obj_set_style_pad_all(main_container, 5, LV_PART_MAIN);
+    lv_obj_set_flex_flow(main_container, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(main_container, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START);
 
     // Create the first lists we'll add the effects to
     effects_list = lv_list_create(main_container);
-    lv_obj_set_size(effects_list, 160, 200);
+    lv_obj_set_size(effects_list, lv_pct(35), lv_pct(100));
 
     lv_list_add_text(effects_list, "Effects");
+	lv_obj_set_style_pad_all(effects_list, 5, LV_PART_MAIN);
+
 
 	params_lists = new lv_obj_t*[chain_length];
 	for (size_t i = 0; i < chain_length; i++)
@@ -196,7 +198,8 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 		//Set up params list
 		params_lists[i] = lv_list_create(main_container);
 		lv_list_add_text(params_lists[i], "Params");
-		lv_obj_set_size(params_lists[i], 200, 200);  // Set size of the second list to fill the container
+		lv_obj_set_size(params_lists[i], lv_pct(100), lv_pct(100));
+		lv_obj_set_style_pad_all(params_lists[i], 5, LV_PART_MAIN);
 		lv_obj_set_flex_grow(params_lists[i], 1);
 
 		//TODO: maybe blink actively edited parameter?
@@ -232,31 +235,6 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 		lv_obj_add_event_cb(list_button, bypass_event, LV_EVENT_CLICKED, NULL); 			// Encoder click: toggle bypass
 		lv_obj_add_event_cb(list_button, effect_focused_event, LV_EVENT_FOCUSED, NULL); 	//Add navigation with encoders
 	}
-
-
-    /* Create the presets list */
-    presets_list = lv_list_create(lv_scr_act());
-	
-    lv_obj_set_size(presets_list, 470, 50);
-	lv_obj_align(presets_list, LV_ALIGN_BOTTOM_MID, 0, -10);
-
-	lv_obj_set_flex_flow(presets_list, LV_FLEX_FLOW_ROW);
-
-	//TODO: grey out empty presets
-	for (size_t i = 0; i < 4; i++)
-	{
-		lv_obj_t* preset_btn =  lv_list_add_btn(presets_list, LV_SYMBOL_FILE, ("P " + String(i)).begin());
-		lv_group_add_obj(presets_group, preset_btn);
-		lv_obj_set_width(preset_btn, lv_pct(25));
-
-		lv_obj_add_event_cb(preset_btn, load_preset, LV_EVENT_SHORT_CLICKED, NULL);
-		lv_obj_add_event_cb(preset_btn, save_preset, LV_EVENT_LONG_PRESSED, NULL); 
-
-		lv_obj_set_user_data(preset_btn, &preset_bank.presets[i]);
-	}
-	lv_obj_add_flag(presets_list, LV_OBJ_FLAG_IGNORE_LAYOUT); 
-	lv_group_focus_obj(lv_obj_get_child(presets_list, 1));
-
 }
 
 // Helper function for updating the value label of a parameter

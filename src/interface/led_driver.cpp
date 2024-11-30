@@ -41,7 +41,7 @@ void led_set_preset(uint8_t preset_index)
 	uint8_t state = led_state;
 	for (size_t i = 0; i < 4; i++)
 	{
-		if(i == preset_index)
+		if(i <= preset_index)
 		{
 			state |= preset_leds[i];
 		}
@@ -50,6 +50,5 @@ void led_set_preset(uint8_t preset_index)
 			state &= ~preset_leds[i];
 		}
 	}
-	statusbar_log_fmt("%d -> %x", preset_index, state);
 	write_to_shift_register(state);
 }
