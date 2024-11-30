@@ -178,7 +178,6 @@ void preset_pressed(lv_event_t * e)
 	apply_param_values_to_knobs();
 
 	statusbar_log("Loaded preset " + String(preset_bank.active_preset));
-
 }
 
 void preset_long_press(lv_event_t * e)
@@ -194,5 +193,5 @@ void preset_long_press(lv_event_t * e)
 	serialize_presets(preset_bank, true);
 
 	// LV_LOG_USER("Preset button long pressed");
-	statusbar_log("Saved preset " + String(preset_bank.active_preset));
+	statusbar_log_fmt("Saved preset %d", preset_bank.active_preset);
 }

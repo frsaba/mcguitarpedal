@@ -3,6 +3,7 @@
 #include <effects/effect.h>
 #include "button_decoder.h"
 #include <encoder_input.h>
+#include "statusbar.h"
 
 extern Effect *effects_chain[];
 

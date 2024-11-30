@@ -23,6 +23,8 @@
 #define SW_BYPASS 0
 #define PWM_FREQ 100000
 
+#define MAX_VOLUME 0.7
+
 #define CHAIN_LENGTH 4
 Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
 Effect *chorus_effect = effects_chain[0];
@@ -35,6 +37,7 @@ int selected_effect_index = 0;
 AudioInputI2S audio_input;       // xy=334.1037826538086,172.99997901916504
 AudioMixer4 final_mixer;       // xy=681.1037902832031,179
 AudioAnalyzeNoteFrequency tuner; // xy=1014.1037216186523,270.00000953674316
+AudioAnalyzeRMS rms_meter;
 AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
 
 // Create connections manually
@@ -68,6 +71,8 @@ AudioConnection patchCord9(reverb_effect->dry_wet_mixer, 0, final_mixer, 0); // 
 AudioConnection patchCord10(final_mixer, 0, audio_output, 0);
 AudioConnection patchCord11(final_mixer, 0, audio_output, 1);
 AudioConnection patchCord12(final_mixer, tuner);
+
+AudioConnection patchCordRMS(audio_input, rms_meter);
 
 AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 // GUItool: end automatically generated code
@@ -131,11 +136,11 @@ void setup()
     // AudioConnection *connectionLast = new AudioConnection(*effects_chain[CHAIN_LENGTH - 1]->chain_end, 0, dry_wet_mixer, 1);
     // patchCords.push_back(*connectionLast);
 
-    sgtl5000_1.enable();
+    sgtl5000_1.lineInLevel(0);
     sgtl5000_1.inputSelect(myInput);
     sgtl5000_1.adcHighPassFilterDisable();
     sgtl5000_1.volume(0.5);
-    sgtl5000_1.lineInLevel(0);
+    sgtl5000_1.enable();
 
     pinMode(MASTER_POT, INPUT);
     pinMode(HP_VOLUME_POT, INPUT);
@@ -174,22 +179,16 @@ void setup()
 void loop()
 {
     static bool blink_state = 0;
+    static float prev_volume = 0.0;
+    static float prev_mix = 0.0;
+
     if (volmsec > 350)
     {
-        led_toggle(255);
+        led_toggle(255 - LED_STATUS);
         volmsec = 0;  
 
-        float volume = analogRead(HP_VOLUME_POT);
-        volume = volume / 1023.0 * 0.5;
-        sgtl5000_1.volume(volume); // <-- uncomment if you have the optional
-                  //     volume pot on your audio shield
 
-        float mix = analogRead(MASTER_POT) / 1023.0;
-        final_mixer.gain(0, mix);
-        final_mixer.gain(1, 1-mix);
         // Serial.println(mix);
-
-
 		// led_toggle(LED_STATUS);
         // led_set(LED_BYPASS, !digitalRead(SW_BYPASS));
 
@@ -201,6 +200,31 @@ void loop()
         digitalWrite(LED_BUILTIN, blink_state);
     }
 
+    // statusbar_log_fmt("Mix %.2f HP: %.2f", 1- mix, volume);
+
+    float volume = analogRead(HP_VOLUME_POT);
+    volume = volume / 1023.0;
+
+    if(fabs(volume - prev_volume) > 0.05)
+    {
+        sgtl5000_1.volume(volume * MAX_VOLUME);
+        statusbar_set_headphone_arc(volume);
+
+        prev_volume = volume;
+    }
+
+
+    float mix = analogRead(MASTER_POT) / 1023.0;
+    if(fabs(mix - prev_mix) > 0.05)
+    {
+        final_mixer.gain(0, 1 - mix);
+        final_mixer.gain(1, mix);
+
+        statusbar_set_mix_arc(1 - mix);
+
+        prev_mix = mix;
+    }
+
     // button_1.tick();
     button_2.tick();
     button_3.tick();
@@ -208,4 +232,13 @@ void loop()
 	lv_timer_handler();
     delay(50);
     decoder_tick();
+
+    if(rms_meter.available())
+    {
+        float rms = rms_meter.read();
+        // statusbar_log_fmt("RMS: %.3f", rms_meter.read());
+
+        led_set(LED_STATUS, rms > 0.15f);
+    }
+    else led_set(LED_STATUS, 0);
 }

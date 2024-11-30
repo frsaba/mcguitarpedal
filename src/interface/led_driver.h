@@ -25,4 +25,4 @@ extern uint8_t led_state;
 void setup_leds();
 void write_to_shift_register(uint8_t data);
 void led_toggle(uint8_t led);
-void led_set(uint8_t led, bool on);
+void led_set(uint8_t led, bool on = true);
