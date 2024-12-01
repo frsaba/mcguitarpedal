@@ -15,12 +15,12 @@ void tuner_tick()
         return;
     }
 
-    float freq_hz = tuner.read();
-    float semitones_from_a4 = 12 * log2(freq_hz/REFERENCE_FREQ) ;
-    int nearest_note = roundf(semitones_from_a4);
+		float freq_hz = tuner.read();
+		float semitones_from_a4 = 12 * log2(freq_hz/REFERENCE_FREQ) ;
+		int nearest_note = roundf(semitones_from_a4);
 
-    int note = (nearest_note + MIDI_NOTE_OFFSET) % 12;
-    int cents = roundf((semitones_from_a4 - nearest_note) * 100);
+		int note = (nearest_note + MIDI_NOTE_OFFSET) % 12;
+		int cents = roundf((semitones_from_a4 - nearest_note) * 100);
 
     statusbar_log_fmt("%s: %d", note_names[note], cents);
 

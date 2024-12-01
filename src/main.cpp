@@ -9,6 +9,7 @@
 #include <effects/reverb.cpp>
 #include <effects/tremolo.cpp>
 #include <effects/chorus.cpp>
+#include <effects/flanger.cpp>
 #include <interface/display.h>
 #include <lvgl.h>
 #define TFT_RGB_ORDER TFT_BGR
@@ -33,6 +34,9 @@ Effect *tremolo_effect = effects_chain[1];
 Effect *delay_effect = effects_chain[2];
 Effect *reverb_effect = effects_chain[3];
 
+#define DRY_CHANNEL 0
+#define WET_CHANNEL 1
+
 int selected_effect_index = 0;
 // GUItool: begin automatically generated code
 AudioInputI2S audio_input;       // xy=334.1037826538086,172.99997901916504
@@ -41,39 +45,34 @@ AudioAnalyzeNoteFrequency tuner; // xy=1014.1037216186523,270.00000953674316
 AudioAnalyzeRMS rms_meter;
 AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
 
-// Create connections manually
-AudioConnection patchCord1(audio_input, 0, chorus_effect->input_amp, 0);
-AudioConnection patchCord24(audio_input, 0, final_mixer, 1);
+std::vector<AudioConnection*> patch_cords(6 + CHAIN_LENGTH * 4);
 
-AudioConnection patchCord17(chorus_effect->input_amp, 0, chorus_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
-AudioConnection patchCord18(chorus_effect->input_amp, 0, *chorus_effect->chain_start, 0);  // Wet in
-AudioConnection patchCord19(*chorus_effect->chain_end, 0, chorus_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
+void create_audio_connections() {
+    // Connect input to the start of the effects chain
+    patch_cords.push_back(new AudioConnection(audio_input, effects_chain[0]->input_amp));
+    patch_cords.push_back(new AudioConnection(audio_input, 0, final_mixer, DRY_CHANNEL));
 
-AudioConnection patchCord20(chorus_effect->dry_wet_mixer, 0, tremolo_effect->input_amp, 0);
+    // Connect effects together
+    for (size_t i = 0; i < CHAIN_LENGTH; i++) {
+        patch_cords.push_back(new AudioConnection(effects_chain[i]->input_amp, 0, effects_chain[i]->dry_wet_mixer, DRY_CHANNEL)); // Dry to dry_wet_mixer
+        patch_cords.push_back(new AudioConnection(effects_chain[i]->input_amp, *effects_chain[i]->chain_start));  // Wet in
+        patch_cords.push_back(new AudioConnection(*effects_chain[i]->chain_end, 0, effects_chain[i]->dry_wet_mixer, WET_CHANNEL)); // Wet out to dry_wet_mixer
 
-AudioConnection patchCord16(tremolo_effect->input_amp, 0, tremolo_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
-AudioConnection patchCord13(tremolo_effect->input_amp, 0, *tremolo_effect->chain_start, 0);  // Wet in
-AudioConnection patchCord14(*tremolo_effect->chain_end, 0, tremolo_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
+        if (i < CHAIN_LENGTH - 1) {
+            patch_cords.push_back(new AudioConnection(effects_chain[i]->dry_wet_mixer, effects_chain[i + 1]->input_amp));
+        }
+    }
 
-AudioConnection patchCord15(tremolo_effect->dry_wet_mixer, 0, delay_effect->input_amp, 0);
+    // Connect last effect to output
+    patch_cords.push_back(new AudioConnection(effects_chain[CHAIN_LENGTH - 1]->dry_wet_mixer, 0, final_mixer, WET_CHANNEL));
+    patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output, 0));
+    patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output, 1));
 
-AudioConnection patchCord2(delay_effect->input_amp, 0, delay_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
-AudioConnection patchCord3(delay_effect->input_amp, 0, *delay_effect->chain_start, 0);  // Wet in
-AudioConnection patchCord4(*delay_effect->chain_end, 0, delay_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
+    // Additional connections
+    patch_cords.push_back(new AudioConnection(audio_input, tuner));
+    patch_cords.push_back(new AudioConnection(audio_input, rms_meter));
+}
 
-AudioConnection patchCord5(delay_effect->dry_wet_mixer, 0, reverb_effect->input_amp, 0);
-AudioConnection patchCord6(reverb_effect->input_amp, 0, reverb_effect->dry_wet_mixer, 0); // Dry to dry_wet_mixer
-AudioConnection patchCord7(reverb_effect->input_amp, 0, *reverb_effect->chain_start, 0);  // Wet in
-AudioConnection patchCord8(*reverb_effect->chain_end, 0, reverb_effect->dry_wet_mixer, 1); // Wet out to dry_wet_mixer
-
-AudioConnection patchCord9(reverb_effect->dry_wet_mixer, 0, final_mixer, 0); // Final mix to main dry/wet mixer
-
-// Final output connections
-AudioConnection patchCord10(final_mixer, 0, audio_output, 0);
-AudioConnection patchCord11(final_mixer, 0, audio_output, 1);
-AudioConnection patchCord12(final_mixer, tuner);
-
-AudioConnection patchCordRMS(audio_input, rms_meter);
 
 AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 
@@ -81,10 +80,10 @@ AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
 // OneButton button_1(3, true);
 // Encoder encoder_1(4, 5);
 
-OneButton button_2(25, true);
+OneButton button_2(25, true, true);
 Encoder encoder_2(29, 28);
 
-OneButton button_3(30, true);
+OneButton button_3(30, true, true);
 Encoder encoder_3(32, 31);
 
 
@@ -117,22 +116,11 @@ void setup()
     final_mixer.gain(1, 1);
 
 
-    // //connect input to the start of the effects chain
-    // AudioConnection *connection1 = new AudioConnection(audio_input, *effects_chain[0]->chain_start);
-    // patchCords.push_back(*connection1);
 
-    // // connect effects together
-    // for (size_t i = 0; i < CHAIN_LENGTH - 1; i++)
-    // {
-    //     AudioConnection *connection = new AudioConnection(*effects_chain[i]->chain_end, *effects_chain[i + 1]->chain_start);
-    //     patchCords.push_back(*connection);
-    // }
 
-    // // Connect last effect to output
-    // AudioConnection *connectionLast = new AudioConnection(*effects_chain[CHAIN_LENGTH - 1]->chain_end, 0, dry_wet_mixer, 1);
-    // patchCords.push_back(*connectionLast);
+	create_audio_connections();
 
-    sgtl5000_1.lineInLevel(3);
+    sgtl5000_1.lineInLevel(0);
     sgtl5000_1.inputSelect(AUDIO_INPUT_LINEIN);
     sgtl5000_1.adcHighPassFilterDisable();
     sgtl5000_1.volume(0.5);
@@ -217,8 +205,8 @@ void loop()
     float mix = analogRead(MASTER_POT) / 1023.0;
     if(fabs(mix - prev_mix) > 0.05)
     {
-        final_mixer.gain(0, 1 - mix);
-        final_mixer.gain(1, mix);
+        final_mixer.gain(DRY_CHANNEL, 1 - mix);
+        final_mixer.gain(WET_CHANNEL, mix);
 
         statusbar_set_mix_arc(1 - mix);
 
