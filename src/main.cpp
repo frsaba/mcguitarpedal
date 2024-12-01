@@ -149,8 +149,8 @@ void setup()
     //TODO: save active preset when it is selected, not just when overwritten
 	LV_LOG_USER("Loading saved presets...");
 	load_presets_from_eeprom(&preset_bank);
-	LV_LOG_USER("Applying active preset...");
-	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
+	// LV_LOG_USER("Applying active preset...");
+	// apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
 	apply_param_values_to_knobs();
 
 

@@ -35,7 +35,9 @@ public:
 
     void update_feedback(float new_feedback)
     {
-        input_mixer.gain(0, new_feedback);
+        // input_mixer.gain(0, new_feedback);
+        input_mixer.gain(1, new_feedback);
+
         // Serial.println("Feedback: " + String(new_feedback));
     }
 
