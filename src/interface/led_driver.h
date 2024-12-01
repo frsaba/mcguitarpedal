@@ -30,3 +30,4 @@ void write_to_shift_register(uint8_t data);
 void led_toggle(uint8_t led);
 void led_set(uint8_t led, bool);
 void led_set_preset(uint8_t preset_index);
+void led_set_tuner(uint8_t mask);

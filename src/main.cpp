@@ -15,6 +15,7 @@
 #include <presets/presets.h>
 #include "interface/led_driver.h"
 #include <interface/button_decoder.h>
+#include "interface/tuner.h"
 
 #define MASTER_POT A1
 #define HP_VOLUME_POT A2
@@ -131,7 +132,7 @@ void setup()
     // AudioConnection *connectionLast = new AudioConnection(*effects_chain[CHAIN_LENGTH - 1]->chain_end, 0, dry_wet_mixer, 1);
     // patchCords.push_back(*connectionLast);
 
-    sgtl5000_1.lineInLevel(0);
+    sgtl5000_1.lineInLevel(3);
     sgtl5000_1.inputSelect(AUDIO_INPUT_LINEIN);
     sgtl5000_1.adcHighPassFilterDisable();
     sgtl5000_1.volume(0.5);
@@ -143,7 +144,7 @@ void setup()
     pinMode(SW_BYPASS, INPUT_PULLUP);
 
     pinMode(BACKLIGHT_PWM, OUTPUT);
-    tuner.begin(0.3);
+    tuner.begin(TUNER_THRESHOLD);
     while(!Serial && millis() < 2500){};
 
 	if(Serial)
@@ -240,5 +241,7 @@ void loop()
     }
     else led_set(LED_STATUS, 0);
 
-    delay(50);
+    tuner_tick();
+
+    delay(100);
 }

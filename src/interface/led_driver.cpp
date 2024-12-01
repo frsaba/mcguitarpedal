@@ -34,7 +34,7 @@ void led_set(uint8_t led, bool on = true)
 	else write_to_shift_register(led_state & ~led);
 }
 
-static uint8_t preset_leds[] = {LED_PRESET_1, LED_PRESET_2, LED_PRESET_3, LED_PRESET_4};
+static uint8_t preset_leds[] = {LED_PRESET_1, LED_PRESET_2, LED_PRESET_3, LED_PRESET_4, LED_BANK};
 
 void led_set_preset(uint8_t preset_index)
 {
@@ -42,6 +42,23 @@ void led_set_preset(uint8_t preset_index)
 	for (size_t i = 0; i < 4; i++)
 	{
 		if(i <= preset_index)
+		{
+			state |= preset_leds[i];
+		}
+		else
+		{
+			state &= ~preset_leds[i];
+		}
+	}
+	write_to_shift_register(state);
+}
+
+void led_set_tuner(uint8_t mask)
+{
+	uint8_t state = led_state;
+	for (size_t i = 0; i < 5; i++)
+	{
+		if((mask >> i ) & 1)
 		{
 			state |= preset_leds[i];
 		}
