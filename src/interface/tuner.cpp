@@ -8,6 +8,10 @@ const char *note_names[12] = {
 
 void tuner_tick()
 {
+    static elapsedMillis last_tick;
+    if(last_tick < 100) return;
+
+    last_tick = 0;
     if(!tuner.available())
     {
         led_set_tuner(0);

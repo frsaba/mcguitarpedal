@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 // TODO: make these dynamic / make sure CHAIN_LENGTH is correct always
-#define CHAIN_LENGTH 4
+#define CHAIN_LENGTH 5
 #define NUM_PRESETS 4
 
 class Effect;

@@ -27,8 +27,8 @@
 
 #define MAX_VOLUME 0.7
 
-#define CHAIN_LENGTH 4
-Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Delay(), new Reverb()};
+#define CHAIN_LENGTH 5
+Effect *effects_chain[] = {new Chorus(), new Tremolo(), new Flanger(), new Delay(), new Reverb()};
 Effect *chorus_effect = effects_chain[0];
 Effect *tremolo_effect = effects_chain[1];
 Effect *delay_effect = effects_chain[2];
@@ -205,8 +205,8 @@ void loop()
     float mix = analogRead(MASTER_POT) / 1023.0;
     if(fabs(mix - prev_mix) > 0.05)
     {
-        final_mixer.gain(DRY_CHANNEL, 1 - mix);
-        final_mixer.gain(WET_CHANNEL, mix);
+        final_mixer.gain(DRY_CHANNEL, mix);
+        final_mixer.gain(WET_CHANNEL, 1 - mix);
 
         statusbar_set_mix_arc(1 - mix);
 
@@ -225,11 +225,11 @@ void loop()
         float rms = rms_meter.read();
         // statusbar_log_fmt("RMS: %.3f", rms_meter.read());
 
-        led_set(LED_STATUS, rms > 0.15f);
+        led_set(LED_STATUS, rms > 0.1f);
     }
     else led_set(LED_STATUS, 0);
 
     tuner_tick();
 
-    delay(100);
+    delay(25);
 }
