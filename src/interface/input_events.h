@@ -31,5 +31,5 @@ void param_selected_event(lv_event_t * e);
 void param_encoder_turned(int enc_diff);
 void bypass_event(lv_event_t * e);
 void effect_focused_event(lv_event_t * e);
-void load_preset(size_t preset_index);
-void save_preset(lv_event_t * e);
+void load_preset(size_t slot);
+void save_preset(size_t slot);

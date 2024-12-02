@@ -115,9 +115,6 @@ void setup()
     final_mixer.gain(0, 0);
     final_mixer.gain(1, 1);
 
-
-
-
 	create_audio_connections();
 
     sgtl5000_1.lineInLevel(0);
@@ -149,16 +146,12 @@ void setup()
     //TODO: save active preset when it is selected, not just when overwritten
 	LV_LOG_USER("Loading saved presets...");
 	load_presets_from_eeprom(&preset_bank);
-	// LV_LOG_USER("Applying active preset...");
-	// apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
-	apply_param_values_to_knobs();
+	LV_LOG_USER("Applying active preset...");
+	load_preset(preset_get_active_index());
 
-
-	statusbar_log("");
 	digitalWrite(BACKLIGHT_PWM, 1);
 	
 	setup_decoder();
-
 
     led_set(255, false);
 

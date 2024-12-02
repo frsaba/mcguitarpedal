@@ -48,7 +48,6 @@ public:
 
 	friend void create_effect_lists(Effect *effects_chain[], size_t chain_length);
 	friend void param_encoder_turned(int enc_diff);
-	friend void save_preset(Effect** effect_chain, size_t num_effects);
 	friend void load_preset(Effect** effect_chain,  size_t num_effects);
 	friend preset_data_t effects_to_preset_data(String preset_name, Effect *effects_chain[]);
 	friend Param* findParamByName(String name, Effect* effect);

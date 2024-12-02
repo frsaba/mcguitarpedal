@@ -35,6 +35,11 @@ void setup_button_events()
 	});
 
 	decoder_attach_click(BUTTON_BANK, next_preset);
+
+	decoder_attach_long_press(BUTTON_BANK, []() { 
+		Serial.println(">---- Save active preset");
+		save_preset(preset_get_active_index());
+	});
 }
 
 //Select previous preset and load it
@@ -177,18 +182,15 @@ void load_preset(size_t preset_index)
 	led_set_preset(preset_index);
 }
 
-void save_preset(lv_event_t * e)
+void save_preset(size_t slot)
 {
-	lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
-    int preset_index = lv_obj_get_index_by_type(target, &lv_list_button_class);
-	preset_bank.active_preset = preset_index;
-	if(preset_index < 0){
-		LV_LOG_ERROR("Could not find preset index");
+	if(slot > NUM_PRESETS){
+		LV_LOG_ERROR("No slot for preset %d", slot);
 		return;
 	}
-	preset_bank.presets[preset_bank.active_preset] = effects_to_preset_data("Preset " + preset_bank.active_preset, effects_chain);
+	preset_bank.active_preset = slot;
+	preset_bank.presets[preset_bank.active_preset] = effects_to_preset_data(String("Preset ") + String(preset_bank.active_preset), effects_chain);
 	serialize_presets(preset_bank, true);
-
-	// LV_LOG_USER("Preset button long pressed");
+	
 	statusbar_log_fmt("Saved preset %d", preset_bank.active_preset);
 }
