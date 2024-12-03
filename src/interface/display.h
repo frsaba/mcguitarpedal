@@ -5,7 +5,8 @@
 #include "encoder_input.h"
 #include <presets/presets.h>
 #include <interface/input_events.h>
-#include <interface/fonts/symbols_large.c>
+#include <interface/fonts/symbols_large.h>
+#include <interface/fonts/font_fa_icons_16.h>
 
 // #define TFT_RST 34
 // #define TFT_DC 9
@@ -21,6 +22,8 @@ class Effect;
 extern preset_bank_t preset_bank;
 
 LV_FONT_DECLARE(symbols_large)
+LV_FONT_DECLARE(font_fa_icons_16)
+
 
 void init_display();
 void create_effect_lists(Effect *effects_chain[], size_t chain_length);

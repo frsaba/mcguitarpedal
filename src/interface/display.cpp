@@ -211,7 +211,8 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 		for (size_t param_index = 0; param_index < effect->num_params; param_index++)
 		{
 			Param* param = &effect->params[param_index];
-			auto param_button = lv_list_add_btn(params_lists[i], LV_SYMBOL_FILE, param->name.begin());
+			auto param_button = lv_list_add_btn(params_lists[i], param->icon.begin(), param->name.begin());
+			lv_obj_set_style_text_font(param_button, &font_fa_icons_16, LV_PART_MAIN);
 			lv_obj_add_style(param_button, &param_button_editing_style, LV_STATE_EDITED);
 
 			lv_obj_set_user_data(param_button, &effect->params[param_index]);

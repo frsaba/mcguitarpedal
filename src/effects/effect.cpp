@@ -2,7 +2,7 @@
 
 Effect::Effect(String name, Param params[], size_t num_params, AudioStream *chain_start, AudioStream *chain_end) : name(name), params(params), num_params(num_params), chain_start(chain_start), chain_end(chain_end)
 {
-	dry_wet_param = Param("Dry/Wet", DEFAULT_WET, 5, 100, 5, std::bind(&Effect::update_dry_wet, this, std::placeholders::_1), "%");
+	dry_wet_param = Param("Dry/Wet", DEFAULT_WET, 5, 100, 5, std::bind(&Effect::update_dry_wet, this, std::placeholders::_1), CUSTOM_SYMBOL_DROPLET, "%");
 	// // this->params[0] = dry_wet_param;
 	// // this->params = new Param[num_params];
 	// // for (size_t i = 0; i < num_params; i++)

@@ -15,8 +15,8 @@ class Chorus : public Effect
 private:
     Param params[3]{
         dry_wet_param,
-        Param("Voices", DEFAULT_VOICES, 1, 5, 1, std::bind(&Chorus::update_voices, this, std::placeholders::_1)),
-        Param("Length", DEFAULT_CHORUS_LENGTH, 1, MAX_CHORUS_LENGTH, 1, std::bind(&Chorus::update_length, this, std::placeholders::_1))};
+        Param("Voices", DEFAULT_VOICES, 1, 5, 1, std::bind(&Chorus::update_voices, this, std::placeholders::_1), CUSTOM_SYMBOL_USERS_LINE),
+        Param("Length", DEFAULT_CHORUS_LENGTH, 1, MAX_CHORUS_LENGTH, 1, std::bind(&Chorus::update_length, this, std::placeholders::_1), CUSTOM_SYMBOL_ARROWS_LEFT_RIGHT_TO_LINE)};
 
     AudioEffectChorus chorus; // xy=660.6000213623047,258.1999683380127
 	short delayline[MAX_CHORUS_DELAY_LENGTH];
