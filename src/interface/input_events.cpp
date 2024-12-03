@@ -47,14 +47,12 @@ void previous_preset()
 {
 	Serial.println(">---- Previous preset"); 
 	load_preset((preset_get_active_index() - 1) % NUM_PRESETS);
-	statusbar_set_preset_num(preset_get_active_index());
 }
 
 void next_preset()
 {
 	Serial.println(">---- Next preset"); 
 	load_preset((preset_get_active_index() + 1) % NUM_PRESETS);
-	statusbar_set_preset_num(preset_get_active_index());
 }
 
 //Called when the param selection button is pressed. Toggles value set mode
@@ -65,6 +63,7 @@ void param_selected_event(lv_event_t * e)
 
 	if(lv_obj_has_flag(lv_obj_get_parent(target), LV_OBJ_FLAG_HIDDEN)){
 		LV_LOG_USER("Trying to set hidden object");
+		//TODO: set focus to the first param here
 		return;
 	}
 
@@ -121,6 +120,7 @@ void param_encoder_turned(int enc_diff)
 }
 
 //Called when effect encoder button is pressed. Toggles the effect bypass
+//TODO: grey out bypassed effect
 void bypass_event(lv_event_t * e)
 {
     lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
@@ -179,6 +179,7 @@ void load_preset(size_t preset_index)
 	apply_param_values_to_knobs();
 
 	statusbar_log("Loaded preset " + String(preset_bank.active_preset));
+	statusbar_set_preset_num(preset_get_active_index());
 	led_set_preset(preset_index);
 }
 
