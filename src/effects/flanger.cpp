@@ -15,8 +15,8 @@ class Flanger : public Effect
 private:
     Param params[4]{
         dry_wet_param,
-        Param("Offset", DEFAULT_OFFSET, 0.1, MAX_FLANGE_DELAY_LENGTH/4.0, 0.1, std::bind(&Flanger::update_offset, this, std::placeholders::_1)),
-        Param("Depth", DEFAULT_DEPTH, 0.1, MAX_FLANGE_DELAY_LENGTH/4.0, 0.1, std::bind(&Flanger::update_depth, this, std::placeholders::_1)),
+        Param("Offset", DEFAULT_OFFSET, 0.1, MAX_FLANGE_DELAY_LENGTH/4.0, 0.1, std::bind(&Flanger::update_offset, this, std::placeholders::_1), CUSTOM_SYMBOL_ARROW_RIGHT_FROM_BRACKET),
+        Param("Depth", DEFAULT_DEPTH, 0.1, MAX_FLANGE_DELAY_LENGTH/4.0, 0.1, std::bind(&Flanger::update_depth, this, std::placeholders::_1), CUSTOM_SYMBOL_RULER_HORIZONTAL),
 		Param("Rate", DEFAULT_RATE, 0.1, 1.5, 0.1, std::bind(&Flanger::update_rate, this, std::placeholders::_1), CUSTOM_SYMBOL_WAVE_SQUARE, "Hz")};
 
     AudioEffectFlange flange; // xy=660.6000213623047,258.1999683380127

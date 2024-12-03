@@ -13,7 +13,7 @@ private:
     Param parameters[3]{
         dry_wet_param,
         Param("Delay", DEFAULT_DELAY_MS, 10, 600, 10, std::bind(&Delay::update_delay_time, this, std::placeholders::_1), CUSTOM_SYMBOL_ARROWS_LEFT_RIGHT_TO_LINE, "ms"),
-        Param("Feedback", DEFAULT_DELAY_FEEDBACK, 0, 0.9, 0.1, std::bind(&Delay::update_feedback, this, std::placeholders::_1))};
+        Param("Feedback", DEFAULT_DELAY_FEEDBACK, 0, 0.9, 0.1, std::bind(&Delay::update_feedback, this, std::placeholders::_1), LV_SYMBOL_LOOP)};
 
     AudioEffectDelay delay;
     AudioMixer4 input_mixer;

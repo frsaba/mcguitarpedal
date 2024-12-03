@@ -12,7 +12,7 @@ class Reverb : public Effect
 private:
     Param reverb_params[3]{
         dry_wet_param,
-        Param("Room size", DEFAULT_REVERB_ROOM_SIZE, 0, 1, 0.1, std::bind(&Reverb::update_room_size, this, std::placeholders::_1)),
+        Param("Room size", DEFAULT_REVERB_ROOM_SIZE, 0, 1, 0.1, std::bind(&Reverb::update_room_size, this, std::placeholders::_1), LV_SYMBOL_HOME),
         Param("Damping", DEFAULT_REVERB_DAMPING, 0, 1, 0.1, std::bind(&Reverb::update_reverb, this, std::placeholders::_1), CUSTOM_SYMBOL_ARROW_DOWN_WIDE_SHORT)};
 
     AudioAmplifier amp;       // xy=532.5999908447266,258.19998359680176
