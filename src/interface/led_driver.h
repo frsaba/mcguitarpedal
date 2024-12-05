@@ -7,6 +7,7 @@
 #define LED_STORE_CLOCK 13
 #define LED_DATA 14
 #define LED_PWM 2
+#define LED_DEFAULT_BRIGHTNESS 50
 
 #define NUM_LEDS 8
 #define LED_TUNER 0x1
@@ -24,6 +25,7 @@
 // extern IntervalTimer led_timer;
 
 extern uint8_t led_state;
+extern uint8_t preset_leds[];
 
 void setup_leds();
 void write_to_shift_register(uint8_t data);

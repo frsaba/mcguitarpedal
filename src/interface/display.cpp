@@ -281,6 +281,8 @@ void apply_param_values_to_knobs(){
 
 		float dry_wet_value = effect->bypass ? 0 : effect->params[0].current_value;
 		update_arc(effect_btn, dry_wet_value);
+		led_set(preset_leds[effect_index], !effect->bypass > 0);
+
 
 		// LV_LOG_USER("Dry/Wet Value: %f", dry_wet_value);
 

@@ -47,6 +47,8 @@ AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
 
 std::vector<AudioConnection*> patch_cords(6 + CHAIN_LENGTH * 4);
 
+bool tuner_mode = false;
+
 void create_audio_connections() {
     // Connect input to the start of the effects chain
     patch_cords.push_back(new AudioConnection(audio_input, effects_chain[0]->input_amp));
@@ -118,6 +120,7 @@ void setup()
 	create_audio_connections();
 
     sgtl5000_1.lineInLevel(0);
+    sgtl5000_1.lineOutLevel(14);
     sgtl5000_1.inputSelect(AUDIO_INPUT_LINEIN);
     sgtl5000_1.adcHighPassFilterDisable();
     sgtl5000_1.volume(0.5);
@@ -146,6 +149,9 @@ void setup()
     //TODO: save active preset when it is selected, not just when overwritten
 	LV_LOG_USER("Loading saved presets...");
 	load_presets_from_eeprom(&preset_bank);
+    
+    led_set(255, false);
+
 	LV_LOG_USER("Applying active preset...");
 	load_preset(preset_get_active_index());
 
@@ -153,15 +159,13 @@ void setup()
 	
 	setup_decoder();
 
-    led_set(255, false);
-
 }
 
 void loop()
 {
     static bool blink_state = 0;
-    static float prev_volume = 0.0;
-    static float prev_mix = 0.0;
+    static float prev_volume = -1;
+    static float prev_mix = -1;
 
     if (volmsec > 350)
     {
@@ -222,7 +226,9 @@ void loop()
     }
     else led_set(LED_STATUS, 0);
 
-    tuner_tick();
-
+    if(tuner_mode)
+    {
+        tuner_tick();
+    }
     delay(25);
 }

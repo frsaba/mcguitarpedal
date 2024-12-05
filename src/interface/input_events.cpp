@@ -32,6 +32,11 @@ void setup_button_events()
 	
 	decoder_attach_long_press(BUTTON_TUNER, []() { 
 		Serial.println(">---- Tuner mode"); 
+		tuner_mode = !tuner_mode;
+		statusbar_log_fmt("Tuner mode %s", tuner_mode ? "on" : "off");
+
+		led_set(LED_TUNER, tuner_mode);
+		// if(!tuner_mode) led_set_preset(preset_get_active_index());
 	});
 
 	decoder_attach_click(BUTTON_BANK, next_preset);
@@ -124,6 +129,7 @@ void param_encoder_turned(int enc_diff)
 void bypass_event(lv_event_t * e)
 {
     lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
+	int effect_index = lv_obj_get_index(target) - 1;
 	Effect* effect = (Effect *)target->user_data;
 
 	// LV_UNUSED(obj);
@@ -131,6 +137,7 @@ void bypass_event(lv_event_t * e)
 	LV_LOG_USER("Clicked: %s", effect->name.begin());
 
 	update_arc(target, new_value);
+	led_set(preset_leds[effect_index], new_value > 0);
 }
 
 // Called when the effect is navigated to; Hides the old params list and shows the new one instead.
@@ -180,7 +187,7 @@ void load_preset(size_t preset_index)
 
 	statusbar_log("Loaded preset " + String(preset_bank.active_preset));
 	statusbar_set_preset_num(preset_get_active_index());
-	led_set_preset(preset_index);
+	// led_set_preset(preset_index);
 }
 
 void save_preset(size_t slot)

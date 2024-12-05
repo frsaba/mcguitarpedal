@@ -9,7 +9,7 @@ void setup_leds()
 	pinMode(LED_SHIFT_CLOCK, OUTPUT);
 	pinMode(LED_STORE_CLOCK, OUTPUT);
 
-	analogWrite(LED_PWM, 250);
+	analogWrite(LED_PWM, 255 - LED_DEFAULT_BRIGHTNESS);
 	write_to_shift_register(255);
 }
 
@@ -34,7 +34,7 @@ void led_set(uint8_t led, bool on = true)
 	else write_to_shift_register(led_state & ~led);
 }
 
-static uint8_t preset_leds[] = {LED_PRESET_1, LED_PRESET_2, LED_PRESET_3, LED_PRESET_4, LED_BANK};
+uint8_t preset_leds[] = {LED_PRESET_1, LED_PRESET_2, LED_PRESET_3, LED_PRESET_4, LED_BANK};
 
 void led_set_preset(uint8_t preset_index)
 {

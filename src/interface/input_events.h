@@ -6,6 +6,8 @@
 #include "statusbar.h"
 #include "led_driver.h"
 
+extern bool tuner_mode;
+
 extern Effect *effects_chain[];
 
 extern lv_group_t * effects_group;
