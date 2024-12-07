@@ -25,6 +25,7 @@ typedef struct{
 	String name;
 	effect_data_t effect_values[CHAIN_LENGTH];
 } preset_data_t;
+
 typedef struct{
 	size_t active_preset;
 	size_t num_presets;

@@ -25,6 +25,8 @@
 // extern IntervalTimer led_timer;
 
 extern uint8_t led_state;
+
+#define  NUM_EFFECT_LEDS 5
 extern uint8_t preset_leds[];
 
 void setup_leds();

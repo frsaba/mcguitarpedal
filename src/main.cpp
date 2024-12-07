@@ -17,6 +17,7 @@
 #include "interface/led_driver.h"
 #include <interface/button_decoder.h>
 #include "interface/tuner.h"
+#include <usb_audio.h>
 
 #define MASTER_POT A1
 #define HP_VOLUME_POT A2
@@ -38,18 +39,20 @@ Effect *reverb_effect = effects_chain[3];
 #define WET_CHANNEL 1
 
 int selected_effect_index = 0;
-// GUItool: begin automatically generated code
-AudioInputI2S audio_input;       // xy=334.1037826538086,172.99997901916504
-AudioMixer4 final_mixer;       // xy=681.1037902832031,179
-AudioAnalyzeNoteFrequency tuner; // xy=1014.1037216186523,270.00000953674316
-AudioAnalyzeRMS rms_meter;
-AudioOutputI2S audio_output;     // xy=1036.1037902832031,219
 
-std::vector<AudioConnection*> patch_cords(6 + CHAIN_LENGTH * 4);
+AudioInputI2S audio_input;       
+AudioMixer4 final_mixer;      
+AudioAnalyzeNoteFrequency tuner; 
+AudioAnalyzeRMS rms_meter;
+AudioOutputI2S audio_output;
+
+AudioOutputUSB audio_output_usb;
+
+std::vector<AudioConnection*> patch_cords(8 + CHAIN_LENGTH * 4);
 
 bool tuner_mode = false;
 
-void create_audio_connections() {
+FLASHMEM void create_audio_connections() {
     // Connect input to the start of the effects chain
     patch_cords.push_back(new AudioConnection(audio_input, effects_chain[0]->input_amp));
     patch_cords.push_back(new AudioConnection(audio_input, 0, final_mixer, DRY_CHANNEL));
@@ -69,6 +72,9 @@ void create_audio_connections() {
     patch_cords.push_back(new AudioConnection(effects_chain[CHAIN_LENGTH - 1]->dry_wet_mixer, 0, final_mixer, WET_CHANNEL));
     patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output, 0));
     patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output, 1));
+
+	patch_cords.push_back(new AudioConnection(audio_input, 0, audio_output_usb, 0));
+    patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output_usb, 1));
 
     // Additional connections
     patch_cords.push_back(new AudioConnection(audio_input, tuner));
