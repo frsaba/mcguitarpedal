@@ -183,7 +183,7 @@ void load_preset(size_t preset_index)
 	LV_LOG_USER("Applying preset...");
 	preset_bank.active_preset = preset_index;
 	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
-	apply_param_values_to_knobs();
+	sync_ui_to_effect_params();
 
 	statusbar_log("Loaded preset " + String(preset_bank.active_preset));
 	statusbar_set_preset_num(preset_get_active_index());

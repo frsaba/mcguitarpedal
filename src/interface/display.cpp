@@ -266,7 +266,7 @@ void update_arc(lv_obj_t* obj, float value){
 }
 
 // Set all the knob and text values to show the current param values for the effects chain
-void apply_param_values_to_knobs(){
+void sync_ui_to_effect_params(){
 	LV_LOG_USER("Applying parameter values...");
 
 	for (size_t effect_index = 0; effect_index < lv_obj_get_child_count_by_type(effects_list, &lv_list_button_class); effect_index++) {
