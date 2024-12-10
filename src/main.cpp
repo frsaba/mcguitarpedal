@@ -82,7 +82,7 @@ FLASHMEM void create_audio_connections() {
 }
 
 
-AudioControlSGTL5000 sgtl5000_1; // xy=256.1037902832031,460
+AudioControlSGTL5000 sgtl5000; // xy=256.1037902832031,460
 
 
 // OneButton button_1(3, true);
@@ -110,53 +110,55 @@ void setup()
     analogWriteFrequency(LED_PWM, PWM_FREQ);
 
     setup_leds();
+
+	pinMode(MASTER_POT, INPUT);
+    pinMode(HP_VOLUME_POT, INPUT);
+    pinMode(EXP, INPUT);
+    pinMode(SW_BYPASS, INPUT_PULLUP);
+	pinMode(BACKLIGHT_PWM, OUTPUT);
+
+
+	init_display();
+    create_status_bar();
+	create_effect_lists(effects_chain, CHAIN_LENGTH);
     
 
     // analogWrite(BACKLIGHT_PWM, 0); //Initalize display pwm early to avoid flicker
     Serial.begin( 115200 );
-    // setup_leds(); // TODO: blink all leds on startup
-    // Audio connections require memory to work.  For more
-    // detailed information, see the MemoryAndCpuUsage example
     AudioMemory(1200);
 
 	//TODO: toggle dry/wet for entire chain
     final_mixer.gain(0, 0);
     final_mixer.gain(1, 1);
 
-	create_audio_connections();
-
-    sgtl5000_1.lineInLevel(0);
-    sgtl5000_1.lineOutLevel(14);
-    sgtl5000_1.inputSelect(AUDIO_INPUT_LINEIN);
-    sgtl5000_1.adcHighPassFilterDisable();
-    sgtl5000_1.volume(0.5);
-    sgtl5000_1.enable();
-
-    pinMode(MASTER_POT, INPUT);
-    pinMode(HP_VOLUME_POT, INPUT);
-    pinMode(EXP, INPUT);
-    pinMode(SW_BYPASS, INPUT_PULLUP);
-
-    pinMode(BACKLIGHT_PWM, OUTPUT);
-    tuner.begin(TUNER_THRESHOLD);
-    while(!Serial && millis() < 2500){};
-
-	if(Serial)
-		Serial.printf("Serial connected in %d\n", millis());
-
-	init_display();
-    create_status_bar();
-	create_effect_lists(effects_chain, CHAIN_LENGTH);
-
-    //Initialize preset bank
+	//Initialize preset bank
     preset_bank = {0, NUM_PRESETS, CHAIN_LENGTH, {}};
 
     //Load active preset
     //TODO: save active preset when it is selected, not just when overwritten
 	LV_LOG_USER("Loading saved presets...");
 	load_presets_from_eeprom(&preset_bank);
+
+
+	create_audio_connections();
+    sgtl5000.enable();
+	sgtl5000.inputSelect(AUDIO_INPUT_LINEIN);
+    sgtl5000.volume(0.5);
+    sgtl5000.adcHighPassFilterDisable();
+	sgtl5000.lineInLevel(0); 
+    sgtl5000.lineOutLevel(14);
+    
+
+    tuner.begin(TUNER_THRESHOLD);
+    while(!Serial && millis() < 2500){};
+
+	if(Serial)
+		Serial.printf("Serial connected in %d\n", millis());
+
     
     led_set(255, false);
+	led_set(LED_BYPASS, !digitalRead(SW_BYPASS));
+
 
 	LV_LOG_USER("Applying active preset...");
 	load_preset(preset_get_active_index());
@@ -172,6 +174,7 @@ void loop()
     static bool blink_state = 0;
     static float prev_volume = -1;
     static float prev_mix = -1;
+	static bool prev_bypass = false;
 
     if (volmsec > 350)
     {
@@ -189,6 +192,8 @@ void loop()
 
         blink_state = !blink_state;
         digitalWrite(LED_BUILTIN, blink_state);
+
+
     }
 
     // statusbar_log_fmt("Mix %.2f HP: %.2f", 1- mix, volume);
@@ -198,7 +203,7 @@ void loop()
 
     if(fabs(volume - prev_volume) > 0.05)
     {
-        sgtl5000_1.volume(volume * MAX_VOLUME);
+        sgtl5000.volume(volume * MAX_VOLUME);
         statusbar_set_headphone_arc(volume);
 
         prev_volume = volume;
@@ -215,6 +220,13 @@ void loop()
 
         prev_mix = mix;
     }
+
+	bool bypass = digitalRead(SW_BYPASS);
+	if(bypass != prev_bypass)
+	{
+		led_set(LED_BYPASS, !bypass);
+		prev_bypass = bypass;
+	}
 
     // button_1.tick();
     button_2.tick();

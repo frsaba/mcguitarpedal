@@ -2,12 +2,19 @@
 
 uint8_t led_state;
 
+#define MISSING_PIN1_WORKAROUND
+
+
 void setup_leds()
 {
 	pinMode(LED_PWM, OUTPUT);
 	pinMode(LED_DATA, OUTPUT);
 	pinMode(LED_SHIFT_CLOCK, OUTPUT);
 	pinMode(LED_STORE_CLOCK, OUTPUT);
+
+	#ifdef MISSING_PIN1_WORKAROUND
+	pinMode(3, OUTPUT);
+	#endif
 
 	analogWrite(LED_PWM, 255 - LED_DEFAULT_BRIGHTNESS);
 	write_to_shift_register(255);
@@ -18,6 +25,10 @@ void write_to_shift_register(uint8_t data)
 	led_state = data;
 	digitalWrite(LED_STORE_CLOCK, 0);
 	shiftOut_msbFirst(LED_DATA, LED_SHIFT_CLOCK, data);
+
+	#ifdef MISSING_PIN1_WORKAROUND
+	analogWrite(3, (led_state & LED_BYPASS) * LED_DEFAULT_BRIGHTNESS);
+	#endif
 
 	digitalWrite(LED_STORE_CLOCK, 1);
 	digitalWrite(LED_STORE_CLOCK, 0);
