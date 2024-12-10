@@ -1,4 +1,5 @@
 #include <interface/input_events.h>
+#include "snapshot.h"
 
 void preset_buttons_read(lv_indev_t * indev, lv_indev_data_t*data)
 {
@@ -23,6 +24,7 @@ void setup_input_devices(){
 
 	setup_button_events();
 }
+extern lv_obj_t *log_label;
 
 void setup_button_events()
 {
@@ -42,8 +44,10 @@ void setup_button_events()
 	decoder_attach_click(BUTTON_BANK, next_preset);
 
 	decoder_attach_long_press(BUTTON_BANK, []() { 
-		Serial.println(">---- Save active preset");
-		save_preset(preset_get_active_index());
+		// Serial.println(">---- Save active preset");
+		// save_preset(preset_get_active_index());
+		snapshot_and_send(log_label);
+		
 	});
 }
 

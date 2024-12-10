@@ -46,7 +46,9 @@ AudioAnalyzeNoteFrequency tuner;
 AudioAnalyzeRMS rms_meter;
 AudioOutputI2S audio_output;
 
+#ifdef USB_AUDIO
 AudioOutputUSB audio_output_usb;
+#endif
 
 std::vector<AudioConnection*> patch_cords(8 + CHAIN_LENGTH * 4);
 
@@ -73,8 +75,10 @@ FLASHMEM void create_audio_connections() {
     patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output, 0));
     patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output, 1));
 
+	#ifdef USB_AUDIO
 	patch_cords.push_back(new AudioConnection(audio_input, 0, audio_output_usb, 0));
     patch_cords.push_back(new AudioConnection(final_mixer, 0, audio_output_usb, 1));
+	#endif
 
     // Additional connections
     patch_cords.push_back(new AudioConnection(audio_input, tuner));
