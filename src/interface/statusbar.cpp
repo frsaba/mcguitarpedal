@@ -46,7 +46,7 @@ FLASHMEM void create_status_bar() {
     lv_obj_set_flex_flow(preset_num_container, LV_FLEX_FLOW_ROW);
 
     preset_label = lv_label_create(preset_num_container);
-    lv_obj_set_width(preset_num_container, lv_pct(12));
+    lv_obj_set_width(preset_num_container, lv_pct(14));
     lv_obj_add_style(preset_label, &preset_label_style, LV_PART_MAIN); 
     lv_obj_set_flex_align(preset_num_container, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 

@@ -176,11 +176,13 @@ void setup()
 void loop()
 {
     static bool blink_state = 0;
+    static bool bypass = 0;
     static float prev_volume = -1;
     static float prev_mix = -1;
 	static bool prev_bypass = false;
 
-    if (volmsec > 350)
+    bypass = !digitalRead(SW_BYPASS);
+    if (volmsec > 500)
     {
         // led_toggle(255 - LED_STATUS);
         volmsec = 0;  
@@ -194,7 +196,15 @@ void loop()
             Serial.printf("CPU: %f, %f\nMemory: %d, %d\n", AudioProcessorUsage(), AudioProcessorUsageMax(), AudioMemoryUsage(), AudioMemoryUsageMax());
         #endif
 
-        blink_state = !blink_state;
+        if(bypass)
+        {
+            blink_state = !blink_state;
+            led_set(LED_BYPASS, blink_state);
+        }
+        else
+        {
+            blink_state = false;
+        }
         digitalWrite(LED_BUILTIN, blink_state);
 
 
@@ -225,10 +235,9 @@ void loop()
         prev_mix = mix;
     }
 
-	bool bypass = digitalRead(SW_BYPASS);
 	if(bypass != prev_bypass)
 	{
-		led_set(LED_BYPASS, !bypass);
+		led_set(LED_BYPASS, bypass);
 		prev_bypass = bypass;
 	}
 
@@ -244,7 +253,7 @@ void loop()
         float rms = rms_meter.read();
         // statusbar_log_fmt("RMS: %.3f", rms_meter.read());
 
-        led_set(LED_STATUS, rms > 0.1f);
+        led_set(LED_STATUS, rms > 0.03f);
     }
     else led_set(LED_STATUS, 0);
 

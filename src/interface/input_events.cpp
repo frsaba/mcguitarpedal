@@ -44,9 +44,9 @@ void setup_button_events()
 	decoder_attach_click(BUTTON_BANK, next_preset);
 
 	decoder_attach_long_press(BUTTON_BANK, []() { 
-		// Serial.println(">---- Save active preset");
-		// save_preset(preset_get_active_index());
-		snapshot_and_send(log_label);
+		Serial.println(">---- Save active preset");
+		save_preset(preset_get_active_index());
+		// snapshot_and_send(log_label);
 		
 	});
 }
@@ -189,8 +189,8 @@ void load_preset(size_t preset_index)
 	apply_preset_values(preset_bank.presets[preset_bank.active_preset ].effect_values, effects_chain, preset_bank.num_effects);
 	sync_ui_to_effect_params();
 
-	statusbar_log("Loaded preset " + String(preset_bank.active_preset));
-	statusbar_set_preset_num(preset_get_active_index());
+	statusbar_log("Loaded preset " + String(preset_bank.active_preset + 1));
+	statusbar_set_preset_num(preset_get_active_index() + 1);
 	// led_set_preset(preset_index);
 }
 
