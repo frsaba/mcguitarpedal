@@ -833,8 +833,8 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
-      "svg": "",
+      "step": "mcguitarpedal.step",
+      "svg": "G:/repos/szakdolgozat/assets/pcb/",
       "vrml": ""
     },
     "page_layout_descr_file": ""
@@ -984,7 +984,7 @@
       "workbook_filename": ""
     },
     "page_layout_descr_file": "empty.kicad_wks",
-    "plot_directory": "",
+    "plot_directory": "G:/repos/szakdolgozat/assets/pcb/",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,
@@ -1006,6 +1006,6 @@
   ],
   "text_variables": {
     "R_BIAS": "100k",
-    "R_BIAS_IN": "1M"
+    "R_BIAS_IN": "100k"
   }
 }
