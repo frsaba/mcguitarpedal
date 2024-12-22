@@ -1,6 +1,7 @@
 #include <interface/display.h>
 
 lv_obj_t *log_label;  // Label for log messages
+lv_obj_t * main_container;
 
 void statusbar_log(const String &s)
 {
@@ -56,7 +57,7 @@ typedef struct {
     TFT_eSPI * tft;
 } lv_tft_espi_t;
 
-// Overriding the display flush callback, swapping the color byte order 
+// Overriding the display flush callback, swapping the color byte order
 static void swapped_flush_cb(lv_display_t * disp, const lv_area_t * area, uint8_t * px_map)
 {
     lv_tft_espi_t * dsc = (lv_tft_espi_t *)lv_display_get_driver_data(disp);
@@ -110,6 +111,7 @@ FLASHMEM void init_display()
     presets_group = lv_group_create();
 
 	setup_input_devices();
+	settings_setup();
 
     lv_indev_set_group(param_selector, effects_group);
     lv_indev_set_group(value_selector, params_group);
@@ -118,8 +120,8 @@ FLASHMEM void init_display()
 	set_scroll_callback(value_selector, param_encoder_turned);
 
 	// lv_indev_add_event_cb(param_selector, param_edited_event, LV_EVENT_ALL, NULL);
-	
-	
+
+
 	//  lv_indev_add_event_cb(value_selector, value_changed_event, LV_EVENT_ALL, params_group->obj_focus);
 
     Serial.println( "Display initialized" );
@@ -156,16 +158,40 @@ FLASHMEM lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25)
 	//TODO: if touchscreen is used, should these be able to be adjusted?
 	//These 2 lines make the arc non-adjustable according to the docs. Is the second one enough?
 	// lv_obj_remove_style(arc, NULL, LV_PART_KNOB);
-	lv_obj_remove_flag(arc, LV_OBJ_FLAG_CLICKABLE);	
+	lv_obj_remove_flag(arc, LV_OBJ_FLAG_CLICKABLE);
 
 	return arc;
-} 
+}
+
+// TODO: refactor/optimize styling to only initialize once
+lv_obj_t* create_param_row(Param* param, lv_obj_t* parent)
+{
+	//TODO: maybe blink actively edited parameter?
+	static lv_style_t param_button_editing_style;
+	lv_style_init(&param_button_editing_style);
+	// lv_style_set_outline_width(&param_button_editing_style, 2);
+	lv_style_set_text_decor(&param_button_editing_style, LV_TEXT_DECOR_UNDERLINE);
+
+	auto param_button = lv_list_add_btn(parent, param->icon.begin(), param->name.begin());
+	lv_obj_set_style_text_font(param_button, &font_fa_icons_16, LV_PART_MAIN);
+	lv_obj_add_style(param_button, &param_button_editing_style, LV_STATE_EDITED);
+
+	lv_obj_add_event_cb(param_button, param_selected_event, LV_EVENT_CLICKED, NULL);
+
+
+	lv_obj_t* value_label = lv_label_create(param_button);
+	lv_label_set_text_fmt(value_label, "%.1f%s", param->current_value, param->unit.begin());
+
+	create_arc(param_button, param->get_as_percentage());
+
+	return param_button;
+}
 
 //TODO: rename and break up this function
 FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 	chain_length = length;
 	    /* Create a parent container */
-    lv_obj_t * main_container = lv_obj_create(lv_scr_act());
+    main_container = lv_obj_create(lv_scr_act());
     lv_obj_set_size(main_container, lv_pct(100), lv_pct(75));
     lv_obj_align(main_container, LV_ALIGN_BOTTOM_MID, 0, -3);
     lv_obj_set_layout(main_container, LV_LAYOUT_FLEX);
@@ -202,31 +228,15 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 		lv_obj_set_style_pad_all(params_lists[i], 5, LV_PART_MAIN);
 		lv_obj_set_flex_grow(params_lists[i], 1);
 
-		//TODO: maybe blink actively edited parameter?
-		static lv_style_t param_button_editing_style;
-		lv_style_init(&param_button_editing_style);
-		// lv_style_set_outline_width(&param_button_editing_style, 2);
-		lv_style_set_text_decor(&param_button_editing_style, LV_TEXT_DECOR_UNDERLINE);
-
 		for (size_t param_index = 0; param_index < effect->num_params; param_index++)
 		{
 			Param* param = &effect->params[param_index];
-			auto param_button = lv_list_add_btn(params_lists[i], param->icon.begin(), param->name.begin());
-			lv_obj_set_style_text_font(param_button, &font_fa_icons_16, LV_PART_MAIN);
-			lv_obj_add_style(param_button, &param_button_editing_style, LV_STATE_EDITED);
+			auto param_button = create_param_row(param, params_lists[i]);
 
 			lv_obj_set_user_data(param_button, &effect->params[param_index]);
 			//Add to group 2 so that it can be scrolled with the encoder
 			lv_group_add_obj(params_group, param_button);
 
-
-			lv_obj_t* value_label = lv_label_create(param_button);
-			lv_label_set_text_fmt(value_label, "%.1f%s", param->current_value, param->unit.begin());
-
-			create_arc(param_button, param->get_as_percentage());
-
-			lv_obj_add_event_cb(param_button, param_selected_event, LV_EVENT_CLICKED, NULL); 
-				
 
 		}
 
@@ -262,7 +272,7 @@ void update_arc(lv_obj_t* obj, float value){
 	else{
 		LV_LOG_USER("Arc object not found");
 	}
-	
+
 }
 
 // Set all the knob and text values to show the current param values for the effects chain
@@ -304,6 +314,14 @@ void sync_ui_to_effect_params(){
 		}
 	}
 
+}
 
-	
+
+void hide_main_screen()
+{
+	lv_obj_add_flag(main_container, LV_OBJ_FLAG_HIDDEN);
+}
+void show_main_screen()
+{
+	lv_obj_remove_flag(main_container, LV_OBJ_FLAG_HIDDEN);
 }

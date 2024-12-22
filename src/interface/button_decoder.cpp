@@ -1,5 +1,5 @@
 #include <interface/button_decoder.h>
-// #define LOG_BUTTON_PRESSES
+#define LOG_BUTTON_PRESSES
 
 void (*short_press_release_function_map[8])() = { nullptr };
 void (*long_press_start_function_map[8])() = { nullptr };

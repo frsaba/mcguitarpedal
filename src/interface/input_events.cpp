@@ -31,6 +31,22 @@ void setup_button_events()
 	decoder_attach_click(BUTTON_TUNER, []() { 
 		previous_preset();
 	});
+
+	decoder_attach_click(0, []() { 
+		save_preset(preset_get_active_index());
+	});
+
+	decoder_attach_click(1, []() { 
+		load_preset(preset_get_active_index());
+	});
+
+	decoder_attach_click(2, []() { 
+		toggle_settings();
+	});
+
+	decoder_attach_long_press(2, []() { 
+		snapshot_and_send(lv_screen_active());
+	});
 	
 	decoder_attach_long_press(BUTTON_TUNER, []() { 
 		Serial.println(">---- Tuner mode"); 
@@ -51,6 +67,35 @@ void setup_button_events()
 	});
 }
 
+void toggle_debug_mode()
+{
+	debug_mode = !debug_mode;
+	statusbar_log_fmt("Debug mode %s", debug_mode ? "on" : "off");
+}
+
+void toggle_settings()
+{
+	settings_menu = !settings_menu;
+	statusbar_log_fmt("");
+
+	if(settings_menu)
+	{
+		hide_main_screen();
+		settings_show();
+	}
+	else
+	{
+		show_main_screen();
+		settings_hide();
+		
+
+	}
+	//stop editing the active parameter, as that would cause the param selection to be stuck
+	lv_group_set_editing(params_group, false);
+	lv_obj_remove_state(*params_group->obj_focus, LV_STATE_PRESSED);
+}
+
+
 //Select previous preset and load it
 void previous_preset()
 {
@@ -67,8 +112,15 @@ void next_preset()
 //Called when the param selection button is pressed. Toggles value set mode
 void param_selected_event(lv_event_t * e)
 {
+	LV_LOG_USER("Clicked");
     lv_obj_t * target = (lv_obj_t *)lv_event_get_target(e);
 	Param* param = (Param *)target->user_data;
+
+	if(param == nullptr)
+	{
+		LV_LOG_ERROR("Param userdata is null");
+		return;
+	}
 
 	if(lv_obj_has_flag(lv_obj_get_parent(target), LV_OBJ_FLAG_HIDDEN)){
 		LV_LOG_USER("Trying to set hidden object");
@@ -204,5 +256,5 @@ void save_preset(size_t slot)
 	preset_bank.presets[preset_bank.active_preset] = effects_to_preset_data(String("Preset ") + String(preset_bank.active_preset), effects_chain);
 	serialize_presets(preset_bank, true);
 	
-	statusbar_log_fmt("Saved preset %d", preset_bank.active_preset);
+	statusbar_log_fmt("Saved preset %d", preset_bank.active_preset + 1);
 }

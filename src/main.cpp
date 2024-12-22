@@ -53,6 +53,8 @@ AudioOutputUSB audio_output_usb;
 std::vector<AudioConnection*> patch_cords(8 + CHAIN_LENGTH * 4);
 
 bool tuner_mode = false;
+bool debug_mode = false;
+bool settings_menu = false;
 
 FLASHMEM void create_audio_connections() {
     // Connect input to the start of the effects chain

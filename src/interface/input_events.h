@@ -5,8 +5,11 @@
 #include <encoder_input.h>
 #include "statusbar.h"
 #include "led_driver.h"
+#include "settings.h"
 
 extern bool tuner_mode;
+extern bool debug_mode;
+extern bool settings_menu;
 
 extern Effect *effects_chain[];
 
@@ -29,6 +32,8 @@ void setup_button_events();
 void previous_preset();
 void next_preset();
 void toggle_tuner_mode();
+void toggle_debug_mode();
+void toggle_settings();
 void param_selected_event(lv_event_t * e);
 void param_encoder_turned(int enc_diff);
 void bypass_event(lv_event_t * e);

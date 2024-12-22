@@ -17,6 +17,10 @@
 // #define T_CS 33
 
 extern TFT_eSPI  tft;
+extern lv_obj_t* main_container;
+extern lv_obj_t * effects_list;
+extern lv_obj_t * presets_list;
+
 class Effect;
 
 extern preset_bank_t preset_bank;
@@ -31,3 +35,7 @@ void update_value_label(lv_obj_t* obj, float new_value, char* unit_str);
 void update_arc(lv_obj_t* obj, float value);
 FLASHMEM lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size);
 void sync_ui_to_effect_params();
+lv_obj_t* create_param_row(Param* param, lv_obj_t* parent);
+
+void hide_main_screen();
+void show_main_screen();
