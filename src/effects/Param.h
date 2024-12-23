@@ -10,9 +10,9 @@ private:
 	float default_value;
 	float min_value;
 	float max_value;
-	float step_size;
 	std::function<void(float)> update_function;
 public:
+	float step_size;
 	String name;
 	String icon;
 	String unit;
@@ -24,5 +24,5 @@ public:
 	float decrement();
 	float change(int steps);
 	float set_value(float new_value);
-	float get_as_percentage();
+	const float get_as_percentage();
 };

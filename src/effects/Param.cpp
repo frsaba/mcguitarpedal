@@ -46,6 +46,6 @@ float Param::set_value(float value){
 }
 
 //Return the current value as a percentage along min and max
-float Param::get_as_percentage(){
+const float Param::get_as_percentage(){
 	return (current_value - min_value) / (max_value - min_value) * 100;
 }

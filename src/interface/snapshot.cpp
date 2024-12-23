@@ -1,5 +1,4 @@
 #include "snapshot.h"
-#include "Arduino.h"
 
 
 // Define the buffer size for the serial output
@@ -12,7 +11,7 @@ void send_serial_data(const uint8_t *data, size_t size) {
     }
 }
 
-void snapshot_and_send(lv_obj_t *widget) {
+FLASHMEM void snapshot_and_send(lv_obj_t *widget) {
     // Take a snapshot of the widget
     lv_draw_buf_t *snapshot = lv_snapshot_take(widget, LV_COLOR_FORMAT_RGB565);
     if (!snapshot) {

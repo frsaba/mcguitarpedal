@@ -31,7 +31,7 @@ LV_FONT_DECLARE(font_fa_icons_16)
 
 void init_display();
 void create_effect_lists(Effect *effects_chain[], size_t chain_length);
-void update_value_label(lv_obj_t* obj, float new_value, char* unit_str);
+void update_value_label(lv_obj_t* obj, const Param& param);
 void update_arc(lv_obj_t* obj, float value);
 FLASHMEM lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size);
 void sync_ui_to_effect_params();

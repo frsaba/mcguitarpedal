@@ -43,7 +43,10 @@ int selected_effect_index = 0;
 AudioInputI2S audio_input;       
 AudioMixer4 final_mixer;      
 AudioAnalyzeNoteFrequency tuner; 
+float tuner_threshold = DEFAULT_TUNER_THRESHOLD;
 AudioAnalyzeRMS rms_meter;
+float rms_threshold = 0.03;
+
 AudioOutputI2S audio_output;
 
 #ifdef USB_AUDIO
@@ -155,7 +158,7 @@ void setup()
     sgtl5000.lineOutLevel(14);
     
 
-    tuner.begin(TUNER_THRESHOLD);
+    tuner.begin(DEFAULT_TUNER_THRESHOLD);
     while(!Serial && millis() < 2500){};
 
 	if(Serial)
@@ -255,7 +258,7 @@ void loop()
         float rms = rms_meter.read();
         // statusbar_log_fmt("RMS: %.3f", rms_meter.read());
 
-        led_set(LED_STATUS, rms > 0.03f);
+        led_set(LED_STATUS, rms > rms_threshold);
     }
     else led_set(LED_STATUS, 0);
 

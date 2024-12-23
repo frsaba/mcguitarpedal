@@ -8,13 +8,13 @@ Param settings_params[NUM_SETTINGS] =
 	//TODO: turn on all leds while editing this param
 	Param("LED brightness", roundf(LED_DEFAULT_BRIGHTNESS / 255.0 * 100 / BRIGHTNESS_STEPS ) * BRIGHTNESS_STEPS, 5,100,BRIGHTNESS_STEPS, [](float val){analogWrite(LED_PWM, 255 - val / 100.0 * 255);}, LV_SYMBOL_UP, "%"),
 	//FIXME: backlight pwm pin declaration
-	Param("Backlight", 100, 15, 100, BRIGHTNESS_STEPS, [](float val){analogWrite(37, val / 100 * MAX_BRIGHTNESS);}, LV_SYMBOL_IMAGE, "%")
+	Param("Backlight", 100, 10, 100, BRIGHTNESS_STEPS, [](float val){analogWrite(37, val / 100 * MAX_BRIGHTNESS);}, LV_SYMBOL_IMAGE, "%"),
+	Param("Tuner threshold", rms_threshold, 0.01, 0.3, THRESHOLD_STEPS, [](float val){tuner_threshold = val;}, CUSTOM_SYMBOL_WAVE_SQUARE),
+	Param("RMS threshold", tuner_threshold, 0.01, 0.3, THRESHOLD_STEPS, [](float val){rms_threshold = val;}, CUSTOM_SYMBOL_UP_DOWN),
 };
 
-void settings_setup()
+FLASHMEM void settings_setup()
 {
-
-
 	settings_list = lv_list_create(lv_screen_active());
 	lv_obj_set_size(settings_list, lv_pct(100), lv_pct(75));
     lv_obj_align(settings_list, LV_ALIGN_BOTTOM_MID, 0, -3);
@@ -28,7 +28,6 @@ void settings_setup()
 		lv_obj_set_user_data(param_button, &settings_params[i]);
 
 	}
-	
 
 	settings_hide();
 }

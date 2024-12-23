@@ -180,7 +180,7 @@ lv_obj_t* create_param_row(Param* param, lv_obj_t* parent)
 
 
 	lv_obj_t* value_label = lv_label_create(param_button);
-	lv_label_set_text_fmt(value_label, "%.1f%s", param->current_value, param->unit.begin());
+	lv_label_set_text_fmt(value_label, "%.*f%s", (param->step_size <= 0.1 ? 2:1) , param->current_value, param->unit.begin());
 
 	create_arc(param_button, param->get_as_percentage());
 
@@ -249,11 +249,12 @@ FLASHMEM void create_effect_lists(Effect *effects_chain[], size_t length){
 }
 
 // Helper function for updating the value label of a parameter
-void update_value_label(lv_obj_t* obj, float new_value, char* unit_str){
+void update_value_label(lv_obj_t* obj, const Param& param){
 	lv_obj_t* label = lv_obj_get_child_by_type(obj, -1, &lv_label_class); // oldest label is the param name, youngest should be the value
+	
 	if (label) {
 		// TODO: don't put a space before '%' in the unit string
-		 lv_label_set_text_fmt(label, "%.1f%s", new_value, unit_str);
+		 lv_label_set_text_fmt(label, "%.*f%s", (param.step_size <= 0.1 ? 2:1) , param.current_value, param.unit.begin());
 	}
 	else{
 		LV_LOG_USER("Value label object not found");
@@ -309,7 +310,7 @@ void sync_ui_to_effect_params(){
 		{
 			lv_obj_t * param_btn = lv_obj_get_child_by_type(params_lists[effect_index], param_index, &lv_list_button_class);
 			Param* param = (Param*)param_btn->user_data;
-			update_value_label(param_btn, param->current_value, param->unit.begin());
+			update_value_label(param_btn, *param);
 			update_arc(param_btn, param->get_as_percentage());
 		}
 	}

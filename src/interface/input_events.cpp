@@ -170,7 +170,7 @@ void param_encoder_turned(int enc_diff)
 
 
 	update_arc(selected_param_obj, param->get_as_percentage());
-	update_value_label(selected_param_obj, new_value, param->unit.begin());
+	update_value_label(selected_param_obj, *param);
 
 	//if the param is dry/wet, update the arc next to the effect name as well
 	if(&effect->params[0] == param){

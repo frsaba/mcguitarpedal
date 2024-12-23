@@ -2,7 +2,7 @@
 
 #include "statusbar.h"
 
-#define TUNER_THRESHOLD 0.05
+#define DEFAULT_TUNER_THRESHOLD 0.05
 
 #define REFERENCE_FREQ 440
 #define MIDI_NOTE_OFFSET 69 //A4 in midi
