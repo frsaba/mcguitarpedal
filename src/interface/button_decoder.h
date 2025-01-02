@@ -25,7 +25,7 @@ extern bool prev_any_button_pressed;
 extern uint32_t last_press_start_time;
 extern bool long_press_ran;
 
-void setup_decoder();
+FLASHMEM void setup_decoder();
 void decoder_tick();
 void decoder_attach_click(uint8_t button_index, callbackFunction);
 void decoder_attach_long_press(uint8_t button_index, callbackFunction);

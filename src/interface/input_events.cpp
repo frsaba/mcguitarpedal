@@ -1,5 +1,5 @@
 #include <interface/input_events.h>
-#include "snapshot.h"
+// #include "snapshot.h"
 
 void preset_buttons_read(lv_indev_t * indev, lv_indev_data_t*data)
 {
@@ -45,7 +45,7 @@ void setup_button_events()
 	});
 
 	decoder_attach_long_press(2, []() { 
-		snapshot_and_send(lv_screen_active());
+		// snapshot_and_send(lv_screen_active());
 	});
 	
 	decoder_attach_long_press(BUTTON_TUNER, []() { 

@@ -11,7 +11,7 @@ bool prev_any_button_pressed = false;
 uint32_t last_press_start_time = 0;
 bool long_press_ran = false;
 
-void setup_decoder()
+FLASHMEM void setup_decoder()
 {
 	LV_LOG_USER("Setting up decoder...");
     pinMode(BUTTON_MTX_A, INPUT);

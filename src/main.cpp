@@ -113,7 +113,7 @@ std::vector<AudioConnection> patchCords;
 
 extern preset_bank_t preset_bank;
 
-void setup()
+FLASHMEM void setup()
 {
     analogWriteFrequency(BACKLIGHT_PWM, PWM_FREQ);
     analogWriteFrequency(LED_PWM, PWM_FREQ);

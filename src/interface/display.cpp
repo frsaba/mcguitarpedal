@@ -164,7 +164,7 @@ FLASHMEM lv_obj_t * create_arc(lv_obj_t* parent, float value, int32_t size = 25)
 }
 
 // TODO: refactor/optimize styling to only initialize once
-lv_obj_t* create_param_row(Param* param, lv_obj_t* parent)
+FLASHMEM lv_obj_t* create_param_row(Param* param, lv_obj_t* parent)
 {
 	//TODO: maybe blink actively edited parameter?
 	static lv_style_t param_button_editing_style;
